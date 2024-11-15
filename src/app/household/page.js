@@ -69,7 +69,7 @@ function Calculate_House() {
         const requiredTokens = footprint / 1000; // 1 token = 1 tCO2e
         const totalCost = requiredTokens * toucanTokenPrice;
     
-        navigate('/result-household', {
+        navigate('/house-result', {
             state: {
                 carbonFootprintCalculated : footprint,
                 requiredToucanTokensCalculated: requiredTokens,

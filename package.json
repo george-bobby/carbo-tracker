@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.9",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/x-charts": "^7.22.2",
     "@radix-ui/react-dialog": "^1.0.5",
     "@reclaimprotocol/js-sdk": "^1.0.0",
     "@types/node": "^20.11.30",
