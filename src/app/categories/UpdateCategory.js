@@ -140,7 +140,7 @@ export default function Category({ isOpen, onClose, category, setCalculatedValue
                         <option className="p-4" value="option7">Bike</option>
                         {/* <option value="option4">Option 4</option> */}
                     </select><br/>
-                    <input type="text" onChange={handleInputChange} className="text-base pl-1 py-1 text-xl border" placeholder="Enter the updated value" /><br />
+                    <input type="text" onChange={handleInputChange} className="pl-1 py-1 text-xl border" placeholder="Enter the updated value" /><br />
                 </form>
                 <div className='text-center'>
                     <button type="submit" onClick={updateValue} className="bg-[#526527] text-white mt-4 py-2 px-4 rounded text-lg">
