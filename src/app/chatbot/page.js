@@ -33,7 +33,7 @@ export default function Page() {
 
   const llmFetch = async (inputText) => {
     const url = 'https://api.together.xyz/v1/chat/completions';
-    const apiKey = "97af5f978e78cc61b035c27ffc04c8985666fb17049b66577b42c8f11c91c7b6";
+    const apiKey = "6cd409eeb96a9b836fa338d0a88304f9b2101c9b4dd1543d54d966d9f830c10c";
 
     try {
       const data = {
