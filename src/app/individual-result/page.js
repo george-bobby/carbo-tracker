@@ -12,14 +12,13 @@ function Result() {
             <main className="bg-white block">
 
                 {/* first section */}
-                <section className="bg-[url('../../public/images/forests-main.png')] bg-center bg-no-repeat bg-cover w-full bg-white text-white mb-24 ">
+                <section className="bg-[url('./public/images/forest-about-main.jpg')] bg-center bg-no-repeat bg-cover w-full bg-white text-white mb-24 ">
                     <div className="flex flex-row mx-auto px-0 text-white">
                         <div className=" px-[4%] py-[40px] pb-[20px] text-center">
                             <h2 className="text-4xl leading-[1] uppercase mb-11 max-w-[400px] mx-auto block my-[0.83em] text-center isolate shadow-lg font-bold ">
                                 <div className=" bg-[rgba(100,255,255,0.40)] max-w-[170px] h-[40px] text-center flex align-center justify-center ml-3 mb-4">Result : </div>
                                 Your carbon impact is {carbonFootprint.toFixed(2)} kg C0<sub>2</sub>e
                             </h2>
-
                             <div className="bg-[url('../../public/images/results-tree.78168e82.png')] bg-top bg-no-repeat bg-contain h-[182px] mx-auto mb-4 max-w-full relative w-[291px] text-center">
                                 <p className="absolute top-[30%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 leading-[1.33] px-[22px] w-full block my-[1em] mx-0 text-center isolate">
                                     Deforestation contributes nearly 10% of global carbon emissions.
