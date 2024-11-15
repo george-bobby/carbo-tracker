@@ -67,7 +67,7 @@ export default function Category({ isOpen, onClose, category, setCalculatedValue
                 const travelOptions = {
                     method: 'GET',
                     headers: {
-                        'X-RapidAPI-Key': '5f151651f9mshcf83822b9cdd731p115ed3jsnf6193d1677c8',
+                        'X-RapidAPI-Key': '0174e1c654msh265114bdcee0735p187290jsn60daa38aeb1c',
                         'X-RapidAPI-Host': 'carbonfootprint1.p.rapidapi.com'
                     }
                 };
@@ -82,7 +82,7 @@ export default function Category({ isOpen, onClose, category, setCalculatedValue
                 const vehicleOptions = {
                     method: 'GET',
                     headers: {
-                        'X-RapidAPI-Key': '5f151651f9mshcf83822b9cdd731p115ed3jsnf6193d1677c8',
+                        'X-RapidAPI-Key': '0174e1c654msh265114bdcee0735p187290jsn60daa38aeb1c',
                         'X-RapidAPI-Host': 'carbonfootprint1.p.rapidapi.com'
                     }
                 };
@@ -96,7 +96,7 @@ export default function Category({ isOpen, onClose, category, setCalculatedValue
                 const foodOptions = {
                     method: 'GET',
                     headers: {
-                        'X-RapidAPI-Key': '7112f3b271msh36e3c9c905f726dp1e7e11jsnc2ea975060d8',
+                        'X-RapidAPI-Key': '0174e1c654msh265114bdcee0735p187290jsn60daa38aeb1c',
                         'X-RapidAPI-Host': 'foodprint.p.rapidapi.com'
                     }
                 };
@@ -104,7 +104,7 @@ export default function Category({ isOpen, onClose, category, setCalculatedValue
                 break;
 
             case 'electricity':
-                const authToken = "QDMV9AG3NJ47S6GV4HP0BY65X71R";
+                const authToken = "C82JJJ9Z815CN3C8DJJ0QNW9MC";
                 const electricityUrl = "https://api.climatiq.io/data/v1/estimate";
                 const electricityOptions = {
                     method: "POST",
