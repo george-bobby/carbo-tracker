@@ -24,11 +24,11 @@ export default function Page() {
     <div className="min-h-screen bg-[#e8e6d7] py-6 flex flex-col gap-6 px-4 lg:px-16 md:px-10 sm:px-8">
       <div className="flex items-center justify-center gap-6">
         <div className="rounded-xl md:w-3/4 sm:w-3/5 w-full h-72  flex flex-col items-center justify-center text-white text-[7vw] md:text-[2.6vw] sm:text-[4vw]">
-          <img className="w-full h-full object-cover origin-center" src={'./images/imag1.jpeg'}/>
+          <img className="w-full h-full object-cover origin-center" src={'./imag1.jpeg'}/>
         </div>
         <div className="rounded-xl md:w-1/4 w-2/5 sm:block hidden h-72 relative p-4">
           <Image
-            src={"/images/logo.png"}
+            src={"/logo.png"}
             fill
             alt="notfound"
             className="object-cover  w-full h-full opacity-60 rounded-xl"
@@ -51,7 +51,7 @@ export default function Page() {
             {/* <div className="flex items-start justify-between"> */}
               {/* <div className="relative h-16 w-16 ">
                 <Image
-                  src="/images/avatar.webp"
+                  src="/avatar.webp"
                   alt="notfound"
                   fill
                   className="rounded-xl"
@@ -130,7 +130,7 @@ export default function Page() {
           <div className="flex items-center gap-6 h-full w-full">
             {/* <div className="bg-[#e0dfce] w-[40%] h-full rounded-xl p-10 relative sm:block hidden">
               <Image
-                src={"/images/avatar.webp"}
+                src={"/avatar.webp"}
                 alt="not found"
                 fill
                 className="rounded-xl object-cover"
@@ -177,7 +177,7 @@ export default function Page() {
       <div className=" w-full h-[50vh] flex justify-around items-center mb-5">  
         <div className="h-[50vh] relative w-full">
           <Image
-            src={"/images/mainLogo.png"}
+            src={"/mainLogo.png"}
             alt="notfound"
             fill
             className="object-contain"
@@ -196,7 +196,7 @@ export default function Page() {
       <div className=" w-full h-[50vh] flex justify-around items-center mb-5">  
         <div className="h-[50vh] relative w-full">
           <Image
-            src={"/images/a2.jpeg"}
+            src={"/a2.jpeg"}
             alt="notfound"
             fill
             className="object-contain"
@@ -217,7 +217,7 @@ At GreenMeter, we believe that understanding your carbon footprint is the first 
       <div className=" w-full h-[50vh] flex justify-around items-center mb-5">  
         <div className="h-[50vh] relative w-full">
           <Image
-            src={"/images/a3.jpeg"}
+            src={"/a3.jpeg"}
             alt="notfound"
             fill
             className="object-contain"
@@ -236,7 +236,7 @@ At GreenMeter, we believe that understanding your carbon footprint is the first 
       <div className=" w-full h-[50vh] flex justify-around items-center mb-5">  
         <div className="h-[50vh] relative w-full">
           <Image
-            src={"/images/a4.jpeg"}
+            src={"/a4.jpeg"}
             alt="notfound"
             fill
             className="object-contain"
@@ -255,7 +255,7 @@ At GreenMeter, we believe that understanding your carbon footprint is the first 
       <div className=" w-full h-[50vh] flex justify-around items-center mb-5">  
         <div className="h-[50vh] relative w-full">
           <Image
-            src={"/images/a5.jpeg"}
+            src={"/a5.jpeg"}
             alt="notfound"
             fill
             className="object-contain"
@@ -274,7 +274,7 @@ At GreenMeter, we believe that understanding your carbon footprint is the first 
       <div className=" w-full h-[50vh] flex justify-around items-center mb-5">  
         <div className="h-[50vh] relative w-full">
           <Image
-            src={"/images/a6.jpeg"}
+            src={"/a6.jpeg"}
             alt="notfound"
             fill
             className="object-contain"

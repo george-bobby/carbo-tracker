@@ -20,7 +20,7 @@ function Result() {
                                 Your carbon impact for your household is {carbonFootprintCalculated.toFixed(2)} kg C0<sub>2</sub>e
                             </h2>
 
-                            <div className="bg-[url('../../public/images/results-tree.78168e82.png')] bg-top bg-no-repeat bg-contain h-[182px] mx-auto mb-4 max-w-full relative w-[291px] text-center">
+                            <div className="bg-[url('../../public/results-tree.78168e82.png')] bg-top bg-no-repeat bg-contain h-[182px] mx-auto mb-4 max-w-full relative w-[291px] text-center">
                                 <p className="absolute top-[38%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 leading-[1.33] px-[22px] w-full block my-[1em] mx-0 text-center isolate">
                                     Deforestation contributes nearly 10% of global carbon emissions.
                                 </p>
@@ -127,7 +127,7 @@ function Result() {
                                 {/* first */}
                                 <div className="flex-col mb-6 text-center mx-16">
                                     <img  
-                                        src="../../public/images/cow.png"
+                                        src="../../public/cow.png"
                                         alt="animal"
                                         className="ml-20 h-20 w-20 mb-3 text-center"
                                     />
@@ -139,7 +139,7 @@ function Result() {
                                 {/* second */}
                                 <div className="flex-col mb-6 text-center mx-16">
                                     <img  
-                                        src="../../public/images/mail.png"
+                                        src="../../public/mail.png"
                                         alt="animal"
                                         className="ml-24 h-20 w-20 mb-3 text-center"
                                     />
@@ -151,7 +151,7 @@ function Result() {
                                 {/* third */}
                                 <div className="flex-col mb-6 text-center mx-16">
                                     <img  
-                                        src="../../public/images/clothes.png"
+                                        src="../../public/clothes.png"
                                         alt="animal"
                                         className="ml-24 h-20 w-20 mb-3 text-center"
                                     />
@@ -167,7 +167,7 @@ function Result() {
                                 {/* fourth */}
                                  <div className="flex-col mb-6 text-center ml-20 mr-16">
                                     <img  
-                                        src="../../public/images/tyre.png"
+                                        src="../../public/tyre.png"
                                         alt="animal"
                                         className="ml-16 h-20 w-20 mb-3 text-center"
                                     />
@@ -179,7 +179,7 @@ function Result() {
                                 {/* fifth */}
                                 <div className="flex-col mb-6 text-center mx-14">
                                     <img  
-                                        src="../../public/images/thermostat.png"
+                                        src="../../public/thermostat.png"
                                         alt="animal"
                                         className="relative left-[30px] ml-24 h-20 w-20 mb-3 text-center"
                                     />
@@ -191,7 +191,7 @@ function Result() {
                                 {/* sixth */}
                                 <div className="flex-col mb-6 text-center mx-16">
                                     <img  
-                                        src="../../public/images/fuel.png"
+                                        src="../../public/fuel.png"
                                         alt="animal"
                                         className="ml-24 h-20 w-20 mb-3 text-center"
                                     />

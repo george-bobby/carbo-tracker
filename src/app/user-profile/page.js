@@ -5,7 +5,7 @@ import UserStats from "./userStats.js";
 import { useUser } from '@clerk/nextjs';
 import {calculateFootprintPercentage,inputCarbonData} from '../../components/firebase_operations'
 // import svg file
-import ProfileSvg from "../../../public/images/man-coloured.svg"
+import ProfileSvg from "../../../public/man-coloured.svg"
 import PieChart from './pieChart';
 export default function UserProfile() {
     const {user} = useUser()

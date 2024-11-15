@@ -78,7 +78,7 @@ function Calculate() {
     return(
         <main>
 
-            <div className="bg-[url('../../public/images/individual_impact.jpg')] bg-center bg-no-repeat bg-cover text-white h-40 p-3">
+            <div className="bg-[url('../../public/individual_impact.jpg')] bg-center bg-no-repeat bg-cover text-white h-40 p-3">
                 <h2 className="mb-7 capitalize">
                     Carbon Footprint Calculator
                 </h2>
