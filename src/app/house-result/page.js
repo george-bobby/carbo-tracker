@@ -12,7 +12,7 @@ function Result() {
             <main className="bg-white block">
 
                 {/* first section */}
-                <section className="bg-[url('../../../public/images/forest-about-main.jpg')] bg-center bg-no-repeat bg-cover w-full bg-white text-white mb-16 ">
+                <section className="bg-[url('https://i.ibb.co/TtD8m17/forest-about-main.jpg')] bg-center bg-no-repeat bg-cover w-full bg-white text-white mb-16 ">
                     <div className="flex flex-row mx-auto px-0 text-white">
                         <div className=" px-[4%] py-[40px] pb-[20px] text-center">
                             <h2 className="text-4xl leading-[1] uppercase mb-11 max-w-[400px] mx-auto block my-[0.83em] text-center isolate shadow-lg font-bold ">
@@ -236,7 +236,7 @@ function Result() {
 
                 {/* sixth section */}
                 <section className="bg-white">
-                    <div className="bg-[url('../../public/images/green-field.jpg')] relative bg-cover bg-no-repeat bg-center w-full h-[700px] bg-blue-800 flex flex-col">
+                    <div className="bg-[url('https://i.ibb.co/CbbkL7X/green-field.jpg')] relative bg-cover bg-no-repeat bg-center w-full h-[700px] bg-blue-800 flex flex-col">
                         <div className="max-w-[600] mx-auto flex flex-row justify-content align-center  gap-x-28 p-0">
                             <div className="my-150px max-w-[500px] px-38 py-33 my-[200px] mr-[650px] bg-[rgba(255,255,255,0.65)] col-span-4">
                                 <p className="text-2xl leading-normal mb-1 m-4 mt-2 font-semibold">

@@ -43,7 +43,7 @@ useEffect(  () =>{
 
   return (
     <div style={{width: "450px !important"}} className='place-content-center'>
-    <button onClick={calculateTotalData}>b</button>
+    {/* <button onClick={calculateTotalData}>b</button> */}
       {/* <h2>Pie Chart</h2> */}
       {/* <Pie data={data} /> */}
       <Pie
