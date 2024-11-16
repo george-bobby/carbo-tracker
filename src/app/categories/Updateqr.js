@@ -9,6 +9,7 @@ export default function Category({ isOpen, onClose, category,  setCalculatedValu
     const {user }= useUser();
     const [data, setEnergy] = useState('');
     const [vehicle, setVehicleType] = useState(0);
+    const rapidApiKey = process.env.NEXT_PUBLIC_RAPIDAPI_API;
     
     if (!isOpen) return null;
 
@@ -62,7 +63,7 @@ export default function Category({ isOpen, onClose, category,  setCalculatedValu
                 const travelOptions = {
                     method: 'GET',
                     headers: {
-                        'X-RapidAPI-Key': '0174e1c654msh265114bdcee0735p187290jsn60daa38aeb1c',
+                        'X-RapidAPI-Key': rapidApiKey,
                         'X-RapidAPI-Host': 'carbonfootprint1.p.rapidapi.com'
                     }
                 };
@@ -74,7 +75,7 @@ export default function Category({ isOpen, onClose, category,  setCalculatedValu
                 const Options = {
                     method: 'GET',
                     headers: {
-                        'X-RapidAPI-Key': '0174e1c654msh265114bdcee0735p187290jsn60daa38aeb1c',
+                        'X-RapidAPI-Key': rapidApiKey,
                         'X-RapidAPI-Host': 'carbonfootprint1.p.rapidapi.com'
                     }
                 };
@@ -86,7 +87,7 @@ export default function Category({ isOpen, onClose, category,  setCalculatedValu
                 const foodOptions= {
                             method: 'GET',
                             headers: {
-                                 'X-RapidAPI-Key': '0174e1c654msh265114bdcee0735p187290jsn60daa38aeb1c',
+                                 'X-RapidAPI-Key': rapidApiKey,
                     'X-RapidAPI-Host': 'foodprint.p.rapidapi.com'
                             }
                         };
@@ -98,7 +99,7 @@ export default function Category({ isOpen, onClose, category,  setCalculatedValu
                 const Optionsfood= {
                             method: 'GET',
                             headers: {
-                                 'X-RapidAPI-Key': '0174e1c654msh265114bdcee0735p187290jsn60daa38aeb1c',
+                                 'X-RapidAPI-Key': rapidApiKey,
                     'X-RapidAPI-Host': 'foodprint.p.rapidapi.com'
                             }
                         };

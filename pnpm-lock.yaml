@@ -53,6 +53,9 @@ importers:
       firebase:
         specifier: ^10.9.0
         version: 10.13.2
+      generative-ai:
+        specifier: ^0.1.4
+        version: 0.1.4
       install:
         specifier: ^0.13.0
         version: 0.13.0
@@ -1853,6 +1856,10 @@ packages:
 
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
+
+  generative-ai@0.1.4:
+    resolution: {integrity: sha512-LEzvbciabASxQFtJ3sGw/ePjPwl2F++xPEjXZ404vM78OSWY4TWSOw9jwDfU61onm2oQEIxrXqQidDQaOxUegA==}
+    engines: {node: '>=18.0.0'}
 
   get-caller-file@2.0.5:
     resolution: {integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==}
@@ -5474,6 +5481,8 @@ snapshots:
       functions-have-names: 1.2.3
 
   functions-have-names@1.2.3: {}
+
+  generative-ai@0.1.4: {}
 
   get-caller-file@2.0.5: {}
 

@@ -8,6 +8,8 @@ export default function Category({ isOpen, onClose, category, setCalculatedValue
     const { user } = useUser();
     const [data, setEnergy] = useState('');
     const [vehicle, setVehicleType] = useState("SmallDieselCar");
+    const rapidApiKey = process.env.NEXT_PUBLIC_RAPIDAPI_API;
+    const climateiqApiKey = process.env.NEXT_PUBLIC_RAPIDAPI_API;
 
     let vehicleTypes = {
     "option1": "SmallDieselCar",
@@ -67,7 +69,7 @@ export default function Category({ isOpen, onClose, category, setCalculatedValue
                 const travelOptions = {
                     method: 'GET',
                     headers: {
-                        'X-RapidAPI-Key': '0174e1c654msh265114bdcee0735p187290jsn60daa38aeb1c',
+                        'X-RapidAPI-Key': rapidApiKey,
                         'X-RapidAPI-Host': 'carbonfootprint1.p.rapidapi.com'
                     }
                 };
@@ -82,7 +84,7 @@ export default function Category({ isOpen, onClose, category, setCalculatedValue
                 const vehicleOptions = {
                     method: 'GET',
                     headers: {
-                        'X-RapidAPI-Key': '0174e1c654msh265114bdcee0735p187290jsn60daa38aeb1c',
+                        'X-RapidAPI-Key': rapidApiKey,
                         'X-RapidAPI-Host': 'carbonfootprint1.p.rapidapi.com'
                     }
                 };
@@ -96,7 +98,7 @@ export default function Category({ isOpen, onClose, category, setCalculatedValue
                 const foodOptions = {
                     method: 'GET',
                     headers: {
-                        'X-RapidAPI-Key': '0174e1c654msh265114bdcee0735p187290jsn60daa38aeb1c',
+                        'X-RapidAPI-Key': rapidApiKey,
                         'X-RapidAPI-Host': 'foodprint.p.rapidapi.com'
                     }
                 };
@@ -104,7 +106,7 @@ export default function Category({ isOpen, onClose, category, setCalculatedValue
                 break;
 
             case 'electricity':
-                const authToken = "C82JJJ9Z815CN3C8DJJ0QNW9MC";
+                const authToken = climateiqApiKey;
                 const electricityUrl = "https://api.climatiq.io/data/v1/estimate";
                 const electricityOptions = {
                     method: "POST",
