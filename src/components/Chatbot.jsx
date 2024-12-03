@@ -43,7 +43,7 @@ function CarbonFootprintTracker() {
     <div className="min-h-screen bg-green-100 flex items-center justify-center">
       <div className="max-w-3xl w-full md:w-2/3 lg:w-1/2 mx-4 my-8 p-6 bg-white rounded-lg shadow-lg">
         <h1 className="flex text-3xl font-bold items-center justify-center mb-4 text-white bg-green-800 rounded-md">
-          Carbon Footprint Tracker
+          CFP for you Activities
           <div className="pl-1"><FaLeaf /></div>
         </h1>
         <div className="flex flex-col gap-2">
@@ -59,7 +59,7 @@ function CarbonFootprintTracker() {
           <div>
             {loading ? (
               <div className="flex items-center justify-center border border-gray-300 rounded-md p-4 w-full h-72 resize-none focus:outline-none focus:ring-2 focus:ring-green-500">
-                <img src={Loading_Img} alt="Loading" />
+                <img src="/loading.gif" alt="Loading" />
               </div>
             ) : (
               <div>
