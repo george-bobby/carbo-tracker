@@ -9,7 +9,7 @@ export default function Category({ isOpen, onClose, category, setCalculatedValue
     const [data, setEnergy] = useState('');
     const [vehicle, setVehicleType] = useState("SmallDieselCar");
     const rapidApiKey = process.env.NEXT_PUBLIC_RAPIDAPI_API;
-    const climateiqApiKey = process.env.NEXT_PUBLIC_RAPIDAPI_API;
+    const climateiqApiKey = process.env.NEXT_PUBLIC_CLIMATEIQ_API;
 
     let vehicleTypes = {
     "option1": "SmallDieselCar",
