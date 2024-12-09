@@ -41,7 +41,7 @@ export default function UserProfile() {
                         <tbody>
                             <tr>
                                 <td className="text-left">Location: </td>
-                                <td className="text-right">Hyderabad, India</td>
+                                <td className="text-right">Bangalore, India</td>
                             </tr>
                             <tr>
                                 <td className="text-left">Email: </td>
