@@ -16,38 +16,79 @@ import Image from "next/image";
 import React from "react";
 import { CiCircleCheck, CiHeart } from "react-icons/ci";
 import { IoEllipsisVertical } from "react-icons/io5";
-import './page.css'
-export default function Page() {
+import './page.css';
 
+
+export default function Page() {
   const { user } = useUser();
+
   return (
     <div className="min-h-screen bg-[#e8e6d7] py-6 flex flex-col gap-6 px-4 lg:px-16 md:px-10 sm:px-8">
-  <div className="flex items-start justify-start">
-    <div className="rounded-xl w-1/5 h-24">
-      <img className="w-full h-full object-cover rounded-lg" src={'./imag1.webp'} />
-    </div>
-  </div>
-  <div className="bg-[#fdd7b0] p-6 rounded-lg shadow-md md:w-3/4 sm:w-3/5 w-full mx-auto mt-4">
-    <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 text-center">What's Your Carbon Footprint? 🌍</h2>
-    <p className="text-sm md:text-lg text-gray-700 leading-snug">
-      Your carbon footprint is the mark you leave on the planet—measuring the greenhouse gases from your daily activities, like commuting, cooking, or streaming your favorite shows.
-    </p>
-    <p className="text-sm md:text-lg text-gray-700 leading-snug mt-4">
-      <strong>Why does it matter?</strong> Because small changes in your habits can lead to big wins for the environment! Tracking your carbon footprint helps you live smarter, cleaner, and more sustainably—making the planet happier one step at a time.
-    </p>
-    <p className="text-sm md:text-lg text-gray-700 leading-snug mt-4 text-center font-semibold">
-      Let’s start your journey to greener living! 🌟
-    </p>
-  </div>
+
+      {/* Header Section with the image and clickable links */}
+      <div className="flex items-center gap-6">
+        {/* The Image */}
+        <div className="rounded-xl w-1/4 h-23">
+          <Image
+            className="w-full h-full object-cover rounded-lg"
+            src="/imag1.webp"
+            alt="Carbo"
+            width={876} 
+            height={156}
+          />
+        </div>
+
+        {/* Navigation Links beside the image */}
+        <div className="flex gap-4 items-center">
+          <Link
+            href="/dashboard"
+            className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#d4d3bb] transition duration-100"
+          >
+            Dashboard
+          </Link>
+          <Link
+            href="/chatbot"
+            className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#d4d3bb] transition duration-100"
+          >
+            Chatbot
+          </Link>
+          <Link
+            href="/reclaim"
+            className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#d4d3bb] transition duration-100"
+          >
+            Emissions
+          </Link>
+          <Link
+            href="/faq"
+            className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#d4d3bb] transition duration-100"
+          >
+            FAQs
+          </Link>
+        </div>
+      </div>
+
+      {/* Section with Carbon Footprint Info */}
+      <div className="bg-[#fdd7b0] p-6 rounded-lg shadow-md md:w-3/4 sm:w-3/5 w-full mx-auto mt-4">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 text-center">What's Your Carbon Footprint? 🌍</h2>
+        <p className="text-sm md:text-lg text-gray-700 leading-snug">
+          Your carbon footprint is the mark you leave on the planet—measuring the greenhouse gases from your daily activities, like commuting, cooking, or streaming your favorite shows.
+        </p>
+        <p className="text-sm md:text-lg text-gray-700 leading-snug mt-4">
+          <strong>Why does it matter?</strong> Because small changes in your habits can lead to big wins for the environment! Tracking your carbon footprint helps you live smarter, cleaner, and more sustainably—making the planet happier one step at a time.
+        </p>
+        <p className="text-sm md:text-lg text-gray-700 leading-snug mt-4 text-center font-semibold">
+          Let’s start your journey to greener living! 🌟
+        </p>
+      </div>
+
+      {/* Other Sections */}
       <div className="flex items-center justify-center gap-6 lg:flex-row flex-col">
-  <div className="rounded-xl lg:w-[65%] w-full h-72 bg-[#b5bf96] md:p-10 sm:p-8 p-6 flex gap-6">
-    <div className="h-full sm:w-[100%] w-full rounded-xl flex flex-col justify-start p-4">
-      {/* Heading with increased visual spacing and improved font */}
-      <p className="text-4xl text-center heading font-bold mt-[-10px] font-sans">About Us</p>
-      {/* Description with increased spacing */}
-      <p className="text-lg md:text-xl text-gray-600 mt-4 leading-snug font-times-new-roman">
-        At Carbo, we simplify carbon footprint tracking to help individuals and organizations take meaningful steps toward sustainability. With actionable insights and personalized strategies, we empower you to understand your impact and make informed, eco-friendly choices.
-      </p>
+        <div className="rounded-xl lg:w-[65%] w-full h-72 bg-[#b5bf96] md:p-10 sm:p-8 p-6 flex gap-6">
+          <div className="h-full sm:w-[100%] w-full rounded-xl flex flex-col justify-start p-4">
+            <p className="text-4xl text-center heading font-bold mt-[-10px] font-sans">About Us</p>
+            <p className="text-lg md:text-xl text-gray-600 mt-4 leading-snug font-times-new-roman">
+              At Carbo, we simplify carbon footprint tracking to help individuals and organizations take meaningful steps toward sustainability. With actionable insights and personalized strategies, we empower you to understand your impact and make informed, eco-friendly choices.
+            </p>
             {/* <div className="flex items-start justify-between"> */}
               {/* <div className="relative h-16 w-16 ">
                 <Image
@@ -116,18 +157,6 @@ export default function Page() {
                 </div>
               </div>
               <div className="h-full w-full bg-[#bcd58b] rounded-xl flex flex-col items-center justify-evenly gap-4 p-4">
-  {/* Navigation Links */}
-  <div className="w-full flex justify-evenly">
-    <span className="text-sm bg-white rounded-lg hover:bg-[#d4d3bb] p-1 px-2">
-      <Link href="/user-profile">User Profile</Link>
-    </span>
-    <span className="text-sm bg-white rounded-lg hover:bg-[#d4d3bb] p-1 px-2">
-      <Link href="/feedback">Feedback</Link>
-    </span>
-    <span className="text-sm bg-white rounded-lg hover:bg-[#d4d3bb] p-1 px-2">
-      <Link href="/faq">FAQs</Link>
-    </span>
-  </div>
   {/* Logout/SignIn Section */}
   <div className="w-full flex items-center justify-center">
     <ClerkLoading>
@@ -154,38 +183,11 @@ export default function Page() {
   </div>
 </div>
 
-<div className="h-full w-full bg-[#e8e6d7] rounded-xl p-4 flex items-center justify-center">
-  <div className="bg-[#bcd58b] w-full max-w-4xl rounded-lg shadow-md py-3 px-6 flex items-center justify-evenly gap-3">
-    
-    {/* Dashboard */}
-    <Link
-      href="/dashboard"
-      className="bg-white text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#d4d3bb] transition duration-300"
-    >
-      Dashboard
-    </Link>
-
-    {/* Chatbot */}
-    <Link
-      href="/chatbot"
-      className="bg-white text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#d4d3bb] transition duration-300"
-    >
-      Chatbot
-    </Link>
-
-    {/* Scan QR */}
-    <Link
-      href="/reclaim"
-      className="bg-white text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#d4d3bb] transition duration-300"
-    >
-      Emmisions
-    </Link>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+    
 
       
       <section className="text-center bg-[#e0dfce] h-full w-full flex flex-col items-center justify-center font-['Roboto']">
