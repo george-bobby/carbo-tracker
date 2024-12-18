@@ -1,9 +1,6 @@
 "use client";
 
-import Spinner from "../components/Spinner";
-import Link from "next/link";
-import Header from "../components/Header";
-import Footer from './components/Footer.jsx'; 
+
 import {
   ClerkLoaded,
   ClerkLoading,
@@ -24,10 +21,7 @@ export default function Page() {
   return (
     <>
       <div className="min-h-screen bg-[#e8e6d7] py-6 flex flex-col gap-6 px-4 lg:px-16 md:px-10 sm:px-8">
-        {/* Header Section */}
-        <div>
-            <Header />
-</div>
+
 
         {/* Main Content Section */}
         <div className="bg-[#fdd7b0] p-6 rounded-lg shadow-md md:w-3/4 sm:w-3/5 w-full mx-auto mt-4">
@@ -120,9 +114,6 @@ export default function Page() {
             ))}
           </div>
         </section>
-
-        {/* Footer */}
-        <Footer />         
       </div>
     </>
   );
