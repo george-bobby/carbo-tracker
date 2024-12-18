@@ -3,7 +3,7 @@
 import Spinner from "../components/Spinner";
 import Link from "next/link";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Footer from './components/Footer.jsx'; 
 import {
   ClerkLoaded,
   ClerkLoading,
@@ -122,7 +122,7 @@ export default function Page() {
         </section>
 
         {/* Footer */}
-
+        <Footer />         
       </div>
     </>
   );
