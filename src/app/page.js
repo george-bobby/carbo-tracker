@@ -127,61 +127,52 @@ export default function Page() {
             </div>
           </div> */}
         </div>
-        <div className="rounded-xl lg:w-[45%] w-full sm:w-5/6 h-72 flex flex-col items-center justify-center gap-6">
-          <div className="flex items-center gap-6 h-full w-full">
-            {/* <div className=" w-[40%] h-44 rounded-xl sm:block hidden ">
-              <img className="w-4/5 ml-3 h-4/5" src={'./logo.png'}/>
-              <h3 className="w-full text-xl text-center text-green-700">GreenMeter</h3>
-            </div> */}
-
-            <div className=" h-full w-full flex flex-col gap-4 justify-between">
-              <div className="rounded-xl bg-[#bcd58b] h-full w-full flex items-center p-2 gap-3">
-                <div className="w-10 h-10 flex items-center justify-center">
-                  <ClerkLoading>
-                    <Spinner color="dark:text-white text-black" />
-                  </ClerkLoading>
-                  <ClerkLoaded>
-                    <SignedIn>
-                      <UserButton afterSignOutUrl="/" />
-                    </SignedIn>
-                  </ClerkLoaded>
-                </div>
-                <div className="flex flex-col w-full">
-                  <span>
-                    <SignedIn>{user?.fullName}</SignedIn>
-                    <SignedOut>Guest User</SignedOut>
-                  </span>
-                  <span className="text-xs flex items-center justify-center rounded cursor-pointer w-fit text-neutral-600">
-                    <ClerkLoaded>
-                      <SignedIn>
-                        since: {user?.createdAt.toLocaleDateString()}
-                      </SignedIn>
-                    </ClerkLoaded>
-                  </span>
-                </div>
-                <div className="">
-                  <IoEllipsisVertical />
-                </div>
-              </div>
-              <div className="h-full w-full bg-[#bcd58b] rounded-xl flex flex-col items-center justify-evenly gap-4 p-4">
-  {/* Logout/SignIn Section */}
-  <div className="w-full flex items-center justify-center">
+        <div className="relative flex items-center justify-end w-full h-16 px-6 bg-[#bcd58b]">
+  {/* Profile Button */}
+  <div className="relative">
     <ClerkLoading>
-      <Spinner color="black" />
+      <Spinner color="dark:text-white text-black" />
     </ClerkLoading>
     <ClerkLoaded>
       <SignedIn>
-        <SignOutButton>
-        <div className="w-auto bg-[#e57373] hover:bg-[#d4d3bb] rounded-lg border-1 border-[#444444] text-medium text-[#444444] py-0.5 px-9 font-medium cursor-pointer">
-  <span className="sr-only">LogOut</span>
-  <span>Logout</span>
-</div>
+        <div className="cursor-pointer flex items-center gap-2" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+          <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
+            {/* Replace with user's avatar */}
+            <img
+              className="w-full h-full rounded-full object-cover"
+              src={user?.profileImageUrl || '/default-avatar.png'}
+              alt="User Avatar"
+            />
+          </div>
+          <span>{user?.fullName || 'User'}</span>
+        </div>
 
-        </SignOutButton>
+        {/* Dropdown Menu */}
+        {isDropdownOpen && (
+          <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
+            <ul>
+              <li>
+                <a
+                  href="/user-profile"
+                  className="block px-4 py-2 hover:bg-gray-100 text-gray-700"
+                >
+                  Profile
+                </a>
+              </li>
+              <li>
+                <SignOutButton>
+                  <div className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
+                    Logout
+                  </div>
+                </SignOutButton>
+              </li>
+            </ul>
+          </div>
+        )}
       </SignedIn>
       <SignedOut>
         <SignInButton afterSignInUrl="/" mode="modal">
-          <div className="w-auto bg-[#60a5fa] rounded-lg flex items-center border-1 border-[#444444] justify-center text-medium text-[#526527] py-0.5 px-5 font-medium cursor-pointer hover:bg-[#d4d3bb]">
+          <div className="text-gray-700 hover:text-gray-900 cursor-pointer">
             SignIn / SignUp
           </div>
         </SignInButton>
@@ -189,12 +180,8 @@ export default function Page() {
     </ClerkLoaded>
   </div>
 </div>
+</div>
 
-                  </div>
-                </div>
-              </div>
-            </div>
-    
 
       
       <section className="text-center bg-[#e0dfce] h-full w-full flex flex-col items-center justify-center font-['Roboto']">
