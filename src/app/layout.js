@@ -17,13 +17,12 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <Head>
-          {/* Ensure the favicon link is placed here */}
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <body className={inter.className}>
-          <Header /> {/* Header placed outside the main content */}
-          <main>{children}</main> {/* Main content area */}
-          <Footer /> {/* Footer placed below content */}
+          <Header /> 
+          <main>{children}</main> 
+          <Footer /> 
         </body>
       </html>
     </ClerkProvider>
