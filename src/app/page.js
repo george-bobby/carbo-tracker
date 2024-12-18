@@ -39,30 +39,37 @@ export default function Page() {
         </div>
 
         {/* Navigation Links beside the image */}
-        <div className="flex gap-4 items-center">
-          <Link
-            href="/dashboard"
+        <Link
+            href="/calculator"
             className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#d4d3bb] transition duration-100"
           >
-            Dashboard
+            Calculator
+        </Link>
+        <Link
+            href="/news"
+            className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#d4d3bb] transition duration-100"
+          >
+            News
           </Link>
+          
           <Link
+            href="/learn"
+            className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#d4d3bb] transition duration-100"
+          >
+            Learn
+          </Link>
+        <div className="flex gap-4 items-center">
+           <Link
             href="/chatbot"
             className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#d4d3bb] transition duration-100"
           >
             Chatbot
           </Link>
           <Link
-            href="/reclaim"
+            href="/dashboard"
             className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#d4d3bb] transition duration-100"
           >
-            Emissions
-          </Link>
-          <Link
-            href="/faq"
-            className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#d4d3bb] transition duration-100"
-          >
-            FAQs
+            Dashboard
           </Link>
         </div>
       </div>

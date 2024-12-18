@@ -2,8 +2,8 @@
 export const ROUTES = {
   HOME: '/',
   DASHBOARD: '/dashboard',
-  FEEDBACK: '/feedback',
-  FAQ: '/faq',
+  LEARN: '/learn',
+  NEWS: '/news',
   CALCULATOR: '/calculator',
-  CONTACT_US: '/contact-us',
+  CHATBOT: '/chatbot',
 };
