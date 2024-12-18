@@ -103,9 +103,6 @@ export default function Page() {
             Generate
           </button>
         </div>
-        <div className="mt-8 border-gray-700 pt-8 flex flex-col items-center">
-          <p className="text-sm">&copy; 2024 Carbo Inc. All rights reserved.</p>
-        </div>
       </div>
     </div>
   );

@@ -1,78 +1,92 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+"use client";
 
+import Spinner from "../components/Spinner";
+import Link from "next/link";
+import {
+  ClerkLoaded,
+  ClerkLoading,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
+import Image from "next/image";
+import React from "react";
 
 function Header() {
-    return(
-        <header className="shadow sticky z-50 top-0">
-            <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
-                <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                    <Link to="/" className="flex items-center">
-                        <img
-                            src="../../public/logo-footprint.png"
-                            className="mr-3 h-12"
-                            alt="Logo"
-                        />
-                    </Link>
-
-                    <div className="flex items-center lg:order-2">
-                        <Link
-                            to="/"
-                            className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-                        >
-                            Log in
-                        </Link>
-                        <Link
-                            to="/calculate"
-                            className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-                        >
-                            Get started
-                        </Link>
-                    </div>
-                    <div
-                        className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
-                        id="mobile-menu-2"
-                    >
-                        <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0 ml-[180px]">
-                            <li>
-                                <NavLink
-                                    to="/"
-                                    className={({isActive}) =>
-                                        `block py-2 pr-4 pl-3 duration-200 ${isActive? "text-green-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-green-700 lg:p-0`
-                                    }
-                                >
-                                    Home
-                                </NavLink>
-                            </li>
-
-                            <li>
-                                <NavLink
-                                    to="/about"
-                                    className={({isActive}) =>
-                                        `block py-2 pr-4 pl-3 duration-200 ${isActive? "text-green-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-green-700 lg:p-0`
-                                    }
-                                >
-                                    About
-                                </NavLink>
-                            </li>
-
-                            <li>
-                                <NavLink
-                                    to="/contact-us"
-                                    className={({isActive}) =>
-                                        `block py-2 pr-4 pl-3 duration-200 ${isActive? "text-green-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-green-700 lg:p-0`
-                                    }
-                                >
-                                    Contact Us
-                                </NavLink>
-                            </li>
-                            
-                        </ul>
-                    </div>
+    return (
+        <div className="flex items-center justify-between gap-6 bg-[#e8e6d7]"> {/* Changed here */}
+            {/* Header Image */}
+            <div className="flex items-center gap-4">
+                <div className="rounded-xl w-1/4 h-23">
+                    <img
+                        className="w-full h-full object-cover rounded-lg"
+                        src="/imag1.webp" // Ensure this image exists in the public folder
+                        alt="Carbo"
+                        width={876}
+                        height={156}
+                    />
                 </div>
-            </nav>
-        </header>
-    )
+
+                {/* Navigation Links */}
+                <div className="flex flex-wrap gap-4 items-center">
+                    <Link
+                        href="/dashboard" // Corrected to href
+                        className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
+                    >
+                        Dashboard
+                    </Link>
+                    <Link
+                        href="/calculator" // Corrected to href
+                        className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
+                    >
+                        Calculator
+                    </Link>
+                    <Link
+                        href="/news" // Corrected to href
+                        className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
+                    >
+                        News
+                    </Link>
+                    <Link
+                        href="/learn" // Corrected to href
+                        className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
+                    >
+                        Learn
+                    </Link>
+                    <Link
+                        href="/chatbot" // Corrected to href
+                        className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
+                    >
+                        Chatbot
+                    </Link>
+                </div>
+            </div>
+
+            {/* Profile Section */}
+            <div className="relative flex items-center justify-end group bg-[#e8e6d7] pr-8">
+                <ClerkLoading>
+                    <Spinner color="black" />
+                </ClerkLoading>
+
+                <ClerkLoaded>
+                    <SignedIn>
+                        <div className="relative group">
+                            <UserButton afterSignOutUrl="/" style={{ transform: "scale(1.4)" }} />
+                        </div>
+                    </SignedIn>
+
+                    <SignedOut>
+                        <SignInButton mode="modal">
+                            <div className="w-auto bg-[#b5bf96] rounded-lg flex items-center border-1 border-[#444444] justify-center text-medium text-[#526527] py-0.5 px-5 font-medium cursor-pointer hover:bg-[#e8e6d7]">
+                                Sign In / Sign Up
+                            </div>
+                        </SignInButton>
+                    </SignedOut>
+                </ClerkLoaded>
+            </div>
+        </div>
+    );
 }
 
-export default Header
+export default Header;
