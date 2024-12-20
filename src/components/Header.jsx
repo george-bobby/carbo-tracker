@@ -10,52 +10,66 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
-import Image from "next/image";
 import React from "react";
 
 function Header() {
     return (
-        <div className="flex items-center justify-between gap-6 bg-[#e8e6d7]"> {/* Changed here */}
-            {/* Header Image */}
-            <div className="flex items-center gap-4">
-                <div className="rounded-xl w-1/4 h-23">
-                    <img
-                        className="w-full h-full object-cover rounded-lg"
-                        src="/imag1.webp" // Ensure this image exists in the public folder
-                        alt="Carbo"
-                        width={876}
-                        height={156}
-                    />
-                </div>
+        <div className="flex items-center justify-between bg-[#e8e6d7] px-7 py-4">
+            {/* Left Section: Logo and Navigation Links */}
+            <div className="flex items-center gap-4"> {/* Reduced gap for less space between logo and nav links */}
+                {/* Header Image */}
+                <Link href="/">
+                    <div className="rounded-xl h-20 w-auto -ml-4"> {/* Negative margin to move the logo left */}
+                        <img
+                            className="w-full h-full object-cover rounded-lg"
+                            src="/imag1.webp"
+                            alt="Carbo"
+                            width={876}
+                            height={156}
+                        />
+                    </div>
+                </Link>
 
                 {/* Navigation Links */}
-                <div className="flex flex-wrap gap-4 items-center">
+                <div className="flex gap-4 items-center">
                     <Link
-                        href="/dashboard" // Corrected to href
+                        href="/dashboard"
                         className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
                     >
                         Dashboard
                     </Link>
                     <Link
-                        href="/calculator" // Corrected to href
+                        href="/calculator"
                         className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
                     >
                         Calculator
                     </Link>
                     <Link
-                        href="/news" // Corrected to href
+                        href="/news"
                         className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
                     >
                         News
                     </Link>
                     <Link
-                        href="/learn" // Corrected to href
+                        href="/carpool"
                         className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
                     >
-                        Learn
+                        Carpool
                     </Link>
                     <Link
-                        href="/chatbot" // Corrected to href
+                        href="/shop"
+                        className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
+                    >
+                        Shop
+                    </Link>
+                    <Link
+                        href="/ecocenter"
+                        className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
+                    >
+                        Ecocenter
+                    </Link>
+                    <Link
+                        href="/chatbot"
                         className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
                     >
                         Chatbot
