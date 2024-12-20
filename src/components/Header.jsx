@@ -51,10 +51,22 @@ function Header() {
                         News
                     </Link>
                     <Link
-                        href="/learn"
+                        href="/carpool"
                         className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
                     >
-                        Learn
+                        Carpool
+                    </Link>
+                    <Link
+                        href="/shop"
+                        className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
+                    >
+                        Shop
+                    </Link>
+                    <Link
+                        href="/ecocenter"
+                        className="text-[#444444] py-1 px-3 rounded-lg font-medium hover:bg-[#e8e6d7] transition duration-100 bg-[#e8e6d7]"
+                    >
+                        Ecocenter
                     </Link>
                     <Link
                         href="/chatbot"
