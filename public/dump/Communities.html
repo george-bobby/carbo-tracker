@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="icon" type="image/x-icon" sizes="64x64" href="https://i.ibb.co/s2hvZ78/182551-200.png">
+  <title>Environmental Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    .event-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 20px;
+      padding: 20px;
+    }
+    .event-date {
+      font-size: 24px;
+      font-weight: bold;
+      color: #4CAF50;
+    }
+    .event-title {
+      font-size: 20px;
+      margin-top: 10px;
+      color: #333;
+    }
+    .event-details {
+      margin-top: 10px;
+      color: #666;
+    }
+    .participate-button {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .participate-button:hover {
+      background-color: #45a049;
+    }
+    .previous-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 40%;
+      padding: 08px;
+      font-size: 40px;
+      cursor: pointer;
+      z-index: 3; /* Ensure the button stays on top */
+    }
+    /* Custom CSS to adjust the width of the modal */
+    .modal-dialog {
+      max-width: 400px; /* Adjust the width as needed */
+      margin: 30px auto; /* Center the modal */
+    }
+  </style>
+</head>
+<body style="background-color: black;">
+    
+  <center class="header-img"><img src="https://i.ibb.co/s2hvZ78/182551-200.png" height="60px" width="60px">&nbsp;&nbsp;<img src="https://i.ibb.co/9HKpLYq/cooltext459891363137067.png"></center>
+
+<br>
+<hr style="background-color: white;">
+<a href="Home.html"><button class="previous-btn">
+  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+</button></a>
+
+<!---<div class="event-card">
+  <div class="event-date">5 June 2024</div>
+  <div class="event-title">World Environment Day</div>
+  <div class="event-details">
+    World Environment Day is celebrated annually on June 5th to raise awareness and encourage action for the protection of our environment. It provides a platform for individuals, communities, and governments to come together and take positive environmental actions.
+  </div><br>
+  <button class="participate-button" data-toggle="modal" data-target="#participateModal">Participate</button>
+</div>--->
+
+<div class="event-card">
+  <div class="event-date">15 August 2024</div>
+  <div class="event-title">National Tree Planting Day</div>
+  <div class="event-details">
+    National Tree Planting Day is a day dedicated to the planting of trees and raising awareness about the importance of trees in our environment. It is celebrated in many countries around the world to promote reforestation and combat deforestation.
+  </div><br>
+  <button class="participate-button" data-toggle="modal" data-target="#participateModal">Participate</button>
+</div>
+
+<div class="event-card">
+  <div class="event-date">22 September 2024</div>
+  <div class="event-title">World Car-Free Day</div>
+  <div class="event-details">
+    World Car-Free Day is an annual event celebrated on September 22nd in cities around the world. It encourages people to use alternative modes of transportation such as walking, cycling, or public transit to reduce air pollution and traffic congestion.
+  </div><br>
+  <button class="participate-button" data-toggle="modal" data-target="#participateModal">Participate</button>
+</div>
+
+<div class="event-card">
+  <div class="event-date">10 October 2024</div>
+  <div class="event-title">International Day of Climate Action</div>
+  <div class="event-details">
+    The International Day of Climate Action is a global day of awareness and action on climate change. It aims to mobilize individuals, communities, and governments to take urgent and meaningful action to address the climate crisis.
+  </div><br>
+  <button class="participate-button" data-toggle="modal" data-target="#participateModal">Participate</button>
+</div>
+
+<div class="event-card">
+  <div class="event-date">5 November 2024</div>
+  <div class="event-title">National Recycling Day</div>
+  <div class="event-details">
+    National Recycling Day is observed on November 15th to raise awareness about the importance of recycling and encourage people to recycle their waste materials. It promotes environmental sustainability and helps reduce waste in landfills.
+  </div><br>
+  <button class="participate-button" data-toggle="modal" data-target="#participateModal">Participate</button>
+</div>
+
+<!-- Participate Modal -->
+<div id="participateModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Join the Group</h4>
+      </div>
+      <div class="modal-body">
+        <p>Be a member to reduce Carbon footprints.</p>
+        <img style="margin-left: 10px"  src="https://i.ibb.co/QDq3qbk/Whats-App-Image-2024-06-07-at-20-56-38-5ea21c55.jpg" alt="Carbon footprint image" height="500px" width="350px">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
