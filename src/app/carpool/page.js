@@ -146,7 +146,7 @@ const RideBooking = () => {
           <div className="col-span-5">
             <label className="block text-sm font-medium mb-2">START FROM</label>
             <Input
-              placeholder="e.g. Mahim, Navi Mumbai"
+              placeholder="e.g. Kengeri"
               value={startLocation}
               onChange={(e) => setStartLocation(e.target.value)}
               className="w-full"
@@ -165,7 +165,7 @@ const RideBooking = () => {
               DESTINATION
             </label>
             <Input
-              placeholder="e.g. Dharavi, Bandra"
+              placeholder="e.g. Rajajinagar"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               className="w-full"
