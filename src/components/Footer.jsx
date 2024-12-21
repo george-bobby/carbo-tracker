@@ -1,5 +1,4 @@
-'use client'; // This makes the component a Client Component
-
+"use client";
 import React from 'react';
 import { FaMapMarkerAlt, FaPhoneAlt, FaFax, FaEnvelope, FaGlobe } from 'react-icons/fa';
 
@@ -24,7 +23,7 @@ export default function Footer() {
                             <div className="flex items-center gap-4">
                                 <FaMapMarkerAlt className="text-l flex-shrink-1" />
                                 <p>
-                                    Dharmaram College Post, Hosur Road, <br />
+                                Hosur Main Road, Bhavani Nagar, S.G. Palya, <br />
                                     Bengaluru - 560029, Karnataka, India
                                 </p>
                             </div>
@@ -76,7 +75,17 @@ export default function Footer() {
                             environment.
                         </p>
                     </div>
-                </div>
+
+                    {/* About Us */}
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                        <img src="ccalogo.webp" alt="CCA Logo" className="mb-4 w-48 h-48 object-contain mx-auto" />
+                        <h3 className="text-white font-serif text-l font-semibold mb-4">About Us</h3>
+                        <p className="font-serif text-l leading-relaxed text-gray-300 max-w-md">
+                        Christites for Climate Action (CCA) is a student-led initiative at CHRIST (Deemed to be University). Focused on promoting sustainability and raising awareness about climate change, CCA inspires eco-friendly practices and aligns with global efforts like the United Nations Sustainable Development Goals, particularly Goal 13.
+                    </p>
+
+                    </div>
+                    </div>
 
                 {/* Footer Bottom */}
                 <div className="mt-10 border-t border-gray-500 pt-6 text-center text-sm">
