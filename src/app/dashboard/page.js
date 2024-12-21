@@ -8,19 +8,19 @@ export default function UserProfile() {
   var check = true;
   var [percentage, setPercentage] = useState(0);
   percentage = Number(percentage);
-  useEffect(() => {
-    if (user != undefined) {
-      if (check) {
-        inputCarbonData("travel", 0, user?.fullName);
-        inputCarbonData("food", 0, user?.fullName);
-        inputCarbonData("vehicle", 0, user?.fullName);
-        inputCarbonData("electricity", 0, user?.fullName);
-        check = false;
-      }
-      calculateFootprintPercentage(user?.fullName, setPercentage);
-      console.log(user?.primaryEmailAddress.emailAddress);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (user != undefined) {
+  //     if (check) {
+  //       inputCarbonData("travel", 0, user?.fullName);
+  //       inputCarbonData("food", 0, user?.fullName);
+  //       inputCarbonData("vehicle", 0, user?.fullName);
+  //       inputCarbonData("electricity", 0, user?.fullName);
+  //       check = false;
+  //     }
+  //     calculateFootprintPercentage(user?.fullName, setPercentage);
+  //     console.log(user?.primaryEmailAddress.emailAddress);
+  //   }
+  // }, []);
   return (
     <div className="bg-[#e8e6d7] text-white">
       <div>

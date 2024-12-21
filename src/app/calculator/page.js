@@ -18,8 +18,7 @@ import {
 } from "lucide-react";
 import { Alert, AlertDescription } from "../../utilities/alert";
 import { Card, CardContent, CardHeader, CardTitle } from "../../utilities/card";
-// import { useTheme } from '../context/ThemeContext';
-// import ImageProcess from "./ImageProcess";
+
 // EPA and IPCC-based conversion factors
 const categories = [
   {
@@ -461,7 +460,7 @@ const CarbonFootprintCalculator = () => {
                     onClick={() => setShowFormula(!showFormula)}
                     className="ml-2 p-1 rounded-full hover:bg-gray-100"
                   >
-                    <Info className="w-5 h-5 text-blue-500" />
+                    <Info className="w-5 h-5 text-green-500" />
                   </button>
                 </CardTitle>
               </CardHeader>
@@ -491,7 +490,7 @@ const CarbonFootprintCalculator = () => {
 
                 {!showResults ? (
                   <>
-                    <div className="flex overflow-x-auto mb-6 pb-2 gap-2">
+                    <div className="flex overflow-x-auto mb-6 p-3 gap-27">
                       {categories.map((category, index) => {
                         const Icon = category.icon;
                         const emission = categoryEmissions[category.id] || 0;
@@ -501,7 +500,7 @@ const CarbonFootprintCalculator = () => {
                             onClick={() => setCurrentCategory(index)}
                             className={`flex-shrink-0 flex flex-col items-center p-3 rounded-lg transition-all ${
                               currentCategory === index
-                                ? "bg-blue-50 text-blue-600 ring-2 ring-blue-200"
+                                ? "bg-green-50 text-green-600 ring-2 ring-green-200"
                                 : "hover:bg-gray-50"
                             }`}
                           >
@@ -567,7 +566,7 @@ const CarbonFootprintCalculator = () => {
                                   <div className="flex gap-4 items-center">
                                     <input
                                       type="number"
-                                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-200"
+                                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-200"
                                       value={value}
                                       onChange={(e) =>
                                         handleInputChange(
@@ -600,7 +599,7 @@ const CarbonFootprintCalculator = () => {
                           setCurrentCategory(Math.max(0, currentCategory - 1))
                         }
                         disabled={currentCategory === 0}
-                        className="px-4 py-2 text-blue-600 disabled:opacity-50"
+                        className="px-4 py-2 text-green-600 disabled:opacity-50"
                       >
                         Previous
                       </button>
@@ -616,7 +615,7 @@ const CarbonFootprintCalculator = () => {
                           onClick={() =>
                             setCurrentCategory(currentCategory + 1)
                           }
-                          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                          className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
                         >
                           Next
                         </button>
@@ -690,7 +689,7 @@ const CarbonFootprintCalculator = () => {
                               </div>
                               <div className="w-full bg-gray-200 rounded-full h-2">
                                 <div
-                                  className="bg-blue-600 h-2 rounded-full"
+                                  className="bg-green-600 h-2 rounded-full"
                                   style={{ width: `${percentage}%` }}
                                 />
                               </div>
@@ -733,7 +732,7 @@ const CarbonFootprintCalculator = () => {
                         setCurrentCategory(0);
                         setAnswers({});
                       }}
-                      className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                      className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
                     >
                       Calculate Again
                     </button>
