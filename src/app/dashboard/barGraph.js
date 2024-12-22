@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import { calculateMonthlyData } from "../../components/firebase_operations";
 import { useUser } from "@clerk/nextjs";
 
 const BarGraph = () => {
@@ -8,14 +7,6 @@ const BarGraph = () => {
     10, 30, 410, 43, 11, 0, 52, 12, 34, 80, 20, 100,
   ]);
   const { user } = useUser();
-  useEffect(() => {
-    if (user != undefined) {
-      for (let i = 1; i <= 6; i++) {
-        calculateMonthlyData(user?.fullName, dataArray, i, setDataArray);
-        console.log(dataArray[i - 1]);
-      }
-    }
-  }, []);
   const data = {
     labels: [
       "January",

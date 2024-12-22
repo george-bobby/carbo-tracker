@@ -3,31 +3,24 @@ import React, { useEffect, useState } from "react";
 import "./index.css";
 import UserStats from "./userStats.js";
 import { useUser } from "@clerk/nextjs";
-import {
-  calculateFootprintPercentage,
-  inputCarbonData,
-} from "../../components/firebase_operations";
-// import svg file
-import ProfileSvg from "../../../public/man-coloured.svg";
-import PieChart from "./pieChart";
 export default function UserProfile() {
   const { user } = useUser();
   var check = true;
   var [percentage, setPercentage] = useState(0);
   percentage = Number(percentage);
-  useEffect(() => {
-    if (user != undefined) {
-      if (check) {
-        inputCarbonData("travel", 0, user?.fullName);
-        inputCarbonData("food", 0, user?.fullName);
-        inputCarbonData("vehicle", 0, user?.fullName);
-        inputCarbonData("electricity", 0, user?.fullName);
-        check = false;
-      }
-      calculateFootprintPercentage(user?.fullName, setPercentage);
-      console.log(user?.primaryEmailAddress.emailAddress);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (user != undefined) {
+  //     if (check) {
+  //       inputCarbonData("travel", 0, user?.fullName);
+  //       inputCarbonData("food", 0, user?.fullName);
+  //       inputCarbonData("vehicle", 0, user?.fullName);
+  //       inputCarbonData("electricity", 0, user?.fullName);
+  //       check = false;
+  //     }
+  //     calculateFootprintPercentage(user?.fullName, setPercentage);
+  //     console.log(user?.primaryEmailAddress.emailAddress);
+  //   }
+  // }, []);
   return (
     <div className="bg-[#e8e6d7] text-white">
       <div>
@@ -66,11 +59,7 @@ export default function UserProfile() {
               </tbody>
             </table>
           </div>
-
-          <div className="w-1/2 p-4 mr-20 ml-10 rounded-lg align-middle">
-            {/* <img src={ProfileSvg} alt="Profile Picture" className="rounded-full h-64 w-64 mx-auto" style={{ fill: 'white' }} /> */}
-            <PieChart />
-          </div>
+          <div className="w-1/2 p-4 mr-20 ml-10 rounded-lg align-middle"></div>
         </div>
         <div>
           <UserStats />

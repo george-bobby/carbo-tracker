@@ -2,7 +2,6 @@ import React from "react";
 import "./index.css";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
-import PieChart from "./pieChart.js";
 import BarGraph from "./barGraph.js";
 
 Chart.register(CategoryScale);
