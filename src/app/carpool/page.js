@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { Card } from "../../utilities/card";
-import { Input } from "../../utilities/input";
-import { Button } from "../../utilities/button";
+import { Card } from "../../components/card";
+import { Input } from "../../components/input";
+import { Button } from "../../components/button";
 import { Star, Check, MapPin } from "lucide-react";
 import allRides from "./ridesData";
 import {
@@ -12,7 +12,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../../utilities/dialog";
+} from "../../components/dialog";
 // import { useTheme } from '../context/ThemeContext';
 // import Lottie from 'react-lottie';
 // import imgR from "../../../public/imgR.jpg";

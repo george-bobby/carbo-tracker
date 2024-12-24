@@ -1,11 +1,21 @@
 "use client";
 import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../utilities/tabs";
-import { Card, CardContent, CardHeader, CardTitle } from "../../utilities/card";
-import { Alert, AlertDescription, AlertTitle } from "../../utilities/alert";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../../components/tabs";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../components/card";
+import { Alert, AlertDescription, AlertTitle } from "../../components/alert";
 
-import { Input } from "../../utilities/input";
+import { Input } from "../../components/input";
 import {
   Car,
   ShoppingBag,
