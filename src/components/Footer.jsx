@@ -93,24 +93,6 @@ export default function Footer() {
                 </div>
             </div>
 
-            {/* Scroll to Top Button */}
-            <button
-                onClick={scrollToTop}
-                className="fixed bottom-6 right-6 bg-transparent border-2 border-white text-white p-4 rounded-lg shadow-lg hover:bg-white hover:text-blue-600 transition"
-                style={{
-                    fontSize: '28px', // Increased size for a thicker arrow
-                    zIndex: '1000',
-                    width: '60px', // Set width to make it square
-                    height: '60px', // Set height to match width for a square shape
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    textAlign: 'center', // Ensure the text is centered
-                    transform: 'translateY(4px)', // Move the arrow slightly down inside the button
-                }}
-            >
-                ↑
-            </button>
         </footer>
     );
 }
