@@ -16,8 +16,8 @@ import {
   Flame,
   Lightbulb,
 } from "lucide-react";
-import { Alert, AlertDescription } from "../../utilities/alert";
-import { Card, CardContent, CardHeader, CardTitle } from "../../utilities/card";
+import { Alert, AlertDescription } from "../../components/alert";
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/card";
 
 // EPA and IPCC-based conversion factors
 const categories = [
