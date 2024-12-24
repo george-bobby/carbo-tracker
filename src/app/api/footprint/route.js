@@ -1,24 +1,22 @@
-import express from "express";
-import CarbonFootprint from "../../models/footprint"; // Adjust the path based on your folder structure
-import dbConnect from "../../../utils/dbConnect"; // Adjust the path based on your folder structure
+import CarbonFootprint from "../../models/footprint";
+import dbConnect from "../../../utils/dbConnect";
 
-const router = express.Router();
-
-// Middleware to authenticate using Clerk
-router.use((req, res, next) => {
-  const clerkId = req.headers["clerk-id"];
-  if (!clerkId) return res.status(401).send("Unauthorized: Clerk ID missing");
-  req.clerkId = clerkId;
-  next();
-});
-
-// Create or Update Carbon Footprint Data
-router.post("/save", async (req, res) => {
+export async function POST(req) {
   try {
-    await dbConnect(); // Ensure MongoDB connection
+    await dbConnect();
 
-    const { clerkId } = req;
-    const data = req.body;
+    const clerkId = req.headers.get("clerk-id");
+    if (!clerkId) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized: Clerk ID missing" }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    const data = await req.json();
 
     const result = await CarbonFootprint.findOneAndUpdate(
       { clerkId },
@@ -26,52 +24,77 @@ router.post("/save", async (req, res) => {
       { new: true, upsert: true }
     );
 
-    res.status(200).json({ message: "Data saved successfully", result });
+    return new Response(
+      JSON.stringify({ message: "Data saved successfully", result }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
   } catch (err) {
-    res.status(500).send(err.message);
+    return new Response(JSON.stringify({ error: err.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
-});
+}
 
-// Get Carbon Footprint Data for the Authenticated User
-router.get("/fetch", async (req, res) => {
+export async function GET(req) {
   try {
-    await dbConnect(); // Ensure MongoDB connection
+    await dbConnect();
 
-    const { clerkId } = req;
+    const clerkId = req.headers.get("clerk-id");
+    if (!clerkId) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized: Clerk ID missing" }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
 
     const result = await CarbonFootprint.findOne({ clerkId });
     if (!result) {
-      return res.status(200).json({
-        data: {
-          // Default data structure
-          transportation: { carMiles: 0, flightHours: 0, publicTransport: 0 },
-          energyUse: { electricityUsage: 0, gasHeating: 0, waterHeating: 0 },
-          foodConsumption: { meatMeals: 0, vegetarianMeals: 0, foodWaste: 0 },
-          wasteManagement: {
-            landfillWaste: 0,
-            recycledPounds: 0,
-            composting: 0,
+      return new Response(
+        JSON.stringify({
+          data: {
+            // Default data structure
+            transportation: { carMiles: 0, flightHours: 0, publicTransport: 0 },
+            energyUse: { electricityUsage: 0, gasHeating: 0, waterHeating: 0 },
+            foodConsumption: { meatMeals: 0, vegetarianMeals: 0, foodWaste: 0 },
+            wasteManagement: {
+              landfillWaste: 0,
+              recycledPounds: 0,
+              composting: 0,
+            },
+            waterUsage: { showerTime: 0, laundryLoads: 0, dishwashing: 0 },
+            socialActivities: {
+              streamingHours: 0,
+              restaurantVisits: 0,
+              concertsEvents: 0,
+            },
+            shopping: {
+              onlineOrders: 0,
+              inStorePurchases: 0,
+              packagingWaste: 0,
+            },
+            buildingMaintenance: {
+              renovationsProjects: 0,
+              applianceReplacements: 0,
+              energyEfficiency: 0,
+            },
           },
-          waterUsage: { showerTime: 0, laundryLoads: 0, dishwashing: 0 },
-          socialActivities: {
-            streamingHours: 0,
-            restaurantVisits: 0,
-            concertsEvents: 0,
-          },
-          shopping: { onlineOrders: 0, inStorePurchases: 0, packagingWaste: 0 },
-          buildingMaintenance: {
-            renovationsProjects: 0,
-            applianceReplacements: 0,
-            energyEfficiency: 0,
-          },
-        },
-      });
+        }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
     }
 
-    res.status(200).json(result);
+    return new Response(JSON.stringify(result), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (err) {
-    res.status(500).send(err.message);
+    return new Response(JSON.stringify({ error: err.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
-});
-
-export default router;
+}
