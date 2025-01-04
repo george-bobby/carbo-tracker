@@ -1,7 +1,7 @@
 import React from "react";
 import { Star } from "lucide-react";
 import productsData from "./data/amazon-products.json"; // Ensure this path is correct
-
+//import productsData from "./data/flipkart-products.json";
 const ShoppingTracker = () => {
   const RatingStars = ({ rating }) => {
     if (rating === "N/A" || !rating) return <span className="text-gray-400">No Rating</span>;
