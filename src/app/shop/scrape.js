@@ -121,7 +121,7 @@ const scrapeMyntra = async () => {
   });
 
   console.log(`Scraped ${products.length} products from Myntra.`);
-  const filePath = path.join(__dirname, "myntra-products.json");
+  const filePath = path.join(__dirname, "./data/myntra-products.json");
   fs.writeFileSync(filePath, JSON.stringify(products, null, 2));
   console.log(`Saved ${products.length} products to myntra-products.json.`);
 
