@@ -35,7 +35,7 @@ const scrapeAmazon = async () => {
   });
 
   console.log(`Scraped ${products.length} products from Amazon.`);
-  const filePath = path.join(__dirname, "amazon-products.json");
+  const filePath = path.join(__dirname, "./data/amazon-products.json");
   fs.writeFileSync(filePath, JSON.stringify(products, null, 2));
   console.log(`Saved ${products.length} products to amazon-products.json.`);
 
