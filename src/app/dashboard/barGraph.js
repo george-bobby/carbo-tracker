@@ -1,58 +1,78 @@
 import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import { useUser } from "@clerk/nextjs";
+import axios from "axios";
 
-const BarGraph = () => {
-  const [dataArray, setDataArray] = useState([
-    10, 30, 410, 43, 11, 0, 52, 12, 34, 80, 20, 100,
-  ]);
-  const { user } = useUser();
-  const data = {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ],
-    datasets: [
-      {
-        label: "Monthly Statistics",
-        data: dataArray,
-        backgroundColor: "rgba(54, 162, 235, 0.6)",
-        borderColor: "rgba(54, 162, 235, 1)",
-        borderWidth: 1,
-      },
-    ],
-  };
+const Dashboard = () => {
+  const [monthlyData, setMonthlyData] = useState([]);
+  const [labels, setLabels] = useState([]);
+  const [values, setValues] = useState([]);
+  const [error, setError] = useState(null);
+
+  // Fetch data from the backend
+  useEffect(() => {
+    const fetchMonthlyData = async () => {
+      try {
+        // Replace with your API endpoint
+        const response = await axios.get("/api/carbonFootprint/monthly", {
+          headers: {
+            "Content-Type": "application/json",
+            "clerk-id": localStorage.getItem("clerkId"), // Assuming Clerk ID is stored in local storage
+          },
+        });
+
+        const { data } = response;
+        setMonthlyData(data);
+
+        // Extract labels and values for the chart
+        const chartLabels = Object.keys(data); // e.g., ['January', 'February', ...]
+        const chartValues = Object.values(data); // e.g., [120, 150, ...]
+
+        setLabels(chartLabels);
+        setValues(chartValues);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch monthly data. Please try again later.");
+      }
+    };
+
+    fetchMonthlyData();
+  }, []);
 
   return (
-    <div>
-      <h2>Bar Graph</h2>
-      <Bar
-        data={data}
-        options={{
-          plugins: {
-            title: {
-              display: true,
-              text: "Carbon Emission this month",
+    <div style={{ width: "80%", margin: "0 auto" }}>
+      <h2 style={{ textAlign: "center", margin: "20px 0" }}>
+        Monthly Carbon Emissions
+      </h2>
+      {error ? (
+        <p style={{ color: "red", textAlign: "center" }}>{error}</p>
+      ) : (
+        <Bar
+          data={{
+            labels: labels,
+            datasets: [
+              {
+                label: "Carbon Emissions (kg CO₂)",
+                data: values,
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 1,
+              },
+            ],
+          }}
+          options={{
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
             },
-          },
-          // maintainAspectRatio: false,
-          width: 500,
-          height: 3000,
-          responsive: true,
-        }}
-      />
+          }}
+          height={400}
+        />
+      )}
     </div>
   );
 };
 
-export default BarGraph;
+export default Dashboard;
