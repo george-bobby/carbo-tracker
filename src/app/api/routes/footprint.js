@@ -36,6 +36,7 @@ async function middleware(req) {
 }
 
 export async function POST(req) {
+  //save data
   try {
     await dbConnect();
     const clerkId = await middleware(req);
@@ -70,6 +71,7 @@ export async function POST(req) {
 }
 
 export async function GET(req) {
+  //fetch data
   try {
     await dbConnect();
     const clerkId = await middleware(req);
