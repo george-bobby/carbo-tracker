@@ -17,7 +17,12 @@ import {
   Lightbulb,
 } from "lucide-react";
 import { Alert, AlertDescription } from "../../components/alert";
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../components/card";
 
 // EPA and IPCC-based conversion factors
 const categories = [
@@ -29,7 +34,7 @@ const categories = [
     questions: [
       {
         id: "carMiles",
-        label: "Miles driven by car per week",
+        label: "Distance driven by car per week (kms)",
         factor: 0.404,
         source: "EPA average vehicle emissions",
       }, // kg CO2 per mile
@@ -236,7 +241,7 @@ const categories = [
 
 const equivalencies = [
   { name: "Smartphones Charged", factor: 0.005, icon: ShoppingBag }, // kg CO2 per charge
-  { name: "Miles Driven", factor: 0.404, icon: Car }, // kg CO2 per mile
+  { name: "Distance Driven (kms)", factor: 0.404, icon: Car }, // kg CO2 per mile
   { name: "Trees Needed (1 year)", factor: 21, icon: TreeDeciduous }, // kg CO2 absorbed per tree per year
   { name: "Gallons of Gasoline", factor: 8.887, icon: Flame }, // kg CO2 per gallon
 ];
@@ -247,7 +252,7 @@ const suggestions = {
       impact: "Can reduce emissions by up to 50%",
     },
     {
-      text: "Consider walking or cycling for short trips under 2 miles",
+      text: "Consider walking or cycling for short trips under 2 kms",
       impact: "Eliminates emissions completely for these trips",
     },
     {
@@ -479,7 +484,7 @@ const CarbonFootprintCalculator = () => {
                         <p className="text-sm">
                           Where:
                           <br />
-                          - Activity Data = Your input (e.g., miles driven)
+                          - Activity Data = Your input (e.g., kms driven)
                           <br />- Emission Factor = Standard CO₂ equivalent per
                           unit (from EPA/IPCC)
                         </p>
