@@ -99,7 +99,7 @@ const categories = [
       },
       {
         id: "foodWaste",
-        label: "Food waste in pounds per week",
+        label: "Food waste in kg per week",
         factor: 2.5,
         source: "U.S. EPA waste study",
       },
@@ -113,19 +113,19 @@ const categories = [
     questions: [
       {
         id: "landfillWaste",
-        label: "Pounds of waste sent to landfill per week",
+        label: "Kolograms of waste sent to landfill per week",
         factor: 1.98,
         source: "EPA landfill methane emissions",
       },
       {
         id: "recycledWaste",
-        label: "Pounds of recycled waste per week",
+        label: "Kolograms of recycled waste per week",
         factor: 0.5,
         source: "Recycling impact study",
       },
       {
         id: "composting",
-        label: "Pounds of composted organic waste per week",
+        label: "Kolograms of composted organic waste per week",
         factor: 0.7,
         source: "EPA composting study",
       },
@@ -203,7 +203,7 @@ const categories = [
       },
       {
         id: "packagingWaste",
-        label: "Pounds of packaging waste per month",
+        label: "Kilograms of packaging waste per month",
         factor: 2.3,
         source: "EPA packaging waste report",
       },
