@@ -1,10 +1,10 @@
 import React from "react";
 import { Star } from "lucide-react";
-import productsData from "./data/amazon-products.json"; // Ensure this path is correct
-//import productsData from "./data/flipkart-products.json";
+import productsData from "./products.json";
 const ShoppingTracker = () => {
   const RatingStars = ({ rating }) => {
-    if (rating === "N/A" || !rating) return <span className="text-gray-400">No Rating</span>;
+    if (rating === "N/A" || !rating)
+      return <span className="text-gray-400">No Rating</span>;
 
     const numRating = parseFloat(rating);
     const fullStars = Math.floor(numRating);
@@ -30,7 +30,9 @@ const ShoppingTracker = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">Sustainable Products</h1>
+      <h1 className="text-3xl font-bold text-center mb-8">
+        Sustainable Products
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {productsData && productsData.length > 0 ? (
           productsData.map((product, index) => (
@@ -47,11 +49,15 @@ const ShoppingTracker = () => {
               </div>
               <div className="p-4">
                 <div className="flex justify-between items-start mb-2">
-                  <span className="text-xl font-bold text-gray-800">{product.price}</span>
+                  <span className="text-xl font-bold text-gray-800">
+                    {product.price}
+                  </span>
                   <RatingStars rating={product.rating} />
                 </div>
                 <span className="text-sm text-gray-600">
-                  {product.productUrl && product.productUrl.includes("amazon") ? "Amazon" : "Flipkart"}
+                  {product.productUrl && product.productUrl.includes("amazon")
+                    ? "Amazon"
+                    : "Flipkart"}
                 </span>
                 <a
                   href={product.productUrl || "#"}
