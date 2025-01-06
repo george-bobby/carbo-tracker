@@ -1,15 +1,15 @@
 import CarbonFootprint from "../models/footprint";
-import dbConnect from "../utils/dbConnect";
+import dbConnect from "../utilities/dbConnect";
 
 const defaultData = {
-  transportation:0 ,
-  energyUse:0,
-  foodConsumption:0,
-  wasteManagement:0,
-  waterUsage:0,
-  socialActivities:0,
-  shopping:0,
-  buildingMaintenance:0,
+  transportation: 0,
+  energyUse: 0,
+  foodConsumption: 0,
+  wasteManagement: 0,
+  waterUsage: 0,
+  socialActivities: 0,
+  shopping: 0,
+  buildingMaintenance: 0,
 };
 
 // Middleware to authenticate Clerk ID
