@@ -1,5 +1,5 @@
-import CarbonFootprint from "../../models/footprint";
-import dbConnect from "../../../utils/dbConnect";
+import CarbonFootprint from "../models/footprint";
+import dbConnect from "../utils/dbConnect";
 
 export async function POST(req) {
   try {
