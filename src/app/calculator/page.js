@@ -113,19 +113,19 @@ const categories = [
     questions: [
       {
         id: "landfillWaste",
-        label: "Kolograms of waste sent to landfill per week",
+        label: "Kilograms of waste sent to landfill per week",
         factor: 1.98,
         source: "EPA landfill methane emissions",
       },
       {
         id: "recycledWaste",
-        label: "Kolograms of recycled waste per week",
+        label: "Kilograms of recycled waste per week",
         factor: 0.5,
         source: "Recycling impact study",
       },
       {
         id: "composting",
-        label: "Kolograms of composted organic waste per week",
+        label: "Kilograms of composted organic waste per week",
         factor: 0.7,
         source: "EPA composting study",
       },
