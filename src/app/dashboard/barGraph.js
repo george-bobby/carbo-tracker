@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Bar } from "react-chartjs-2";
-import { useUser } from "@clerk/nextjs";
 
 const BarGraph = () => {
   const [dataArray, setDataArray] = useState([
     10, 30, 410, 43, 11, 0, 52, 12, 34, 80, 20, 100,
   ]);
-  const { user } = useUser();
+
   const data = {
     labels: [
       "January",
@@ -33,24 +32,21 @@ const BarGraph = () => {
     ],
   };
 
+  const options = {
+    plugins: {
+      title: {
+        display: true,
+        text: "Yearly Statistics Overview",
+      },
+    },
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2,
+  };
+
   return (
-    <div>
-      <h2>Bar Graph</h2>
-      <Bar
-        data={data}
-        options={{
-          plugins: {
-            title: {
-              display: true,
-              text: "Carbon Emission this month",
-            },
-          },
-          // maintainAspectRatio: false,
-          width: 500,
-          height: 3000,
-          responsive: true,
-        }}
-      />
+    <div style={{ width: "80%", margin: "0 auto", height: "500px" }}>
+      <Bar data={data} options={options} />
     </div>
   );
 };
