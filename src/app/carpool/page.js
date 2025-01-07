@@ -13,13 +13,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../components/dialog";
-// import { useTheme } from '../context/ThemeContext';
-// import Lottie from 'react-lottie';
-// import imgR from "../../../public/imgR.jpg";
-// import image2 from "../../../public/img5.webp";
-// import image3 from "../../../public/imgr1.jpg";
-// import car from '../../../public/car.png';
-// import animation from "../../../public/Animation.json";
 
 const RideBooking = () => {
   const [startLocation, setStartLocation] = useState("");
@@ -30,6 +23,7 @@ const RideBooking = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [confirmedRideId, setConfirmedRideId] = useState(null);
   const [searchOn, setSearchOn] = useState(false);
+  const [newRide, setNewRide] = useState({ start: "", end: "", car: "", seats: 0, driver: "", distance: "", pickupPoint: "" });
 
   const handleSearch = () => {
     if (!startLocation && !destination) {
@@ -69,6 +63,21 @@ const RideBooking = () => {
     setConfirmedRideId(selectedRide.id);
     setShowConfirmDialog(false);
     setSelectedRide(null);
+  };
+
+  const handleCreateRide = () => {
+    if (newRide.start && newRide.end && newRide.car && newRide.seats > 0) {
+      // Assuming the backend API or database interaction is handled here
+      const newRideEntry = {
+        id: allRides.length + 1, // Assign a new unique ID
+        ...newRide,
+      };
+      allRides.push(newRideEntry);
+      alert("Ride created successfully!");
+      setNewRide({ start: "", end: "", car: "", seats: 0, driver: "", distance: "", pickupPoint: "" });
+    } else {
+      alert("Please fill all fields to create a ride.");
+    }
   };
 
   const displayRides = isSearchActive ? filteredRides : allRides;
@@ -139,8 +148,70 @@ const RideBooking = () => {
   };
 
   return (
-    <div className="h-screen relative">
-      <div className="relative z-10 max-w-3xl mx-auto p-6 bg-white bg-opacity-10 rounded-lg">
+    <div className="h-screen grid grid-cols-2">
+      {/* Left Side - Create a Ride Section */}
+      <div className="bg-gray-100 p-6 flex flex-col items-center justify-center">
+        <h1 className="text-2xl font-bold mb-6">CREATE A RIDE</h1>
+        <div className="grid grid-cols-1 gap-4 w-full max-w-md">
+          <Input
+            placeholder="Start Location"
+            value={newRide.start}
+            onChange={(e) => setNewRide({ ...newRide, start: e.target.value })}
+            className="w-full"
+          />
+          <Input
+            placeholder="Destination"
+            value={newRide.end}
+            onChange={(e) => setNewRide({ ...newRide, end: e.target.value })}
+            className="w-full"
+          />
+          <Input
+            placeholder="Driver Name"
+            value={newRide.driver}
+            onChange={(e) => setNewRide({ ...newRide, driver: e.target.value })}
+            className="w-full"
+          />
+          <Input
+            placeholder="Car Model"
+            value={newRide.car}
+            onChange={(e) => setNewRide({ ...newRide, car: e.target.value })}
+            className="w-full"
+          />
+          <Input
+            placeholder="Distance"
+            value={newRide.distance}
+            onChange={(e) => setNewRide({ ...newRide, distance: e.target.value })}
+            className="w-full"
+          />
+          <Input
+            placeholder="Pickup Point"
+            value={newRide.pickupPoint}
+            onChange={(e) =>
+              setNewRide({ ...newRide, pickupPoint: e.target.value })
+            }
+            className="w-full"
+          />
+          <Input
+            type="number"
+            placeholder="Seats Available"
+            value={newRide.seats}
+            onChange={(e) =>
+              setNewRide({ ...newRide, seats: parseInt(e.target.value) })
+            }
+            className="w-full"
+          />
+          <Button
+            variant="primary"
+            className="w-full bg-green-700 text-white hover:bg-green-600"
+            onClick={handleCreateRide}
+          >
+            Create Ride
+          </Button>
+        </div>
+      </div>
+
+      {/* Right Side - Pick a Ride Section */}
+      <div className="p-6 bg-white">
         <h1 className="text-2xl font-bold mb-6">PICK A RIDE</h1>
         <div className="grid grid-cols-12 gap-4 mb-4 border-2 p-6 rounded-xl shadow-md bg-white bg-opacity-70">
           <div className="col-span-5">
