@@ -28,12 +28,11 @@ async function middleware(req) {
 }
 
 export async function POST(req) {
-  //save data
   try {
-    await dbConnect();
+    await dbConnect(); // Ensure database connection
     const clerkId = await middleware(req);
 
-    if (!clerkId) return clerkId; // Unauthorized response handled in middleware.
+    if (!clerkId) return clerkId; // Handle unauthorized access
 
     const data = await req.json();
 
@@ -44,6 +43,7 @@ export async function POST(req) {
       });
     }
 
+    // Update or create a new record in the database
     const result = await CarbonFootprint.findOneAndUpdate(
       { clerkId },
       { data, updatedAt: new Date() },
@@ -63,26 +63,55 @@ export async function POST(req) {
 }
 
 export async function GET(req) {
-  //fetch data
   try {
-    await dbConnect();
+    await dbConnect(); // Ensure database connection
     const clerkId = await middleware(req);
 
-    if (!clerkId) return clerkId; // Unauthorized response handled in middleware.
+    if (!clerkId) return clerkId; // Handle unauthorized access
 
     const result = await CarbonFootprint.findOne({ clerkId });
 
     if (!result) {
-      return new Response(JSON.stringify({ data: defaultData }), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      });
+      // Return default data if no user data is found
+      return new Response(
+        JSON.stringify({
+          data: defaultData,
+          monthlyEmissions: [],
+          yearlyEmissions: [],
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
 
-    return new Response(JSON.stringify(result), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    // Extract total emissions data
+    const totalEmissions = result.data;
+
+    // Calculate monthly emissions (assume even distribution for simplicity)
+    const monthlyEmissions = Object.entries(totalEmissions).map(([key, value]) => ({
+      category: key,
+      value: value / 12, // Assuming the value is annual, divide by 12
+    }));
+
+    // Calculate yearly emissions (directly use the total values)
+    const yearlyEmissions = Object.entries(totalEmissions).map(([key, value]) => ({
+      category: key,
+      value: value,
+    }));
+
+    return new Response(
+      JSON.stringify({
+        data: result.data,
+        monthlyEmissions,
+        yearlyEmissions,
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   } catch (err) {
     return new Response(JSON.stringify({ error: err.message }), {
       status: 500,
