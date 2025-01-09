@@ -1,5 +1,5 @@
-import CarbonFootprint from "../models/footprint";
-import dbConnect from "../utilities/dbConnect";
+import dbConnect from "@/utilities/dbConnect";
+import CarbonFootprint from "@/models/footprint";
 
 const defaultData = {
   transportation: 0,
@@ -50,11 +50,14 @@ export async function POST(req) {
       { new: true, upsert: true }
     );
 
+    console.log("Database operation result:", result);
+
     return new Response(
       JSON.stringify({ message: "Data saved successfully", result }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   } catch (err) {
+    console.error("Error:", err);
     return new Response(JSON.stringify({ error: err.message }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
@@ -67,6 +70,8 @@ export async function GET(req) {
     await dbConnect(); // Ensure database connection
     const clerkId = await middleware(req);
 
+    console.log("Clerk ID:", clerkId);
+
     if (!clerkId) return clerkId; // Handle unauthorized access
 
     const result = await CarbonFootprint.findOne({ clerkId });
@@ -76,8 +81,14 @@ export async function GET(req) {
       return new Response(
         JSON.stringify({
           data: defaultData,
-          monthlyEmissions: [],
-          yearlyEmissions: [],
+          monthlyEmissions: Object.entries(defaultData).map(([key, value]) => ({
+            category: key,
+            value: value / 12, // Default monthly values
+          })),
+          yearlyEmissions: Object.entries(defaultData).map(([key, value]) => ({
+            category: key,
+            value: value,
+          })),
         }),
         {
           status: 200,
@@ -90,16 +101,20 @@ export async function GET(req) {
     const totalEmissions = result.data;
 
     // Calculate monthly emissions (assume even distribution for simplicity)
-    const monthlyEmissions = Object.entries(totalEmissions).map(([key, value]) => ({
-      category: key,
-      value: value / 12, // Assuming the value is annual, divide by 12
-    }));
+    const monthlyEmissions = Object.entries(totalEmissions).map(
+      ([key, value]) => ({
+        category: key,
+        value: value / 12, // Assuming the value is annual, divide by 12
+      })
+    );
 
     // Calculate yearly emissions (directly use the total values)
-    const yearlyEmissions = Object.entries(totalEmissions).map(([key, value]) => ({
-      category: key,
-      value: value,
-    }));
+    const yearlyEmissions = Object.entries(totalEmissions).map(
+      ([key, value]) => ({
+        category: key,
+        value: value,
+      })
+    );
 
     return new Response(
       JSON.stringify({
