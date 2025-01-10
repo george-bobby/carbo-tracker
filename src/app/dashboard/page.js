@@ -28,7 +28,7 @@ export default function UserProfile() {
                   <PieChart clerkId={user?.id} />
                 </div>
                 <div className="w-1/2">
-                  <TreeValue />
+                  <TreeValue clerkId={user?.id} />
                 </div>
               </div>
             </div>

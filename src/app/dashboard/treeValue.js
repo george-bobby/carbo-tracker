@@ -1,7 +1,7 @@
 import React from "react";
 import { FaTree } from "react-icons/fa";
 
-const TreeValue = () => {
+const TreeValue = ({ clerkId }) => {
   const trees = 70;
 
   const treeIcons = Math.min(Math.ceil(trees / 20), 5); // 1 icon per 20 trees, but max 5 icons
