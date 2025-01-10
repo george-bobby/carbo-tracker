@@ -1,7 +1,7 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
 
-const PieChart = () => {
+const PieChart = ({ clerkId }) => {
   const data = {
     labels: [
       "Transportation",
@@ -66,6 +66,7 @@ const PieChart = () => {
   return (
     <div style={{ width: "80%", margin: "0 auto", height: "500px" }}>
       <Pie data={data} options={options} />
+      {console.log(clerkId)}
     </div>
   );
 };

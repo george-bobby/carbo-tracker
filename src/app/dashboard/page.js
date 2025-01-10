@@ -25,7 +25,7 @@ export default function UserProfile() {
             <div className="flex justify-center mb-8">
               <div className="flex justify-between items-center space-x-8 p-6 border border-gray-300 shadow-lg rounded-lg w-3/4">
                 <div className="w-1/2">
-                  <PieChart />
+                  <PieChart clerkId={user?.id} />
                 </div>
                 <div className="w-1/2">
                   <TreeValue />
@@ -35,7 +35,7 @@ export default function UserProfile() {
 
             <div className="flex justify-center">
               <div className="p-6 border border-gray-300 shadow-lg rounded-lg w-3/4">
-                <BarGraph clerkId={user?.id} />
+                <BarGraph />
               </div>
             </div>
           </div>
