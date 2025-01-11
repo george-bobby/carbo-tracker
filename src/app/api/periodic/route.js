@@ -20,8 +20,8 @@ async function run() {
     await client.connect();
     // Querying our database
     const cursor = await client
-      .db("carbon_footprint")
-      .collection("piechart")
+      .db("carbo")
+      .collection("periodic")
 
       .find();
     const array = await cursor.toArray();

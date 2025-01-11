@@ -8,19 +8,17 @@ const PieChart = ({ clerkId }) => {
   const fetchData = async () => {
     try {
       // console.log("FETCHING DATA");
-      const fetchedData = await fetch("/api/piechart").then((res) =>
-        res.json()
-      );
+      const fetchedData = await fetch("/api/overall").then((res) => res.json());
       console.log("FETCHED DATA", fetchedData);
 
       // Find the data for the given clerkId
       const userData = fetchedData.find((item) => item.clerkId === clerkId);
       if (userData) {
-        const { footPrint } = userData;
+        const { categories } = userData;
 
         // Prepare data for the chart
-        const labels = Object.keys(footPrint);
-        const dataValues = Object.values(footPrint);
+        const labels = Object.keys(categories);
+        const dataValues = Object.values(categories);
 
         const data = {
           labels,
@@ -80,7 +78,13 @@ const PieChart = ({ clerkId }) => {
     responsive: true,
     plugins: {
       legend: {
-        display: false,
+        display: true,
+        position: "bottom",
+        labels: {
+          font: {
+            size: 14,
+          },
+        },
       },
     },
   };

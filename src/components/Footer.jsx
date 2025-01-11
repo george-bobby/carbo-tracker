@@ -93,7 +93,7 @@ export default function Footer() {
 
                 {/* Footer Bottom */}
                 <div className="mt-10 border-t border-gray-500 pt-6 text-center text-[#376d08] text-sm">
-                    <p>Copyright © CHRIST (Deemed to be University) 2024 | Privacy Policy</p>
+                    <p>Copyright © CHRIST (Deemed to be University) 2024</p>
                 </div>
             </div>
 

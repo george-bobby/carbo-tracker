@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "../clsx-tw"
+import { cn } from "../utils/clsx-tw"
 
 const Input = React.forwardRef(({ className, type, ...props }, ref) => {
   return (

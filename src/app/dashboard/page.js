@@ -6,7 +6,7 @@ import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import BarGraph from "./barGraph";
 import PieChart from "./pieChart";
-import TreeValue from "./treeValue";
+import EquivalenciesTable from "./eqvTable";
 
 Chart.register(CategoryScale);
 Chart.defaults.font.size = 20;
@@ -28,7 +28,7 @@ export default function UserProfile() {
                   <PieChart clerkId={user?.id} />
                 </div>
                 <div className="w-1/2">
-                  <TreeValue clerkId={user?.id} />
+                  <EquivalenciesTable clerkId={user?.id} />
                 </div>
               </div>
             </div>
