@@ -43,7 +43,9 @@ const EquivalenciesTable = ({ clerkId }) => {
             <td className="border border-green-500 px-4 py-2 text-center">
               <FaTree className="text-green-500 text-xl" />
             </td>
-            <td className="border border-green-500 px-4 py-2">Trees Planted</td>
+            <td className="border border-green-500 px-4 py-2">
+              Trees to be Planted
+            </td>
             <td className="border border-green-500 px-4 py-2">
               {equivalencies.treesPlanted}
             </td>

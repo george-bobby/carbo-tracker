@@ -7,7 +7,7 @@ import {
 } from "@radix-ui/react-icons"
 import * as SelectPrimitive from "@radix-ui/react-select"
 
-import { cn } from "../utils/clsx-tw"
+import { cn } from "../clsx-tw"
 
 const Select = SelectPrimitive.Root
 
