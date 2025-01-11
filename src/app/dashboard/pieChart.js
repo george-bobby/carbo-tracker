@@ -9,7 +9,7 @@ const PieChart = ({ clerkId }) => {
     try {
       // console.log("FETCHING DATA");
       const fetchedData = await fetch("/api/overall").then((res) => res.json());
-      console.log("FETCHED DATA", fetchedData);
+      // console.log("FETCHED DATA", fetchedData);
 
       // Find the data for the given clerkId
       const userData = fetchedData.find((item) => item.clerkId === clerkId);

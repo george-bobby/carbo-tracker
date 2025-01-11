@@ -35,7 +35,7 @@ export default function UserProfile() {
 
             <div className="flex justify-center">
               <div className="p-6 border border-gray-300 shadow-lg rounded-lg w-3/4">
-                <BarGraph />
+                <BarGraph clerkId={user?.id} />
               </div>
             </div>
           </div>
