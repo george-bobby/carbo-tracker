@@ -117,23 +117,7 @@ const CarbonFootprintCalculator = () => {
 
   const saveData = async () => {
     try {
-      const equivalencyKeyMap = {
-        "Smartphones Charged": "phonesCharged",
-        "Distance Driven": "distanceDriven",
-        "Trees Needed (1 Year)": "treesPlanted",
-        "Gallons of Gasoline": "gallonsGasoline",
-      };
-
-      const transformedEquivalencies = equivalencies.map((eq) => {
-        const key = equivalencyKeyMap[eq.name];
-        if (!key) {
-          throw new Error(`Unknown equivalency name: ${eq.name}`);
-        }
-        return { key, factor: eq.factor, icon: eq.icon };
-      });
-
-      const monthlyData = {};
-      const averageMonthlyEmission = totalEmissions / 12;
+      const currentMonthIndex = new Date().getMonth(); // 0-based index
       const months = [
         "January",
         "February",
@@ -148,11 +132,7 @@ const CarbonFootprintCalculator = () => {
         "November",
         "December",
       ];
-      months.forEach((month, index) => {
-        monthlyData[month] = Math.round(
-          averageMonthlyEmission + (index % 2 === 0 ? 10 : -10)
-        );
-      });
+      const currentMonth = months[currentMonthIndex];
 
       const data = {
         clerkId: user?.id,
@@ -162,7 +142,9 @@ const CarbonFootprintCalculator = () => {
           acc[eq.name] = eq.value;
           return acc;
         }, {}),
-        monthlyData,
+        monthlyData: {
+          [currentMonth]: Math.round(totalEmissions),
+        },
       };
 
       const response = await fetch("/api/save", {
