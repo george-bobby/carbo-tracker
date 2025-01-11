@@ -7,7 +7,7 @@ const BarGraph = ({ clerkId }) => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("/api/overall");
+      const response = await fetch("/api/fetch");
       const fetchedData = await response.json();
 
       // Find the data for the given clerkId

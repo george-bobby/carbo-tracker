@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "../clsx-tw"
+import { cn } from "../twMerge"
 
 const Table = React.forwardRef(({ className, ...props }, ref) => (
   <div className="relative w-full overflow-auto">

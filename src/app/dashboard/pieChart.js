@@ -8,7 +8,7 @@ const PieChart = ({ clerkId }) => {
   const fetchData = async () => {
     try {
       // console.log("FETCHING DATA");
-      const fetchedData = await fetch("/api/overall").then((res) => res.json());
+      const fetchedData = await fetch("/api/fetch").then((res) => res.json());
       // console.log("FETCHED DATA", fetchedData);
 
       // Find the data for the given clerkId

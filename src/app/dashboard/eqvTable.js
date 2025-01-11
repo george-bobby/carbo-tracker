@@ -6,7 +6,7 @@ const EquivalenciesTable = ({ clerkId }) => {
 
   const fetchEquivalencies = async () => {
     try {
-      const fetchedData = await fetch("/api/overall").then((res) => res.json());
+      const fetchedData = await fetch("/api/fetch").then((res) => res.json());
       const userData = fetchedData.find((item) => item.clerkId === clerkId);
 
       if (userData && userData.equivalencies) {
