@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import "./index.css";
 import { useUser } from "@clerk/nextjs";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
