@@ -58,7 +58,11 @@ const BarGraph = ({ clerkId }) => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <p className="text-slate-500">
+        No data found. Add data in "Calculator" to show it on "Dashboard".
+      </p>
+    );
   }
 
   return (

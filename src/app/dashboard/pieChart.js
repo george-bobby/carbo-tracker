@@ -94,7 +94,9 @@ const PieChart = ({ clerkId }) => {
       {chartData ? (
         <Pie data={chartData} options={options} />
       ) : (
-        <p>Loading chart...</p>
+        <p className="text-slate-500">
+          No data found. Add data in "Calculator" to show it on "Dashboard".
+        </p>
       )}
       {/* {console.log(clerkId)} */}
     </div>

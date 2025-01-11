@@ -9,7 +9,7 @@ export async function GET(request) {
     const db = client.db("carbo");
 
     // Query the collection
-    const cursor = db.collection("overall").find();
+    const cursor = db.collection("test").find();
     const data = await cursor.toArray();
 
     // Return the data as JSON

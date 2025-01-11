@@ -23,7 +23,7 @@ import {
   Flame,
   Lightbulb,
 } from "lucide-react";
-
+import { useUser } from "@clerk/nextjs";
 import suggestions from "./suggestions";
 import categories from "./categories";
 import equivalencies from "./equivalencies";
@@ -39,7 +39,6 @@ const CarbonFootprintCalculator = () => {
   const [dailySuggestion, setDailySuggestion] = useState(null);
   const [suggestionCategory, setSuggestionCategory] = useState(null);
 
-  // Add this to your existing useEffect
   useEffect(() => {
     if (showResults && Object.keys(categoryEmissions).length > 0) {
       // Find the category with highest emissions
@@ -59,6 +58,7 @@ const CarbonFootprintCalculator = () => {
       }
     }
   }, [showResults, categoryEmissions]);
+
   const calculateCategoryEmissions = (categoryId) => {
     const category = categories.find((c) => c.id === categoryId);
     if (!category) return 0;
@@ -111,6 +111,77 @@ const CarbonFootprintCalculator = () => {
         bg: "bg-yellow-50",
       };
     return { text: "High Impact", color: "text-red-600", bg: "bg-red-50" };
+  };
+
+  const { user } = useUser();
+
+  const saveData = async () => {
+    try {
+      const equivalencyKeyMap = {
+        "Smartphones Charged": "phonesCharged",
+        "Distance Driven": "distanceDriven",
+        "Trees Needed (1 Year)": "treesPlanted",
+        "Gallons of Gasoline": "gallonsGasoline",
+      };
+
+      const transformedEquivalencies = equivalencies.map((eq) => {
+        const key = equivalencyKeyMap[eq.name];
+        if (!key) {
+          throw new Error(`Unknown equivalency name: ${eq.name}`);
+        }
+        return { key, factor: eq.factor, icon: eq.icon };
+      });
+
+      const monthlyData = {};
+      const averageMonthlyEmission = totalEmissions / 12;
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      months.forEach((month, index) => {
+        monthlyData[month] = Math.round(
+          averageMonthlyEmission + (index % 2 === 0 ? 10 : -10)
+        );
+      });
+
+      const data = {
+        clerkId: user?.id,
+        updatedAt: new Date().toISOString(),
+        categories: categoryEmissions,
+        equivalencies: getEquivalencies(totalEmissions).reduce((acc, eq) => {
+          acc[eq.name] = eq.value;
+          return acc;
+        }, {}),
+        monthlyData,
+      };
+
+      const response = await fetch("/api/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Failed to save data:", errorData);
+        return;
+      }
+
+      const result = await response.json();
+      console.log("Data saved successfully:", result);
+    } catch (error) {
+      console.error("An error occurred while saving data:", error);
+    }
   };
 
   return (
@@ -272,7 +343,10 @@ const CarbonFootprintCalculator = () => {
                       </button>
                       {currentCategory === categories.length - 1 ? (
                         <button
-                          onClick={() => setShowResults(true)}
+                          onClick={() => {
+                            setShowResults(true);
+                            saveData();
+                          }}
                           className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
                         >
                           View Results

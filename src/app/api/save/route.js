@@ -1,26 +1,49 @@
 import clientPromise from "../../../dbConnect";
 
-export async function GET(request) {
+export async function POST(req) {
   try {
-    // Wait for the client connection to resolve
     const client = await clientPromise;
-
-    // Access the database
     const db = client.db("carbo");
+    const data = await req.json();
 
-    // Query the collection
-    const cursor = db.collection("overall").find();
-    const data = await cursor.toArray();
+    if (
+      !data.clerkId ||
+      !data.categories ||
+      !data.equivalencies ||
+      !data.monthlyData
+    ) {
+      return new Response(JSON.stringify({ error: "Invalid payload" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
 
-    // Return the data as JSON
-    return new Response(JSON.stringify(data), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    const result = await db.collection("test").findOneAndUpdate(
+      { clerkId: data.clerkId },
+      {
+        $set: {
+          categories: data.categories,
+          equivalencies: data.equivalencies,
+          monthlyData: data.monthlyData,
+          updatedAt: new Date(data.updatedAt),
+        },
+        $setOnInsert: { createdAt: new Date() },
+      },
+      { upsert: true, returnDocument: "after" }
+    );
+
+    return new Response(
+      JSON.stringify({
+        message: "Document saved successfully",
+        data: result.value,
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   } catch (error) {
-    // Handle errors
-    console.error("Error fetching data:", error.message);
-    return new Response(JSON.stringify({ error: "Failed to fetch data" }), {
+    return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
