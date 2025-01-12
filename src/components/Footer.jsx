@@ -12,7 +12,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-[#8ac655] py-10">
+        <footer className="bg-[#D7ECD9] py-10">
             <div className="container mx-auto px-4 sm:px-6 md:px-12 text-gray-300">
                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Contact Details */}

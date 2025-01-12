@@ -17,44 +17,41 @@ import "./page.css";
 const TechFestSection = () => {
   return (
     <section>
-      <div className="bg-[#d8f0ab] text-white py-20">
-        <div className="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
-          {/* Left Content */}
-          <div className="flex flex-col w-full lg:w-1/3 justify-center items-start p-8">
-            <h1 className="text-3xl md:text-5xl p-2 text-[#376d08] tracking-loose">Carbo</h1>
-            <h2 className="text-xl md:text-sm text-[#376d08] leading-relaxed md:leading-snug mb-2">
-              MEASURE. REDUCE. SUSTAIN.
-            </h2>
-            <p className="text-sm md:text-base text-gray-50 mb-4">
-              Explore your favourite events and register now to showcase your talent and win exciting prizes.
-            </p>
-            <a
-              href="#"
-              className="bg-transparent hover:bg-yellow-300 text-yellow-300 hover:text-black rounded shadow hover:shadow-lg py-2 px-4 border border-yellow-300 hover:border-transparent"
-            >
-              Explore Now
-            </a>
-          </div>
-
+      <div className="bg-[#A5D6A7] text-white py-20">
+  <div className="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
+    {/* Left Content */}
+    <div className="flex flex-col w-full lg:w-1/3 justify-center items-start p-8">
+      <h1 className="text-4xl md:text-6xl p-2 text-[#376d08] tracking-loose">Carbo</h1>
+      <h2 className="text-2xl md:text-xl text-[#376d08] leading-relaxed md:leading-snug mb-2">
+        MEASURE. REDUCE. SUSTAIN.
+      </h2>
+      <p className="text-lg text-[#013220] md:text-xl text-gray-50 mb-4">
+      Measure your carbon footprint, reduce your impact, and build a greener future with Carbo.
+      </p>
+      <a
+        href="/calculator"
+        className="bg-transparent hover:bg-[#2ECC71] text-[#004D40] border-[#004D40] hover:text-black rounded shadow hover:shadow-lg py-2 px-4 border border-[#D7ECD9] hover:border-[#013220]"
+      >
+        Calculate
+      </a>
+    </div>
           {/* Right Content */}
-          <div className="p-8 mt-12 mb-6 md:mb-0 md:mt-0 ml-0 md:ml-12 lg:w-2/3 justify-center">
-            <div className="h-48 flex flex-wrap content-center">
-              <div>
-                <img
-                  className="inline-block mt-28 hidden xl:block"
-                  src="https://user-images.githubusercontent.com/54521023/116969935-c13d5b00-acd4-11eb-82b1-5ad2ff10fb76.png"
-                  alt="TechFest Illustration 1"
-                />
-              </div>
-              <div>
-                <img
-                  className="inline-block mt-24 md:mt-0 p-8 md:p-0"
-                  src="https://user-images.githubusercontent.com/54521023/116969931-bedb0100-acd4-11eb-99a9-ff5e0ee9f31f.png"
-                  alt="TechFest Illustration 2"
-                />
-              </div>
-              <div>
-              </div>
+          <div className="p-8 mt-12 mb-6 md:mb-0 md:mt-0 ml-0 md:ml-12 lg:w-2/3 flex justify-end">
+          <div className="h-48 flex flex-wrap content-center">
+            <div>
+              <img
+                className="inline-block mt-28 hidden xl:block"
+                src="https://user-images.githubusercontent.com/54521023/116969935-c13d5b00-acd4-11eb-82b1-5ad2ff10fb76.png"
+                alt="TechFest Illustration 1"
+              />
+            </div>
+            <div>
+              <img
+                className="inline-block mt-24 md:mt-0 p-8 md:p-0"
+                src="https://user-images.githubusercontent.com/54521023/116969931-bedb0100-acd4-11eb-99a9-ff5e0ee9f31f.png"
+                alt="TechFest Illustration 2"
+              />
+            </div>
             </div>
           </div>
         </div>
@@ -69,13 +66,15 @@ export default function Page() {
 
   return (
     <>
-      <div className="min-h-screen bg-[#d8f0ab] py-6 flex flex-col gap-6 px-4 sm:px-6 md:px-10 lg:px-16">
+      <div className="min-h-screen bg-[#A5D6A7] py-6 flex flex-col gap-6 px-4 sm:px-6 md:px-10 lg:px-16">
         {/* TechFest Section */}
         <TechFestSection />
 
         {/* FAQ Section */}
-        <section className="bg-[#fdd7b0] py-8 px-6 sm:px-8 md:px-12 rounded-xl shadow-lg">
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl text-center font-bold mb-8">Frequently Asked Questions</h3>
+        <section className="bg-[#AED581] py-8 px-6 sm:px-8 md:px-12 rounded-xl shadow-xl">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl text-center font-bold mb-8">
+            Frequently Asked Questions
+          </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[
               {
@@ -98,22 +97,6 @@ export default function Page() {
                 answer:
                   "There are many actions you can take to reduce your carbon footprint, including using public transportation, driving fuel-efficient vehicles, conserving energy at home, recycling, reducing meat consumption, and supporting sustainable products and practices.",
               },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out"
-              >
-                <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">{item.question}</h4>
-                <p className="text-sm md:text-base text-gray-700 leading-relaxed">{item.answer}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Continued FAQ Section */}
-        <section className="bg-[#e0dfce] py-8 px-6 sm:px-8 md:px-12 rounded-xl shadow-lg mt-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {[
               {
                 question: "How often should I check my carbon emissions on Carbo?",
                 answer:
@@ -139,12 +122,17 @@ export default function Page() {
                 key={index}
                 className="p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out"
               >
-                <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">{item.question}</h4>
-                <p className="text-sm md:text-base text-gray-700 leading-relaxed">{item.answer}</p>
+                <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">
+                  {item.question}
+                </h4>
+                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                  {item.answer}
+                </p>
               </div>
             ))}
           </div>
         </section>
+
       </div>
     </>
   );

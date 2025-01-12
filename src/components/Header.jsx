@@ -14,7 +14,7 @@ import React from "react";
 
 function Header() {
   return (
-    <div className="sticky top-0 z-50 flex flex-wrap items-center justify-between bg-[#8ac655] px-5 py-4">
+    <div className="sticky top-0 z-50 flex flex-wrap items-center justify-between bg-[#D7ECD9] px-5 py-4">
       {/* Left Section: Logo and Navigation Links */}
       <div className="flex flex-wrap items-center gap-4 w-full md:w-auto justify-between">
         {/* Header Image */}
