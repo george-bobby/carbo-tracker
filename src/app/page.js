@@ -55,58 +55,57 @@ const TechFestSection = () => {
 
   return (
     <section>
-  <div className="bg-[#A5D6A7] text-white py-20 transition-all ease-in-out duration-300 hover:bg-[#81C784] relative overflow-hidden group">
-    <div class="absolute top-0 left-0 w-full h-full bg-[#A5D6A7] opacity-50 group-hover:opacity-0 transition-all duration-500"></div>
+      <div className="bg-[#A5D6A7] text-white py-20 transition-all ease-in-out duration-300 hover:bg-[#81C784] relative overflow-hidden group">
+        <div className="absolute top-0 left-0 w-full h-full bg-[#A5D6A7] opacity-50 group-hover:opacity-0 transition-all duration-500"></div>
 
-    <div className="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
-      <div className="flex flex-col w-full lg:w-1/3 justify-center items-start p-8 hover:scale-105 transition-transform duration-300">
-        <h1 className="text-4xl md:text-6xl p-2 text-[#376d08] tracking-wide font-bold transform transition-all duration-500 hover:text-[#004D40]">
-          Carbo
-        </h1>
-        <h2 className="text-2xl md:text-xl text-[#376d08] leading-relaxed md:leading-snug mb-2 font-semibold transform transition-all duration-500 hover:text-[#2ECC71]">
-          MEASURE. REDUCE. SUSTAIN.
-        </h2>
-        <p className="text-lg text-[#013220] md:text-xl mb-4 opacity-90 hover:opacity-100 transition-opacity duration-300">
-          Measure your carbon footprint, reduce your impact, and build a greener future with Carbo.
-        </p>
-        <a
-          href="/calculator"
-          className="text-xl bg-transparent hover:bg-[#2ECC71] text-[#004D40] hover:text-white rounded-lg shadow-lg hover:shadow-xl py-2 px-6 border-2 border-[#D7ECD9] hover:border-[#013220] transform transition-all duration-300 hover:scale-105"
-        >
-          Calculate
-        </a>
-      </div>
-
-      <div className="p-8 mt-12 mb-6 md:mb-0 md:mt-0 ml-0 md:ml-12 lg:w-2/3 flex justify-end">
-        <div className="h-48 flex flex-wrap content-center hover:scale-105 transition-transform duration-300">
-          <div>
-            <img
-              className="inline-block mt-28 hidden xl:block transform transition-all duration-500 hover:rotate-12 animate__animated animate__fadeInUp"
-              src="https://user-images.githubusercontent.com/54521023/116969935-c13d5b00-acd4-11eb-82b1-5ad2ff10fb76.png"
-              alt="TechFest Illustration 1"
-            />
+        <div className="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
+          <div className="flex flex-col w-full lg:w-1/3 justify-center items-start p-8 hover:scale-105 transition-transform duration-300">
+            <h1 className="text-4xl md:text-6xl p-2 text-[#376d08] tracking-wide font-bold transform transition-all duration-500 hover:text-[#004D40]">
+              Carbo
+            </h1>
+            <h2 className="text-2xl md:text-xl text-[#376d08] leading-relaxed md:leading-snug mb-2 font-semibold transform transition-all duration-500 hover:text-[#2ECC71]">
+              MEASURE. REDUCE. SUSTAIN.
+            </h2>
+            <p className="text-lg text-[#013220] md:text-xl mb-4 opacity-90 hover:opacity-100 transition-opacity duration-300">
+              Measure your carbon footprint, reduce your impact, and build a
+              greener future with Carbo.
+            </p>
+            <a
+              href="/calculator"
+              className="text-xl bg-transparent hover:bg-[#2ECC71] text-[#004D40] hover:text-white rounded-lg shadow-lg hover:shadow-xl py-2 px-6 border-2 border-[#D7ECD9] hover:border-[#013220] transform transition-all duration-300 hover:scale-105"
+            >
+              Calculate
+            </a>
           </div>
-          <div>
-            <img
-              className="inline-block mt-24 md:mt-0 p-8 md:p-0 transform transition-all duration-500 hover:scale-105 animate__animated animate__fadeInUp animate__delay-1s"
-              src="https://user-images.githubusercontent.com/54521023/116969931-bedb0100-acd4-11eb-99a9-ff5e0ee9f31f.png"
-              alt="TechFest Illustration 2"
-            />
+
+          <div className="p-8 mt-12 mb-6 md:mb-0 md:mt-0 ml-0 md:ml-12 lg:w-2/3 flex justify-end">
+            <div className="h-48 flex flex-wrap content-center hover:scale-105 transition-transform duration-300">
+              <div>
+                <img
+                  className="mt-28 hidden xl:block transform transition-all duration-500 hover:rotate-12 animate__animated animate__fadeInUp"
+                  src="https://user-images.githubusercontent.com/54521023/116969935-c13d5b00-acd4-11eb-82b1-5ad2ff10fb76.png"
+                  alt="TechFest Illustration 1"
+                />
+              </div>
+              <div>
+                <img
+                  className="inline-block mt-24 md:mt-0 p-8 md:p-0 transform transition-all duration-500 hover:scale-105 animate__animated animate__fadeInUp animate__delay-1s"
+                  src="https://user-images.githubusercontent.com/54521023/116969931-bedb0100-acd4-11eb-99a9-ff5e0ee9f31f.png"
+                  alt="TechFest Illustration 2"
+                />
+              </div>
+            </div>
           </div>
         </div>
+
+        <a
+          href="/dashboard"
+          className="absolute bottom-8 right-8 bg-[#2ECC71] text-[#004D40] text-lg px-6 py-3 rounded-full shadow-xl transform transition-all duration-300 hover:scale-110 hover:bg-[#1A7C53] hover:text-white"
+        >
+          Get Started
+        </a>
       </div>
-    </div>
-
-    <a
-      href="/dashboard"
-      className="absolute bottom-8 right-8 bg-[#2ECC71] text-[#004D40] text-lg px-6 py-3 rounded-full shadow-xl transform transition-all duration-300 hover:scale-110 hover:bg-[#1A7C53] hover:text-white"
-    >
-      Get Started
-    </a>
-  </div>
-</section>
-
-
+    </section>
   );
 };
 
@@ -147,7 +146,8 @@ export default function Page() {
                   "There are many actions you can take to reduce your carbon footprint, including using public transportation, driving fuel-efficient vehicles, conserving energy at home, recycling, reducing meat consumption, and supporting sustainable products and practices.",
               },
               {
-                question: "How often should I check my carbon emissions on Carbo?",
+                question:
+                  "How often should I check my carbon emissions on Carbo?",
                 answer:
                   "It's a good idea to check your carbon emissions regularly, especially if you're actively trying to reduce your footprint. Monitoring your emissions on a monthly basis can help you track your progress over time and identify areas for improvement.",
               },
@@ -162,7 +162,8 @@ export default function Page() {
                   "Yes, we take data privacy and security seriously. Your personal information and carbon footprint data are encrypted and stored securely on our servers. We do not share your data with third parties without your consent.",
               },
               {
-                question: "How can I provide feedback or report issues with Carbo?",
+                question:
+                  "How can I provide feedback or report issues with Carbo?",
                 answer:
                   "We welcome your feedback and suggestions for improving Carbo. You can provide feedback through our website's feedback section or contact our support team directly via email. Additionally, if you encounter any technical issues or have concerns about your data, please don't hesitate to reach out to us.",
               },
