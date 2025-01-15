@@ -1,8 +1,6 @@
 "use client";
 
 import {
-  ClerkLoaded,
-  ClerkLoading,
   SignInButton,
   SignOutButton,
   SignedIn,
@@ -14,97 +12,90 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import { gsap } from "gsap";
 import "./page.css";
+import Link from "next/link";
 
 const TechFestSection = () => {
   useEffect(() => {
-    // GSAP Animation
     const calculateButton = document.querySelector("a[href='/calculator']");
 
-    if (calculateButton) {
-      // On hover
-      calculateButton.addEventListener("mouseenter", () => {
-        gsap.to(calculateButton, {
-          backgroundColor: "#2ECC71",
-          color: "#000000",
-          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
-          borderColor: "#013220",
-          duration: 0.3,
-        });
+    const handleMouseEnter = () => {
+      gsap.to(calculateButton, {
+        backgroundColor: "#2ECC71",
+        color: "#000000",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
+        borderColor: "#013220",
+        duration: 0.3,
       });
+    };
 
-      // On mouse leave
-      calculateButton.addEventListener("mouseleave", () => {
-        gsap.to(calculateButton, {
-          backgroundColor: "transparent",
-          color: "#004D40",
-          boxShadow: "none",
-          borderColor: "#D7ECD9",
-          duration: 0.3,
-        });
+    const handleMouseLeave = () => {
+      gsap.to(calculateButton, {
+        backgroundColor: "transparent",
+        color: "#004D40",
+        boxShadow: "none",
+        borderColor: "#D7ECD9",
+        duration: 0.3,
       });
+    };
+
+    if (calculateButton) {
+      calculateButton.addEventListener("mouseenter", handleMouseEnter);
+      calculateButton.addEventListener("mouseleave", handleMouseLeave);
     }
 
-    // Cleanup the event listeners when the component unmounts
     return () => {
       if (calculateButton) {
-        calculateButton.removeEventListener("mouseenter", () => {});
-        calculateButton.removeEventListener("mouseleave", () => {});
+        calculateButton.removeEventListener("mouseenter", handleMouseEnter);
+        calculateButton.removeEventListener("mouseleave", handleMouseLeave);
       }
     };
-  }, []); // Runs once on component mount
+  }, []);
 
   return (
-    <section>
-      <div className="bg-[#A5D6A7] text-white py-20 transition-all ease-in-out duration-300 hover:bg-[#81C784] relative overflow-hidden group">
-        <div className="absolute top-0 left-0 w-full h-full bg-[#A5D6A7] opacity-50 group-hover:opacity-0 transition-all duration-500"></div>
-
-        <div className="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
-          <div className="flex flex-col w-full lg:w-1/3 justify-center items-start p-8 hover:scale-105 transition-transform duration-300">
-            <h1 className="text-4xl md:text-6xl p-2 text-[#376d08] tracking-wide font-bold transform transition-all duration-500 hover:text-[#004D40]">
-              Carbo
-            </h1>
-            <h2 className="text-2xl md:text-xl text-[#376d08] leading-relaxed md:leading-snug mb-2 font-semibold transform transition-all duration-500 hover:text-[#2ECC71]">
-              MEASURE. REDUCE. SUSTAIN.
-            </h2>
-            <p className="text-lg text-[#013220] md:text-xl mb-4 opacity-90 hover:opacity-100 transition-opacity duration-300">
-              Measure your carbon footprint, reduce your impact, and build a
-              greener future with Carbo.
-            </p>
-            <a
-              href="/calculator"
-              className="text-xl bg-transparent hover:bg-[#2ECC71] text-[#004D40] hover:text-white rounded-lg shadow-lg hover:shadow-xl py-2 px-6 border-2 border-[#D7ECD9] hover:border-[#013220] transform transition-all duration-300 hover:scale-105"
-            >
-              Calculate
-            </a>
-          </div>
-
-          <div className="p-8 mt-12 mb-6 md:mb-0 md:mt-0 ml-0 md:ml-12 lg:w-2/3 flex justify-end">
-            <div className="h-48 flex flex-wrap content-center hover:scale-105 transition-transform duration-300">
-              <div>
-                <img
-                  className="mt-28 hidden xl:block transform transition-all duration-500 hover:rotate-12 animate__animated animate__fadeInUp"
-                  src="https://user-images.githubusercontent.com/54521023/116969935-c13d5b00-acd4-11eb-82b1-5ad2ff10fb76.png"
-                  alt="TechFest Illustration 1"
-                />
-              </div>
-              <div>
-                <img
-                  className="inline-block mt-24 md:mt-0 p-8 md:p-0 transform transition-all duration-500 hover:scale-105 animate__animated animate__fadeInUp animate__delay-1s"
-                  src="https://user-images.githubusercontent.com/54521023/116969931-bedb0100-acd4-11eb-99a9-ff5e0ee9f31f.png"
-                  alt="TechFest Illustration 2"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <a
-          href="/dashboard"
-          className="absolute bottom-8 right-8 bg-[#2ECC71] text-[#004D40] text-lg px-6 py-3 rounded-full shadow-xl transform transition-all duration-300 hover:scale-110 hover:bg-[#1A7C53] hover:text-white"
+    <section className="mx-8 mt-8">
+      <div
+        id="hero-section"
+        className="pt-20 pb-40 rounded-2xl max-w-7xl m-auto"
+      >
+        <div
+          id="hero-content"
+          className="max-w-md m-auto text-center font-sans"
         >
-          Get Started
-        </a>
+          <h1 className="font-bold text-shadow text-5xl text-white">
+            MEASURE. REDUCE. SUSTAIN.
+          </h1>
+          <p className="font-semibold text-shadow text-purple-200 mt-5 font-sans text-xl">
+            Measure your carbon footprint, reduce your impact, and build a
+            greener future with Carbo.
+          </p>
+          <Link href="/calculator">
+            <button className="flex m-auto mt-10 items-center justify-between overflow-hidden w-48 shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 ease padding rounded-full m-3 text-green-700 font-bold bg-gradient-to-r from-green-300 to-green-200">
+              <span className="pl-8">Calculate Now</span>
+              <span className="px-3 py-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </span>
+            </button>
+          </Link>
+        </div>
       </div>
+      {/* <img
+        className="m-auto relative -top-40"
+        src="./forest-about-main.jpg"
+        alt="3D Computer Graphics Graphic Design"
+      /> */}
     </section>
   );
 };

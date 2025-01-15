@@ -15,7 +15,6 @@ import {
 } from "../../components/dialog";
 import { useUser } from "@clerk/nextjs";
 
-
 const RideBooking = () => {
   const [startLocation, setStartLocation] = useState("");
   const [destination, setDestination] = useState("");
@@ -185,8 +184,8 @@ const RideBooking = () => {
             className="w-full"
           />
           <Input
-            placeholder="Driver Name"
-            value={user?.firstName}
+            placeholder={"Name : " + user?.firstName + " " + user?.lastName}
+            value={newRide.driver}
             onChange={(e) => setNewRide({ ...newRide, driver: e.target.value })}
             className="w-full"
           />
@@ -199,7 +198,9 @@ const RideBooking = () => {
           <Input
             placeholder="Distance"
             value={newRide.distance}
-            onChange={(e) => setNewRide({ ...newRide, distance: e.target.value })}
+            onChange={(e) =>
+              setNewRide({ ...newRide, distance: e.target.value })
+            }
             className="w-full"
           />
           <Input
@@ -211,19 +212,19 @@ const RideBooking = () => {
             className="w-full"
           />
           <div className="relative w-full">
-          <Input
-            type="number"
-            placeholder="0"
-            value={newRide.seats}
-            onChange={(e) =>
-              setNewRide({ ...newRide, seats: parseInt(e.target.value) || 0 })
-            }
-            className="w-full border rounded px-4 py-2 pr-16" // Adjusted padding on the right
-          />
-          <span className="absolute left-9 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm pointer-events-none">
-            Seats Available
-          </span>
-        </div>
+            <Input
+              type="number"
+              placeholder="0"
+              value={newRide.seats}
+              onChange={(e) =>
+                setNewRide({ ...newRide, seats: parseInt(e.target.value) || 0 })
+              }
+              className="w-full border rounded px-4 py-2 pr-16" // Adjusted padding on the right
+            />
+            <span className="absolute left-9 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm pointer-events-none">
+              Seats Available
+            </span>
+          </div>
 
           <Button
             variant="primary"
