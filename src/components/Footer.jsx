@@ -12,7 +12,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-[#8ac655] py-10">
+        <footer className="bg-[#D7ECD9] py-10">
             <div className="container mx-auto px-4 sm:px-6 md:px-12 text-gray-300">
                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Contact Details */}
@@ -93,7 +93,7 @@ export default function Footer() {
 
                 {/* Footer Bottom */}
                 <div className="mt-10 border-t border-gray-500 pt-6 text-center text-[#376d08] text-sm">
-                    <p>Copyright © CHRIST (Deemed to be University) 2024</p>
+                    <p>Copyright © CHRIST (Deemed to be University) 2025</p>
                 </div>
             </div>
 

@@ -1,8 +1,6 @@
 "use client";
 
 import {
-  ClerkLoaded,
-  ClerkLoading,
   SignInButton,
   SignOutButton,
   SignedIn,
@@ -11,56 +9,94 @@ import {
   useUser,
 } from "@clerk/nextjs";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
+import { gsap } from "gsap";
 import "./page.css";
+import Link from "next/link";
 
 const TechFestSection = () => {
-  return (
-    <section>
-      <div className="bg-[#d8f0ab] text-white py-20">
-        <div className="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
-          {/* Left Content */}
-          <div className="flex flex-col w-full lg:w-1/3 justify-center items-start p-8">
-            <h1 className="text-3xl md:text-5xl p-2 text-[#376d08] tracking-loose">Carbo</h1>
-            <h2 className="text-xl md:text-sm text-[#376d08] leading-relaxed md:leading-snug mb-2">
-              MEASURE. REDUCE. SUSTAIN.
-            </h2>
-            <p className="text-sm md:text-base text-gray-50 mb-4">
-              Explore your favourite events and register now to showcase your talent and win exciting prizes.
-            </p>
-            <a
-              href="#"
-              className="bg-transparent hover:bg-yellow-300 text-yellow-300 hover:text-black rounded shadow hover:shadow-lg py-2 px-4 border border-yellow-300 hover:border-transparent"
-            >
-              Explore Now
-            </a>
-          </div>
+  useEffect(() => {
+    const calculateButton = document.querySelector("a[href='/calculator']");
 
-          {/* Right Content */}
-          <div className="p-8 mt-12 mb-6 md:mb-0 md:mt-0 ml-0 md:ml-12 lg:w-2/3 justify-center">
-            <div className="h-48 flex flex-wrap content-center">
-              <div>
-                <img
-                  className="inline-block mt-28 hidden xl:block"
-                  src="https://user-images.githubusercontent.com/54521023/116969935-c13d5b00-acd4-11eb-82b1-5ad2ff10fb76.png"
-                  alt="TechFest Illustration 1"
-                />
-              </div>
-              <div>
-                <img
-                  className="inline-block mt-24 md:mt-0 p-8 md:p-0"
-                  src="https://user-images.githubusercontent.com/54521023/116969931-bedb0100-acd4-11eb-99a9-ff5e0ee9f31f.png"
-                  alt="TechFest Illustration 2"
-                />
-              </div>
-              <div>
-              </div>
-            </div>
-          </div>
+    const handleMouseEnter = () => {
+      gsap.to(calculateButton, {
+        backgroundColor: "#2ECC71",
+        color: "#000000",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
+        borderColor: "#013220",
+        duration: 0.3,
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(calculateButton, {
+        backgroundColor: "transparent",
+        color: "#004D40",
+        boxShadow: "none",
+        borderColor: "#D7ECD9",
+        duration: 0.3,
+      });
+    };
+
+    if (calculateButton) {
+      calculateButton.addEventListener("mouseenter", handleMouseEnter);
+      calculateButton.addEventListener("mouseleave", handleMouseLeave);
+    }
+
+    return () => {
+      if (calculateButton) {
+        calculateButton.removeEventListener("mouseenter", handleMouseEnter);
+        calculateButton.removeEventListener("mouseleave", handleMouseLeave);
+      }
+    };
+  }, []);
+
+  return (
+    <section className="mx-8 mt-8">
+      <div
+        id="hero-section"
+        className="pt-20 pb-40 rounded-2xl max-w-7xl m-auto"
+      >
+        <div
+          id="hero-content"
+          className="max-w-md m-auto text-center font-sans"
+        >
+          <h1 className="font-bold text-shadow text-5xl text-white">
+            MEASURE. REDUCE. SUSTAIN.
+          </h1>
+          <p className="font-semibold text-shadow text-purple-200 mt-5 font-sans text-xl">
+            Measure your carbon footprint, reduce your impact, and build a
+            greener future with Carbo.
+          </p>
+          <Link href="/calculator">
+            <button className="flex m-auto mt-10 items-center justify-between overflow-hidden w-48 shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 ease padding rounded-full m-3 text-green-700 font-bold bg-gradient-to-r from-green-300 to-green-200">
+              <span className="pl-8">Calculate Now</span>
+              <span className="px-3 py-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </span>
+            </button>
+          </Link>
         </div>
       </div>
+      {/* <img
+        className="m-auto relative -top-40"
+        src="./forest-about-main.jpg"
+        alt="3D Computer Graphics Graphic Design"
+      /> */}
     </section>
-    
   );
 };
 
@@ -69,13 +105,15 @@ export default function Page() {
 
   return (
     <>
-      <div className="min-h-screen bg-[#d8f0ab] py-6 flex flex-col gap-6 px-4 sm:px-6 md:px-10 lg:px-16">
+      <div className="min-h-screen bg-[#A5D6A7] py-6 flex flex-col gap-6 px-4 sm:px-6 md:px-10 lg:px-16">
         {/* TechFest Section */}
         <TechFestSection />
 
         {/* FAQ Section */}
-        <section className="bg-[#fdd7b0] py-8 px-6 sm:px-8 md:px-12 rounded-xl shadow-lg">
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl text-center font-bold mb-8">Frequently Asked Questions</h3>
+        <section className="bg-[#AED581] py-8 px-6 sm:px-8 md:px-12 rounded-xl shadow-xl">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl text-center font-bold mb-8">
+            Frequently Asked Questions
+          </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[
               {
@@ -98,24 +136,9 @@ export default function Page() {
                 answer:
                   "There are many actions you can take to reduce your carbon footprint, including using public transportation, driving fuel-efficient vehicles, conserving energy at home, recycling, reducing meat consumption, and supporting sustainable products and practices.",
               },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out"
-              >
-                <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">{item.question}</h4>
-                <p className="text-sm md:text-base text-gray-700 leading-relaxed">{item.answer}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Continued FAQ Section */}
-        <section className="bg-[#e0dfce] py-8 px-6 sm:px-8 md:px-12 rounded-xl shadow-lg mt-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {[
               {
-                question: "How often should I check my carbon emissions on Carbo?",
+                question:
+                  "How often should I check my carbon emissions on Carbo?",
                 answer:
                   "It's a good idea to check your carbon emissions regularly, especially if you're actively trying to reduce your footprint. Monitoring your emissions on a monthly basis can help you track your progress over time and identify areas for improvement.",
               },
@@ -130,7 +153,8 @@ export default function Page() {
                   "Yes, we take data privacy and security seriously. Your personal information and carbon footprint data are encrypted and stored securely on our servers. We do not share your data with third parties without your consent.",
               },
               {
-                question: "How can I provide feedback or report issues with Carbo?",
+                question:
+                  "How can I provide feedback or report issues with Carbo?",
                 answer:
                   "We welcome your feedback and suggestions for improving Carbo. You can provide feedback through our website's feedback section or contact our support team directly via email. Additionally, if you encounter any technical issues or have concerns about your data, please don't hesitate to reach out to us.",
               },
@@ -139,8 +163,12 @@ export default function Page() {
                 key={index}
                 className="p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out"
               >
-                <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">{item.question}</h4>
-                <p className="text-sm md:text-base text-gray-700 leading-relaxed">{item.answer}</p>
+                <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">
+                  {item.question}
+                </h4>
+                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                  {item.answer}
+                </p>
               </div>
             ))}
           </div>

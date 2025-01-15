@@ -13,6 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../components/dialog";
+import { useUser } from "@clerk/nextjs";
 
 const RideBooking = () => {
   const [startLocation, setStartLocation] = useState("");
@@ -23,7 +24,17 @@ const RideBooking = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [confirmedRideId, setConfirmedRideId] = useState(null);
   const [searchOn, setSearchOn] = useState(false);
-  const [newRide, setNewRide] = useState({ start: "", end: "", car: "", seats: 0, driver: "", distance: "", pickupPoint: "" });
+  const [newRide, setNewRide] = useState({
+    start: "",
+    end: "",
+    car: "",
+    seats: 0,
+    driver: "",
+    distance: "",
+    pickupPoint: "",
+  });
+
+  const { user } = useUser();
 
   const handleSearch = () => {
     if (!startLocation && !destination) {
@@ -67,14 +78,21 @@ const RideBooking = () => {
 
   const handleCreateRide = () => {
     if (newRide.start && newRide.end && newRide.car && newRide.seats > 0) {
-      // Assuming the backend API or database interaction is handled here
       const newRideEntry = {
-        id: allRides.length + 1, // Assign a new unique ID
+        id: allRides.length + 1,
         ...newRide,
       };
       allRides.push(newRideEntry);
       alert("Ride created successfully!");
-      setNewRide({ start: "", end: "", car: "", seats: 0, driver: "", distance: "", pickupPoint: "" });
+      setNewRide({
+        start: "",
+        end: "",
+        car: "",
+        seats: 0,
+        driver: "",
+        distance: "",
+        pickupPoint: "",
+      });
     } else {
       alert("Please fill all fields to create a ride.");
     }
@@ -148,7 +166,7 @@ const RideBooking = () => {
   };
 
   return (
-    <div className="h-screen grid grid-cols-2">
+    <div className="h-screen grid grid-cols-1 lg:grid-cols-2">
       {/* Left Side - Create a Ride Section */}
       <div className="bg-gray-100 p-6 flex flex-col items-center justify-center">
         <h1 className="text-2xl font-bold mb-6">CREATE A RIDE</h1>
@@ -166,7 +184,7 @@ const RideBooking = () => {
             className="w-full"
           />
           <Input
-            placeholder="Driver Name"
+            placeholder={"Name : " + user?.firstName + " " + user?.lastName}
             value={newRide.driver}
             onChange={(e) => setNewRide({ ...newRide, driver: e.target.value })}
             className="w-full"
@@ -180,7 +198,9 @@ const RideBooking = () => {
           <Input
             placeholder="Distance"
             value={newRide.distance}
-            onChange={(e) => setNewRide({ ...newRide, distance: e.target.value })}
+            onChange={(e) =>
+              setNewRide({ ...newRide, distance: e.target.value })
+            }
             className="w-full"
           />
           <Input
@@ -191,15 +211,21 @@ const RideBooking = () => {
             }
             className="w-full"
           />
-          <Input
-            type="number"
-            placeholder="Seats Available"
-            value={newRide.seats}
-            onChange={(e) =>
-              setNewRide({ ...newRide, seats: parseInt(e.target.value) })
-            }
-            className="w-full"
-          />
+          <div className="relative w-full">
+            <Input
+              type="number"
+              placeholder="0"
+              value={newRide.seats}
+              onChange={(e) =>
+                setNewRide({ ...newRide, seats: parseInt(e.target.value) || 0 })
+              }
+              className="w-full border rounded px-4 py-2 pr-16" // Adjusted padding on the right
+            />
+            <span className="absolute left-9 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm pointer-events-none">
+              Seats Available
+            </span>
+          </div>
+
           <Button
             variant="primary"
             className="w-full bg-green-700 text-white hover:bg-green-600"
@@ -211,8 +237,8 @@ const RideBooking = () => {
       </div>
 
       {/* Right Side - Pick a Ride Section */}
-      <div className="p-6 bg-white">
-        <h1 className="text-2xl font-bold mb-6">PICK A RIDE</h1>
+      <div className="bg-white p-6 flex flex-col items-center justify-center">
+        <h1 className="text-2xl font-bold mb-6">JOIN A RIDE</h1>
         <div className="grid grid-cols-12 gap-4 mb-4 border-2 p-6 rounded-xl shadow-md bg-white bg-opacity-70">
           <div className="col-span-5">
             <label className="block text-sm font-medium mb-2">START FROM</label>
@@ -302,28 +328,27 @@ const RideBooking = () => {
                     <div className="mt-4 p-3 bg-gray-50 rounded-lg">
                       <p className="font-medium text-gray-700 flex items-center">
                         <MapPin className="w-4 h-4 mr-2" />
-                        Pickup Location
-                      </p>
-                      <p className="text-gray-600 ml-6">
-                        {selectedRide.pickupPoint}
+                        Pickup Point: {selectedRide.pickupPoint}
                       </p>
                     </div>
-                    <p className="mt-4 text-sm text-gray-500">
-                      Please confirm if you want to book this ride
-                    </p>
                   </div>
                 )}
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
               <Button
-                variant="primary"
+                variant="ghost"
+                className="text-gray-600 hover:bg-gray-100"
                 onClick={() => setShowConfirmDialog(false)}
               >
                 Cancel
               </Button>
-              <Button variant="outline" onClick={handleConfirmBooking}>
-                Confirm
+              <Button
+                variant="primary"
+                className="bg-green-700 hover:bg-green-600"
+                onClick={handleConfirmBooking}
+              >
+                Confirm Booking
               </Button>
             </DialogFooter>
           </DialogContent>
