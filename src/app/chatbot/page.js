@@ -9,7 +9,6 @@ export default function Page() {
   const [input, setInput] = useState("");
   const [generatedText, setGeneratedText] = useState("");
   const [loading, setLoading] = useState(false);
-  const copyRef = useRef();
 
   const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API);
 
@@ -18,7 +17,6 @@ export default function Page() {
       setLoading(true);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-      // Generate the prompt based on the specific activity
       const prompt = `Explain how the following activity contributes to the carbon footprint in detail: ${input}. Provide specific metrics or environmental impacts in a concise paragraph.`;
 
       const result = await model.generateContent(prompt);
@@ -44,64 +42,74 @@ export default function Page() {
   };
 
   return (
-    <div className="min-h-screen bg-green-100 flex items-center justify-center">
-      <div className="max-w-3xl w-full md:w-2/3 lg:w-1/2 mx-4 my-8 p-6 bg-white rounded-lg shadow-lg">
-        <h1 className="flex text-3xl font-bold items-center justify-center mb-4 text-white bg-green-800 rounded-md">
-          CFP for your Activities
-          <div className="pl-1">
-            <FaLeaf />
-          </div>
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center bg-fixed px-4"
+      style={{
+        backgroundImage: "url('/chatbotimg.webp')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="max-w-2xl w-full p-6 sm:p-8 bg-white rounded-lg shadow-2xl relative">
+        {/* Header */}
+        <h1 className="text-xl sm:text-3xl font-bold text-green-800 mb-6 text-center flex items-center justify-center">
+          <FaLeaf className="text-3xl sm:text-4xl mr-2" />
+          Carbon Footprint Analyzer
         </h1>
-        <div className="flex flex-col gap-2">
-          <div className="cursor-pointer flex justify-end">
-            <div
-              className="flex bg-green-800 text-white px-2 py-2 rounded-md hover:bg-green-600"
-              onClick={onCopyText}
-            >
-              Copy
-              <div className="pt-1 pl-1">
-                <MdContentCopy size={15} />
-              </div>
-            </div>
-          </div>
-          <div>
+
+        {/* Chat Interface */}
+        <div className="space-y-6">
+          {/* Generated Response */}
+          <div className="relative bg-gray-50 border border-gray-300 rounded-lg p-4 min-h-[8rem] sm:min-h-[10rem] overflow-y-auto">
             {loading ? (
-              <div className="flex items-center justify-center border border-gray-300 rounded-md p-4 w-full h-72 resize-none focus:outline-none focus:ring-2 focus:ring-green-500">
-                <img src="/loading.gif" alt="Loading" />
+              <div className="flex items-center justify-center h-full">
+                <div className="animate-spin rounded-full h-8 w-8 sm:h-12 sm:w-12 border-t-4 border-green-600"></div>
+              </div>
+            ) : generatedText ? (
+              <div className="text-gray-700 text-sm sm:text-base whitespace-pre-wrap">
+                {generatedText}
               </div>
             ) : (
-              <div>
-                <textarea
-                  className="border border-gray-300 rounded-md p-4 w-full h-72 resize-none focus:outline-none focus:ring-2 focus:ring-green-800"
-                  value={generatedText}
-                  readOnly
-                  placeholder="Generated carbon footprint analysis will appear here..."
-                  ref={copyRef}
-                ></textarea>
-              </div>
+              <p className="text-gray-400 text-center text-sm sm:text-base">
+                Your generated analysis will appear here...
+              </p>
+            )}
+
+            {/* Copy Button (visible only when text is generated) */}
+            {generatedText && (
+              <button
+                onClick={onCopyText}
+                className="absolute top-2 right-2 text-gray-500 hover:text-green-600 transition-all"
+              >
+                <MdContentCopy size={20} />
+              </button>
             )}
           </div>
-        </div>
 
-        <div className="flex pt-4">
-          <input
-            className="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-green-800"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            type="text"
-            placeholder="Enter an activity (e.g., aeroplane flights, meat consumption)"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                genText();
-              }
-            }}
-          />
-          <button
-            className="ml-2 px-4 py-2 bg-green-800 text-white rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600"
-            onClick={genText}
-          >
-            Generate
-          </button>
+          {/* Input Field */}
+          <div className="flex flex-col sm:flex-row items-center">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Enter an activity (e.g., flying, meat consumption)"
+              className="w-full sm:flex-1 border border-gray-300 rounded-md sm:rounded-l-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 text-sm sm:text-base mb-4 sm:mb-0"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") genText();
+              }}
+            />
+            <button
+              onClick={genText}
+              className="w-full sm:w-auto bg-green-600 text-white px-6 py-2 rounded-md sm:rounded-r-md hover:bg-green-700 focus:ring-2 focus:ring-offset-1 focus:ring-green-500 transition-all text-sm sm:text-base"
+            >
+              Generate
+            </button>
+          </div>
+
+          {/* Footer Message */}
+          <p className="text-xs sm:text-sm text-gray-500 text-center">
+            This tool calculates carbon footprints for common activities.
+          </p>
         </div>
       </div>
     </div>
