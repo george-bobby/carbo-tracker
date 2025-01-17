@@ -10,8 +10,8 @@ const NewsPageClient = ({ initialFeeds }) => {
   const itemsPerPage = 15; // Number of items per page
 
   // Combine all news items for global search
-  const allNewsItems = useMemo(() => 
-    initialFeeds.flatMap(feed => 
+  const allNewsItems = useMemo(() =>
+    initialFeeds.flatMap(feed =>
       feed.items.map(item => ({
         ...item,
         sourceName: feed.sourceName
@@ -25,9 +25,9 @@ const NewsPageClient = ({ initialFeeds }) => {
     if (!searchTerm) return initialFeeds[activeTab].items;
 
     const lowercaseSearchTerm = searchTerm.toLowerCase();
-    return initialFeeds[activeTab].items.filter(item => 
+    return initialFeeds[activeTab].items.filter(item =>
       item.title.toLowerCase().includes(lowercaseSearchTerm) ||
-      (item.contentSnippet && 
+      (item.contentSnippet &&
        item.contentSnippet.toLowerCase().includes(lowercaseSearchTerm))
     );
   }, [searchTerm, activeTab, initialFeeds]);
@@ -37,9 +37,9 @@ const NewsPageClient = ({ initialFeeds }) => {
     if (!searchTerm) return allNewsItems;
 
     const lowercaseSearchTerm = searchTerm.toLowerCase();
-    return allNewsItems.filter(item => 
+    return allNewsItems.filter(item =>
       item.title.toLowerCase().includes(lowercaseSearchTerm) ||
-      (item.contentSnippet && 
+      (item.contentSnippet &&
        item.contentSnippet.toLowerCase().includes(lowercaseSearchTerm))
     );
   }, [searchTerm, allNewsItems]);
@@ -95,15 +95,15 @@ const NewsPageClient = ({ initialFeeds }) => {
           />
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex border-b mb-4">
+        {/* Tab Navigation with Horizontal Scrolling */}
+        <div className="flex overflow-x-auto whitespace-nowrap bg-white p-2 border-b border-gray-300">
           {initialFeeds.map((feed, index) => (
             <button
               key={index}
-              className={`px-4 py-2 -mb-px border-b-2 ${
-                activeTab === index 
-                  ? 'border-green-800 text-green-800' 
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+              className={`px-4 py-2 whitespace-nowrap text-sm font-medium ${
+                activeTab === index
+                  ? 'text-green-800 border-b-2 border-green-800'
+                  : 'text-gray-500 hover:text-gray-700'
               }`}
               onClick={() => handleTabChange(index)}
             >
