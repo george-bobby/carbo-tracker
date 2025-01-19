@@ -158,7 +158,7 @@ function Header() {
       </div>
 
       {/* Footer for smaller screens */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#D7ECD9] flex justify-around items-center py-3 md:hidden border-t border-gray-300">
+      <div className="fixed bottom-0 left-0 right-0 bg-[#D7ECD9] flex justify-around items-center py-3 md:hidden border-t border-gray-300 z-[9]">
         {footerItems.map((item, index) => (
           <div
             key={item.name}
