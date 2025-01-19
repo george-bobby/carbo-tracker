@@ -34,13 +34,13 @@ function Header() {
   ];
 
   const headerItems = [
-    "Dashboard", 
-    "Calculator", 
-    "News", 
-    "Carpool", 
-    "Shop", 
-    "Ecocenter", 
-    "Chatbot"
+    "Dashboard",
+    "Calculator",
+    "News",
+    "Carpool",
+    "Shop",
+    "Ecocenter",
+    "Chatbot",
   ];
 
   return (
@@ -91,15 +91,22 @@ function Header() {
             } md:flex gap-4 items-center mt-4 md:mt-0 w-full md:w-auto`}
           >
             <div className="flex flex-col md:flex-row gap-4">
-              {headerItems.filter(item => !isSmallScreen || !["Dashboard", "Calculator", "Chatbot"].includes(item)).map((item) => (
-                <Link
-                  key={item}
-                  href={`/${item.toLowerCase()}`}
-                  className="text-[#444444] py-2 px-3 rounded-lg font-medium hover:bg-[#d4d4c1] transition duration-100"
-                >
-                  {item}
-                </Link>
-              ))}
+              {headerItems
+                .filter(
+                  (item) =>
+                    !isSmallScreen ||
+                    !["Dashboard", "Calculator", "Chatbot"].includes(item)
+                )
+                .map((item) => (
+                  <Link
+                    key={item}
+                    href={`/${item.toLowerCase()}`}
+                    className="text-[#444444] py-2 px-3 rounded-lg font-medium hover:bg-[#d4d4c1] transition duration-500" // Slower transition
+                    onClick={() => setMenuOpen(false)} // Close menu after navigation
+                  >
+                    {item}
+                  </Link>
+                ))}
             </div>
           </div>
         </div>
@@ -114,7 +121,7 @@ function Header() {
             <ClerkLoaded>
               <SignedIn>
                 <div className="relative group">
-                  <div className="w-auto flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-105 active:scale-95">
+                  <div className="w-auto flex items-center justify-center cursor-pointer transition-transform duration-500 hover:scale-105 active:scale-95"> {/* Slower transform */}
                     <UserButton
                       afterSignOutUrl="/"
                       style={{
@@ -131,7 +138,7 @@ function Header() {
 
               <SignedOut>
                 <SignInButton mode="modal">
-                  <div className="relative w-auto rounded-lg flex items-center justify-center bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-white py-2 px-6 font-medium cursor-pointer shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl active:scale-95">
+                  <div className="relative w-auto rounded-lg flex items-center justify-center bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-white py-2 px-6 font-medium cursor-pointer shadow-lg transition-all duration-500 transform hover:scale-105 hover:shadow-xl active:scale-95"> {/* Slower transition */}
                     <span className="flex items-center gap-2">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -169,26 +176,20 @@ function Header() {
               setExpandedItem((prev) => (prev === index ? null : index))
             }
           >
-            {/* Wrap the entire container in the Link to make it clickable */}
             <Link
               href={`/${item.name.toLowerCase()}`}
-              className={`relative flex items-center gap-2 transition-all duration-300 ease-in-out ${
+              className={`relative flex items-center gap-2 transition-all duration-500 ease-in-out ${ // Slower transition
                 expandedItem === index ? "w-auto" : "w-12"
               }`}
             >
               <div
-                className={`text-[#444444] flex items-center justify-center rounded-full w-12 h-12 hover:bg-[#d4d4c1] transition duration-300 ${
+                className={`text-[#444444] flex items-center justify-center rounded-full w-12 h-12 hover:bg-[#d4d4c1] transition duration-500 ${ // Slower transition
                   expandedItem === index ? "bg-[#d4d4c1]" : ""
                 }`}
               >
-                <img
-                  src={item.icon}
-                  alt={item.name}
-                  className="w-6 h-6"
-                />
+                <img src={item.icon} alt={item.name} className="w-6 h-6" />
               </div>
 
-              {/* Expanding text when item is clicked or hovered */}
               {expandedItem === index && (
                 <span className="bg-[#d4d4c1] text-[#444444] text-xs font-medium rounded px-2 py-1 shadow-lg whitespace-nowrap">
                   {item.name}
