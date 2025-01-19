@@ -40,6 +40,8 @@ const CarbonFootprintCalculator = () => {
   const [suggestionCategory, setSuggestionCategory] = useState(null);
 
   useEffect(() => {
+    
+    
     if (showResults && Object.keys(categoryEmissions).length > 0) {
       // Find the category with highest emissions
       const highestCategory = Object.entries(categoryEmissions).reduce((a, b) =>
@@ -168,24 +170,30 @@ const CarbonFootprintCalculator = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50 p-8">
+      <div className="min-h-screen bg-gradient-to-r from-green-200 via-blue-200 to-purple-200 p-8"
+  style={{
+    backgroundImage: `url('/imagec1.avif')`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    //backgroundColor: "rgba(255, 255, 255, 0.8)", // Add transparency
+    //borderRadius: "10px", // Optional: Add rounded corners for better design
+  }}>
         <div className="flex flex-col lg:flex-row gap-8 max-w-[1800px] mx-auto">
           {/* Main Calculator Section - 70% width */}
           <div className="lg:w-full">
-            <Card className="h-full">
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold flex items-center gap-2">
-                  Carbon Footprint Calculator
-                  <button
-                    onClick={() => setShowFormula(!showFormula)}
-                    className="ml-2 p-1 rounded-full hover:bg-gray-100"
-                  >
-                    <Info className="w-5 h-5 text-green-500" />
-                  </button>
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent>
+  <Card className="h-full bg-white/50 shadow-lg rounded-lg">
+    <CardHeader>
+      <CardTitle className="text-2xl font-bold flex items-center gap-2">
+        Carbon Footprint Calculator
+        <button
+          onClick={() => setShowFormula(!showFormula)}
+          className="ml-2 p-1 rounded-full hover:bg-gray-100"
+        >
+          <Info className="w-5 h-5 text-green-500" />
+        </button>
+      </CardTitle>
+    </CardHeader>
+    <CardContent>
                 {showFormula && (
                   <Alert className="mb-4">
                     <AlertDescription>

@@ -171,69 +171,81 @@ const RideBooking = () => {
       <div className="bg-gray-100 p-6 flex flex-col items-center justify-center">
         <h1 className="text-2xl font-bold mb-6">CREATE A RIDE</h1>
         <div className="grid grid-cols-1 gap-4 w-full max-w-md">
+        <Input
+          placeholder={`Name: ${user?.firstName || ""}${user?.lastName ? ` ${user?.lastName}` : ""}`}
+          value={`${user?.firstName || ""}${user?.lastName ? ` ${user?.lastName}` : ""}`}
+          className="w-full"
+          readOnly
+        />
+        <div className="relative">
           <Input
             placeholder="Start Location"
             value={newRide.start}
             onChange={(e) => setNewRide({ ...newRide, start: e.target.value })}
             className="w-full"
+            list="createStartLocations"
           />
+          <datalist id="createStartLocations">
+            {Array.from(new Set(allRides.map((ride) => ride.start))).map((location) => (
+              <option key={location} value={location} />
+            ))}
+          </datalist>
+        </div>
+        <div className="relative">
           <Input
             placeholder="Destination"
             value={newRide.end}
             onChange={(e) => setNewRide({ ...newRide, end: e.target.value })}
             className="w-full"
+            list="createDestinations"
           />
-          <Input
-            placeholder={"Name : " + user?.firstName + " " + user?.lastName}
-            value={newRide.driver}
-            onChange={(e) => setNewRide({ ...newRide, driver: e.target.value })}
-            className="w-full"
-          />
-          <Input
-            placeholder="Car Model"
-            value={newRide.car}
-            onChange={(e) => setNewRide({ ...newRide, car: e.target.value })}
-            className="w-full"
-          />
-          <Input
-            placeholder="Distance"
-            value={newRide.distance}
-            onChange={(e) =>
-              setNewRide({ ...newRide, distance: e.target.value })
-            }
-            className="w-full"
-          />
-          <Input
-            placeholder="Pickup Point"
-            value={newRide.pickupPoint}
-            onChange={(e) =>
-              setNewRide({ ...newRide, pickupPoint: e.target.value })
-            }
-            className="w-full"
-          />
-          <div className="relative w-full">
-            <Input
-              type="number"
-              placeholder="0"
-              value={newRide.seats}
-              onChange={(e) =>
-                setNewRide({ ...newRide, seats: parseInt(e.target.value) || 0 })
-              }
-              className="w-full border rounded px-4 py-2 pr-16" // Adjusted padding on the right
-            />
-            <span className="absolute left-9 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm pointer-events-none">
-              Seats Available
-            </span>
-          </div>
-
-          <Button
-            variant="primary"
-            className="w-full bg-green-700 text-white hover:bg-green-600"
-            onClick={handleCreateRide}
-          >
-            Create Ride
-          </Button>
+          <datalist id="createDestinations">
+            {Array.from(new Set(allRides.map((ride) => ride.end))).map((location) => (
+              <option key={location} value={location} />
+            ))}
+          </datalist>
         </div>
+        <Input
+          placeholder="Car Model"
+          value={newRide.car}
+          onChange={(e) => setNewRide({ ...newRide, car: e.target.value })}
+          className="w-full"
+        />
+        <Input
+          placeholder="Distance"
+          value={newRide.distance}
+          onChange={(e) => setNewRide({ ...newRide, distance: e.target.value })}
+          className="w-full"
+        />
+        <Input
+          placeholder="Pickup Point"
+          value={newRide.pickupPoint}
+          onChange={(e) => setNewRide({ ...newRide, pickupPoint: e.target.value })}
+          className="w-full"
+        />
+        <div className="relative w-full">
+          <Input
+            type="number"
+            placeholder="0"
+            value={newRide.seats}
+            onChange={(e) =>
+              setNewRide({ ...newRide, seats: parseInt(e.target.value) || 0 })
+            }
+            className="w-full border rounded px-4 py-2 pr-16"
+          />
+          <span className="absolute left-9 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm pointer-events-none">
+            Seats Available
+          </span>
+        </div>
+
+        <Button
+          variant="primary"
+          className="w-full bg-green-700 text-white hover:bg-green-600"
+          onClick={handleCreateRide}
+        >
+          Create Ride
+        </Button>
+      </div>
       </div>
 
       {/* Right Side - Pick a Ride Section */}
