@@ -230,17 +230,45 @@ const ApplianceCard = ({
       <CardContent>
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-500">Duration (hours)</span>
-            <Input
-              type="number"
-              value={duration}
-              onChange={(e) => onDurationChange(e.target.value)}
-              className={`w-24 text-right ${
-                isOverLimit ? "border-red-500" : ""
-              }`}
-              min="0"
-              max="24"
-            />
+            <span className="text-sm text-gray-500">Duration </span>
+            
+            <div className="flex gap-2 items-center">
+  {/* Hours Dropdown */}
+  <select
+    value={Math.floor(duration)}
+    onChange={(e) =>
+      onDurationChange(
+        parseFloat(e.target.value) + (duration % 1)
+      )
+    }
+    className="border border-gray-300 rounded-md p-1"
+  >
+    {Array.from({ length: 24 }, (_, i) => (
+      <option key={i} value={i}>
+        {i} hrs
+      </option>
+    ))}
+  </select>
+
+  {/* Minutes Dropdown */}
+  <select
+    value={Math.round((duration % 1) * 60)}
+    onChange={(e) =>
+      onDurationChange(
+        Math.floor(duration) +
+          parseInt(e.target.value, 10) / 60
+      )
+    }
+    className="border border-gray-300 rounded-md p-1"
+  >
+    {Array.from({ length: 12 }, (_, i) => (
+      <option key={i} value={i * 5}>
+        {i * 5} mins
+      </option>
+    ))}
+  </select>
+</div>
+
           </div>
           <div className="flex items-center justify-between">
             <span className="text-sm text-gray-500">Status</span>
@@ -386,10 +414,11 @@ const EcoCenter = () => {
       ...prev,
       [applianceName]: {
         ...prev[applianceName],
-        duration: value,
+        duration: parseFloat(value),
       },
     }));
   };
+  
 
   return (
     <motion.div
