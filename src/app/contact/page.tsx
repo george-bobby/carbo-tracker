@@ -55,7 +55,7 @@ export default function Contact() {
                     </p>
                 </div>
 
-                <div className="max-w-3xl mx-auto">
+                <div className="max-w-4xl mx-auto">
                     <div className="relative">
                         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-emerald-700/20 rounded-2xl blur-xl transform rotate-1"></div>
                         <div className="relative bg-slate-800/90 backdrop-blur-sm border border-slate-700 p-8 rounded-2xl shadow-2xl">
@@ -203,8 +203,8 @@ export default function Contact() {
                         </div>
                     </div>
 
-                    {/* <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-6 rounded-xl transition-all duration-300 hover:border-emerald-500/50 hover:bg-slate-800/80">
+                    <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-xl transition-all duration-300 hover:border-emerald-500/50 hover:bg-slate-800/80">
                             <div className="h-12 w-12 rounded-md flex items-center justify-center mb-4 bg-emerald-900/50 text-emerald-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -212,11 +212,13 @@ export default function Contact() {
                             </div>
                             <h3 className="text-white font-semibold text-lg mb-2">Email Us</h3>
                             <p className="text-gray-400 text-sm leading-relaxed">
-                                mail@christuniversity.in
+                                gupta.sahil@bba.christuniversity.in
+                                <br></br>
+                                suhas.ls@mzoo.christuniversity.in
                             </p>
                         </div>
 
-                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-6 rounded-xl transition-all duration-300 hover:border-emerald-500/50 hover:bg-slate-800/80">
+                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-xl transition-all duration-300 hover:border-emerald-500/50 hover:bg-slate-800/80">
                             <div className="h-12 w-12 rounded-md flex items-center justify-center mb-4 bg-emerald-900/50 text-emerald-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -224,11 +226,13 @@ export default function Contact() {
                             </div>
                             <h3 className="text-white font-semibold text-lg mb-2">Call Us</h3>
                             <p className="text-gray-400 text-sm leading-relaxed">
-                                +91 804012 9100 / 9600
+                                Suhas LS:+91 82170 29775
+                                <br></br>
+                                Sahil Gupta:+91 78609 59337
                             </p>
                         </div>
 
-                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-6 rounded-xl transition-all duration-300 hover:border-emerald-500/50 hover:bg-slate-800/80">
+                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-xl transition-all duration-300 hover:border-emerald-500/50 hover:bg-slate-800/80">
                             <div className="h-12 w-12 rounded-md flex items-center justify-center mb-4 bg-emerald-900/50 text-emerald-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -237,10 +241,12 @@ export default function Contact() {
                             </div>
                             <h3 className="text-white font-semibold text-lg mb-2">Office</h3>
                             <p className="text-gray-400 text-sm leading-relaxed">
-                                Dharmaram College Post, Hosur Road, Bengaluru - 560029, Karnataka, India
+                                Cabin 20, Block 3,
+                                CHRIST (Deemed to be University),
+                                Bangalore Central Campus
                             </p>
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </div>
