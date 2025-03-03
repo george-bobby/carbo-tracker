@@ -2,3 +2,31 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hide {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.leaflet-container {
+	width: 100%;
+	height: 100%;
+}
+
+/* Ensure input text remains white */
+.custom-date,
+.custom-time {
+	color: white;
+}
+
+/* Make the calendar and clock icons visible in dark themes */
+.custom-date::-webkit-calendar-picker-indicator,
+.custom-time::-webkit-calendar-picker-indicator {
+	filter: invert(1);
+}
