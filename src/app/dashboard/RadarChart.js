@@ -138,9 +138,7 @@ const RadarChart = ({ clerkId }) => {
 						</svg>
 					</div>
 				</div>
-				<p className='text-gray-400 text-lg'>
-					No data found. Add data in "Calculator" to show it on "Dashboard".
-				</p>
+				<p className='text-gray-400 text-lg'>Loading...</p>
 			</div>
 		);
 	}
