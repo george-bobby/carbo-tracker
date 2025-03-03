@@ -9,6 +9,7 @@ import {
 	FaShoppingCart,
 	FaChevronUp,
 	FaTwitter,
+	FaFacebook,
 	FaInstagram,
 	FaLinkedin,
 } from 'react-icons/fa';
@@ -125,19 +126,19 @@ export default function Footer() {
 							{/* Social Media Icons */}
 							<div className='flex space-x-4 mb-8 justify-center md:justify-start'>
 								<a
-									href='#'
+									href='https://www.facebook.com/www.christuniversity.in/photos/christites-for-climate-action-cca-invites-you-to-be-a-part-of-a-meaningful-envir/1067363768739736/'
 									className='w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-emerald-600 transition-colors duration-300'
 								>
-									<FaTwitter className='text-white' />
+									<FaFacebook className='text-white' />
 								</a>
 								<a
-									href='#'
+									href='https://www.instagram.com/cca.christ/'
 									className='w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-emerald-600 transition-colors duration-300'
 								>
 									<FaInstagram className='text-white' />
 								</a>
 								<a
-									href='#'
+									href='https://www.linkedin.com/company/christforclimate/'
 									className='w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-emerald-600 transition-colors duration-300'
 								>
 									<FaLinkedin className='text-white' />
