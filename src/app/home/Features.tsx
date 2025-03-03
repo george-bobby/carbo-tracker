@@ -1,10 +1,6 @@
 "use client";
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Thermometer, Wind, Droplets, TreePine } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const features = [
   {
@@ -30,29 +26,10 @@ const features = [
 ];
 
 export function Features() {
-  const featuresRef = useRef<HTMLDivElement | null>(null);
-  const [hoveredCard, setHoveredCard] = React.useState<number | null>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.feature-card', {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: featuresRef.current,
-          start: 'top center+=100',
-          toggleActions: 'play none none reverse',
-        },
-      });
-    }, featuresRef);
-
-    return () => ctx.revert();
-  }, []);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   return (
-    <section ref={featuresRef} className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <section className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Background Elements */}
       <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
       <div className="absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>

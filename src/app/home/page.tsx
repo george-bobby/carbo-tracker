@@ -1,7 +1,6 @@
 "use client";
 import React from 'react';
 // import { SearchBar } from '../live/searchBar';
-import { Hero } from './Hero';
 import { Features } from './Features';
 import Stats from './Stats';
 import { CallToAction } from './CallToAction';
@@ -14,11 +13,10 @@ export default function Home() {
         <div className="relative min-h-screen flex flex-col">
             <div className="flex-grow">
                 <main >
-                    {/* <Hero /> */}
-                    {/* <Stats /> */}
-                    {/* <Features /> */}
+                    <Stats />
+                    <Features />
                     <NewsSection />
-                    {/* <CallToAction /> */}
+                    <CallToAction />
                 </main>
 
             </div>

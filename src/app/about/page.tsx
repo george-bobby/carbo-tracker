@@ -183,82 +183,98 @@ export default function AboutUs() {
             </div>
 
             {/* About Section */}
-            <div className="max-w-4xl mx-auto my-20 px-4">
-                <h2 className="text-3xl font-bold text-slate-800 mb-6 ">About <span className="text-emerald-600">CCA</span></h2>
-                <p className="text-gray-600 leading-relaxed mb-8">
-                    CHRISTITES FOR CLIMATE ACTION (CCA) is a movement initiated by Rev.Fr.Dr.Jose CC,
-                    Vice Chancellor, CHRIST (Deemed to be University), to campaign for climate changes
-                    and its consequences on Mother Earth. This student-led movement started with an
-                    ultimate goal to take up the responsibility of conserving the environment from
-                    campus to societal level.
-                </p>
-                <p className="text-gray-600 leading-relaxed mb-8">
-                    The emphasis in CCA is given on developing an Eco-friendly lifestyle. CCA believes
-                    that it's the primary responsibility of every CHRISTITE to be aware and create
-                    awareness about climatic changes which is a looming threat to all life on mother Earth.
-                </p>
-                <p className="text-gray-600 leading-relaxed mb-8">
-                    The CCA adopts the UN Sustainable Development Goal 13, along with many other goals
-                    developed in the United Nation Sustainable Development Goals (2015) to urgently combat
-                    climate change, aligning with the broader UN goals for global peace and prosperity.
-                </p>
+            <div className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+                {/* Background Elements */}
+                <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+
+                <div className="max-w-4xl mx-auto px-4">
+                    <h2 className="text-4xl font-bold text-white mb-6">About <span className="text-emerald-400">CCA</span></h2>
+                    <p className="text-gray-300 leading-relaxed mb-8">
+                        CHRISTITES FOR CLIMATE ACTION (CCA) is a movement initiated by Rev.Fr.Dr.Jose CC,
+                        Vice Chancellor, CHRIST (Deemed to be University), to campaign for climate changes
+                        and its consequences on Mother Earth. This student-led movement started with an
+                        ultimate goal to take up the responsibility of conserving the environment from
+                        campus to societal level.
+                    </p>
+                    <p className="text-gray-300 leading-relaxed mb-8">
+                        The emphasis in CCA is given on developing an Eco-friendly lifestyle. CCA believes
+                        that it's the primary responsibility of every CHRISTITE to be aware and create
+                        awareness about climatic changes which is a looming threat to all life on mother Earth.
+                    </p>
+                    <p className="text-gray-300 leading-relaxed mb-8">
+                        The CCA adopts the UN Sustainable Development Goal 13, along with many other goals
+                        developed in the United Nation Sustainable Development Goals (2015) to urgently combat
+                        climate change, aligning with the broader UN goals for global peace and prosperity.
+                    </p>
+                </div>
             </div>
 
             {/* Messages Section */}
-            <div className="max-w-5xl mx-auto mb-20 px-4">
-                <div className="grid md:grid-cols-2 gap-12">
-                    <div className="bg-slate-800/10 backdrop-blur-sm border border-slate-300 p-8 rounded-lg relative mt-20">
-                        <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
-                            <img
-                                src={images.viceChancellor}
-                                alt="Vice Chancellor"
-                                className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full border-4 border-emerald-500 shadow-lg object-cover"
-                            />
+            <div className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+                {/* Background Elements */}
+                <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+
+                <div className="max-w-5xl mx-auto px-4">
+                    <div className="grid md:grid-cols-2 gap-8">
+                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-lg relative mt-20 hover:shadow-emerald-500/20 hover:border-emerald-500/50 hover:bg-slate-800/80 hover:translate-y-1 transition-all duration-300">
+                            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
+                                <img
+                                    src={images.viceChancellor}
+                                    alt="Vice Chancellor"
+                                    className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full border-4 border-emerald-500 shadow-lg object-cover"
+                                />
+                            </div>
+                            <div className="pt-16">
+                                <h3 className="text-2xl font-bold text-emerald-400 mb-4 text-center">Vice Chancellor's Message</h3>
+                                <p className="text-gray-300 italic">
+                                    "Climate change poses a global threat, with global warming serving as its undeniable signal.
+                                    Christites for Climate Action (CCA) is a movement to educate and create awareness among
+                                    the human community to take responsible action towards conservation and stop destruction.
+                                    Our collective actions today significantly influence the climate of tomorrow."
+                                </p>
+                                <p className="mt-4 font-semibold text-white text-center text-xl">- Rev.Fr.Dr.Jose CC </p>
+                                <p className="font-semibold text-gray-400 text-center text-sm">Vice Chancellor<br />Founder of CCA</p>
+                            </div>
                         </div>
-                        <div className="pt-16">
-                            <h3 className="text-2xl font-bold text-emerald-600 mb-4 text-center">Vice Chancellor's Message</h3>
-                            <p className="text-gray-600 italic">
-                                "Climate change poses a global threat, with global warming serving as its undeniable signal.
-                                Christites for Climate Action (CCA) is a movement to educate and create awareness among
-                                the human community to take responsible action towards conservation and stop destruction.
-                                Our collective actions today significantly influence the climate of tomorrow."
-                            </p>
-                            <p className="mt-4 font-semibold text-slate-800 text-center text-xl">- Rev.Fr.Dr.Jose CC </p>
-                            <p className="font-semibold text-slate-600 text-center text-sm">Vice Chancellor<br />Founder of CCA</p>
-                        </div>
-                    </div>
-                    <div className="bg-slate-800/10 backdrop-blur-sm border border-slate-300 p-8 rounded-lg relative mt-20">
-                        <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
-                            <img
-                                src={images.coordinator}
-                                alt="Student Coordinator"
-                                className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full border-4 border-emerald-500 shadow-lg object-cover"
-                            />
-                        </div>
-                        <div className="pt-16">
-                            <h3 className="text-2xl font-bold text-emerald-600 mb-4 text-center">Student Coordinator's Message</h3>
-                            <p className="text-gray-600 italic">
-                                "CCA is a dynamic student-led movement which was initiated to create awareness about
-                                climate changes and its effects on the mother earth. Our main objective is to make
-                                every citizen aware and responsible towards conservation of the planet."
-                            </p>
-                            <p className="mt-8 font-semibold text-slate-800 text-center text-xl">- Suhas LS</p>
-                            <p className="font-semibold text-slate-600 text-center text-sm">Student Coordinator<br />CCA</p>
+                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-lg relative mt-20 hover:shadow-emerald-500/20 hover:border-emerald-500/50 hover:bg-slate-800/80 hover:translate-y-1 transition-all duration-300">
+                            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
+                                <img
+                                    src={images.coordinator}
+                                    alt="Student Coordinator"
+                                    className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full border-4 border-emerald-500 shadow-lg object-cover"
+                                />
+                            </div>
+                            <div className="pt-16">
+                                <h3 className="text-2xl font-bold text-emerald-400 mb-4 text-center">Student Coordinator's Message</h3>
+                                <p className="text-gray-300 italic">
+                                    "CCA is a dynamic student-led movement which was initiated to create awareness about
+                                    climate changes and its effects on the mother earth. Our main objective is to make
+                                    every citizen aware and responsible towards conservation of the planet."
+                                </p>
+                                <p className="mt-8 font-semibold text-white text-center text-xl">- Suhas LS</p>
+                                <p className="font-semibold text-gray-400 text-center text-sm">Student Coordinator<br />CCA</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Featured Activities */}
-            <div className="py-16 bg-slate-100">
+            <div className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+                {/* Background Elements */}
+                <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+
                 <div className="container mx-auto px-4">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-4xl font-bold text-slate-800 mb-12 text-center"
+                        className="text-4xl font-bold text-white mb-12 text-center"
                     >
-                        Upcoming <span className="text-emerald-500">Events</span>
+                        Upcoming <span className="text-emerald-400">Events</span>
                     </motion.h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {images.activities.map((activity, index) => (
@@ -268,7 +284,7 @@ export default function AboutUs() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
-                                className="bg-white backdrop-blur-sm border border-slate-200 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-emerald-500/50 hover:translate-y-1"
+                                className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl shadow-lg overflow-hidden hover:shadow-emerald-500/20 hover:border-emerald-500/50 hover:bg-slate-800/80 hover:translate-y-1 transition-all duration-300"
                             >
                                 <div className="relative h-48">
                                     <img
@@ -281,9 +297,9 @@ export default function AboutUs() {
                                     </div>
                                 </div>
                                 <div className="p-6">
-                                    <h3 className="text-xl font-bold text-slate-800 mb-2">{activity.title}</h3>
-                                    <p className="text-gray-600 mb-4">{activity.description}</p>
-                                    <button className="text-emerald-600 font-semibold hover:text-emerald-800 transition-colors">
+                                    <h3 className="text-xl font-bold text-white mb-2">{activity.title}</h3>
+                                    <p className="text-gray-300 mb-4">{activity.description}</p>
+                                    <button className="text-emerald-400 font-semibold hover:text-emerald-300 transition-colors">
                                         Learn More →
                                     </button>
                                 </div>
@@ -327,42 +343,54 @@ export default function AboutUs() {
             </div>
 
             {/* Vision & Mission */}
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto my-20 px-4">
-                <div className="bg-slate-800/5 backdrop-blur-sm border border-slate-200 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:border-emerald-500/50 hover:translate-y-1">
-                    <h3 className="text-2xl font-bold text-slate-800 mb-4">Vision</h3>
-                    <p className="text-gray-600">
-                        To foster a harmonious coexistence between humanity and nature through proactive
-                        environmental stewardship, ensuring a sustainable future for generations to come.
-                    </p>
-                </div>
-                <div className="bg-slate-800/5 backdrop-blur-sm border border-slate-200 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:border-emerald-500/50 hover:translate-y-1">
-                    <h3 className="text-2xl font-bold text-slate-800 mb-4">Mission</h3>
-                    <p className="text-gray-600">
-                        Engage, educate, and empower communities to take tangible actions towards environmental
-                        preservation. Take up grassroots initiatives, advocacy, and collaboration, to protect
-                        ecosystems, conserve resources, and promote eco-conscious lifestyles.
-                    </p>
+            <div className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+                {/* Background Elements */}
+                <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+
+                <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto px-4">
+                    <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-lg shadow-lg hover:shadow-emerald-500/20 hover:border-emerald-500/50 hover:bg-slate-800/80 hover:translate-y-1 transition-all duration-300">
+                        <h3 className="text-2xl font-bold text-white mb-4">Vision</h3>
+                        <p className="text-gray-300">
+                            To foster a harmonious coexistence between humanity and nature through proactive
+                            environmental stewardship, ensuring a sustainable future for generations to come.
+                        </p>
+                    </div>
+                    <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-lg shadow-lg hover:shadow-emerald-500/20 hover:border-emerald-500/50 hover:bg-slate-800/80 hover:translate-y-1 transition-all duration-300">
+                        <h3 className="text-2xl font-bold text-white mb-4">Mission</h3>
+                        <p className="text-gray-300">
+                            Engage, educate, and empower communities to take tangible actions towards environmental
+                            preservation. Take up grassroots initiatives, advocacy, and collaboration, to protect
+                            ecosystems, conserve resources, and promote eco-conscious lifestyles.
+                        </p>
+                    </div>
                 </div>
             </div>
 
             {/* Objectives */}
-            <div className="max-w-4xl mx-auto my-20 px-4">
-                <h3 className="text-2xl font-bold text-slate-800 mb-6">Our <span className="text-emerald-600">Objectives</span></h3>
-                <div className="bg-slate-800/5 backdrop-blur-sm border border-slate-200 p-8 rounded-lg shadow-lg">
-                    <ul className="space-y-6">
-                        <li className="flex items-start">
-                            <span className="h-8 w-8 rounded-full bg-emerald-500 text-white flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">1</span>
-                            <p className="text-gray-600">To drive an awareness campaign about climate change from campus to societal level</p>
-                        </li>
-                        <li className="flex items-start">
-                            <span className="h-8 w-8 rounded-full bg-emerald-500 text-white flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">2</span>
-                            <p className="text-gray-600">To embrace sustainable practices and foster eco-friendly lifestyle</p>
-                        </li>
-                        <li className="flex items-start">
-                            <span className="h-8 w-8 rounded-full bg-emerald-500 text-white flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">3</span>
-                            <p className="text-gray-600">To take proactive steps toward climate resilience</p>
-                        </li>
-                    </ul>
+            <div className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+                {/* Background Elements */}
+                <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+
+                <div className="max-w-4xl mx-auto px-4">
+                    <h3 className="text-2xl font-bold text-white mb-6">Our <span className="text-emerald-400">Objectives</span></h3>
+                    <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-lg shadow-lg">
+                        <ul className="space-y-6">
+                            <li className="flex items-start">
+                                <span className="h-8 w-8 rounded-full bg-emerald-500 text-white flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">1</span>
+                                <p className="text-gray-300">To drive an awareness campaign about climate change from campus to societal level</p>
+                            </li>
+                            <li className="flex items-start">
+                                <span className="h-8 w-8 rounded-full bg-emerald-500 text-white flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">2</span>
+                                <p className="text-gray-300">To embrace sustainable practices and foster eco-friendly lifestyle</p>
+                            </li>
+                            <li className="flex items-start">
+                                <span className="h-8 w-8 rounded-full bg-emerald-500 text-white flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">3</span>
+                                <p className="text-gray-300">To take proactive steps toward climate resilience</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
