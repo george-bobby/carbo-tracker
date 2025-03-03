@@ -14,11 +14,11 @@ export default function Home() {
         <div className="relative min-h-screen flex flex-col">
             <div className="flex-grow">
                 <main >
-                    <Hero />
-                    <Stats />
-                    <Features />
+                    {/* <Hero /> */}
+                    {/* <Stats /> */}
+                    {/* <Features /> */}
                     <NewsSection />
-                    <CallToAction />
+                    {/* <CallToAction /> */}
                 </main>
 
             </div>

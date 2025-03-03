@@ -1,11 +1,7 @@
 "use client";
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, ArrowLeft, ExternalLink } from 'lucide-react';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const newsItems = [
   {
@@ -48,55 +44,41 @@ const newsItems = [
 
 export function NewsSection() {
   const router = useRouter();
-  const sliderRef = useRef(null);
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.news-card', {
-        x: 100,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top center+=100',
-        },
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
     const container = sliderRef.current;
     if (!container) return;
 
     const scrollAmount = container.offsetWidth * 0.8;
-    gsap.to(container, {
-      scrollLeft: direction === 'left' ? '-=' + scrollAmount : '+=' + scrollAmount,
-      duration: 0.8,
-      ease: 'power2.inOut',
+    container.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
     });
   };
 
   return (
-    <section ref={containerRef} className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Background Elements */}
+      <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+
+      <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-12">
-          <h2 className="text-4xl font-bold">Latest Climate News</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
+            Latest <span className="text-emerald-400">Climate</span> News
+          </h2>
           <div className="flex gap-4">
             <button
               onClick={() => scroll('left')}
-              className="p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-shadow"
+              className="p-2 rounded-full bg-slate-800/80 border border-slate-700 hover:border-emerald-500/50 text-emerald-400 shadow-md hover:shadow-emerald-500/20 transition-all duration-300"
               aria-label="Scroll left through news"
             >
               <ArrowLeft className="w-6 h-6" />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-shadow"
+              className="p-2 rounded-full bg-slate-800/80 border border-slate-700 hover:border-emerald-500/50 text-emerald-400 shadow-md hover:shadow-emerald-500/20 transition-all duration-300"
               aria-label="Scroll right through news"
             >
               <ArrowRight className="w-6 h-6" />
@@ -104,25 +86,32 @@ export function NewsSection() {
           </div>
         </div>
 
-        <div ref={sliderRef} className="flex gap-6 overflow-x-auto pb-6 hide-scrollbar">
+        <div
+          ref={sliderRef}
+          className="flex gap-6 overflow-x-auto pb-6 hide-scrollbar snap-x snap-mandatory"
+        >
           {newsItems.map((item) => (
             <div
               key={item.id}
-              className="news-card flex-none w-[350px] sm:w-[300px] md:w-[350px] lg:w-[400px] bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+              className="news-card flex-none w-[300px] sm:w-[350px] md:w-[400px] bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl shadow-lg hover:shadow-emerald-500/20 hover:border-emerald-500/50 hover:bg-slate-800/80 hover:translate-y-1 transition-all duration-300 flex flex-col snap-center"
             >
-              <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-t-xl" />
-              <div className="p-6">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-48 object-cover rounded-t-xl"
+              />
+              <div className="p-6 flex flex-col flex-grow">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm text-gray-500">{item.date}</span>
-                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                  <span className="text-sm text-gray-400">{item.date}</span>
+                  <span className="px-3 py-1 bg-emerald-900/50 text-emerald-400 rounded-full text-sm border border-emerald-500/20">
                     {item.tag}
                   </span>
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                <p className="text-gray-600 mb-4">{item.excerpt}</p>
+                <h3 className="text-xl font-semibold mb-3 text-white">{item.title}</h3>
+                <p className="text-gray-300 mb-4 flex-grow">{item.excerpt}</p>
                 <button
                   onClick={() => router.push(item.link)}
-                  className="text-green-600 font-semibold hover:text-green-700 transition-colors"
+                  className="text-emerald-400 font-semibold hover:text-emerald-300 transition-colors"
                   aria-label={`Read more about ${item.title}`}
                 >
                   Read More →
@@ -135,7 +124,7 @@ export function NewsSection() {
         <div className="text-center mt-12">
           <button
             onClick={() => router.push('/news')}
-            className="inline-flex items-center gap-2 bg-green-500 text-white px-8 py-3 rounded-full hover:bg-green-600 transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-md font-medium shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 hover:translate-y-1"
             aria-label="See all news articles"
           >
             See All News

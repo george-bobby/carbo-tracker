@@ -20,6 +20,8 @@ function Stats() {
     error: false
   });
 
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
   useEffect(() => {
     const fetchClimateData = async () => {
       try {
@@ -41,7 +43,7 @@ function Stats() {
 
         // For emission reduction goal and trees planted, we'll use static data
         // as there's no single free API that provides this global information
-        
+
         setClimateData({
           globalTemp: tempValue || '1.2',
           co2Concentration: co2Value || '417',
@@ -73,8 +75,7 @@ function Stats() {
       value: climateData.globalTemp || '1.2',
       label: 'Global Temperature Rise (°C)',
       description: 'Increase in global temperatures since pre-industrial levels.',
-      color: 'text-red-500',
-      bgColor: 'bg-red-500',
+      color: 'from-red-500 to-red-600',
       progress: 75,
     },
     {
@@ -82,8 +83,7 @@ function Stats() {
       value: climateData.co2Concentration || '417',
       label: 'CO2 Concentration (ppm)',
       description: 'Atmospheric carbon dioxide concentration in parts per million.',
-      color: 'text-yellow-500',
-      bgColor: 'bg-yellow-500',
+      color: 'from-yellow-500 to-yellow-600',
       progress: 65,
     },
     {
@@ -91,8 +91,7 @@ function Stats() {
       value: climateData.emissionReduction || '49',
       label: 'Emission Reduction Goal (%)',
       description: 'Global target to reduce greenhouse gas emissions by 2030.',
-      color: 'text-blue-500',
-      bgColor: 'bg-blue-500',
+      color: 'from-blue-500 to-blue-600',
       progress: 49,
     },
     {
@@ -100,57 +99,51 @@ function Stats() {
       value: climateData.treesPlanted || '7.3B',
       label: 'Trees Planted',
       description: 'Total trees planted worldwide in recent environmental campaigns.',
-      color: 'text-green-500',
-      bgColor: 'bg-green-500',
+      color: 'from-emerald-500 to-emerald-600',
       progress: 90,
     },
   ];
 
   return (
-    <section 
-      className="py-12 relative" 
-      style={{
-        backgroundColor: '#001F54',
-        backgroundImage: 'linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 31, 84, 1))',
-        backdropFilter: 'blur(10px)',
-      }}
-    >
-      
-      
+    <section className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Background Elements */}
+      <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+
       <div className="container mx-auto px-4 relative z-10">
+        <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-16">
+          Climate <span className="text-emerald-400">Statistics</span>
+        </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="text-center group hover:bg-white/10 p-6 rounded-lg transition-all duration-300 shadow-lg bg-black bg-opacity-30 relative"
-              style={{
-                backdropFilter: 'blur(5px)',
-                boxShadow: '0 8px 15px rgba(0, 0, 0, 0.2)',
-              }}
+              className="text-center bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-6 rounded-xl shadow-lg hover:shadow-emerald-500/20 hover:border-emerald-500/50 hover:bg-slate-800/80 hover:translate-y-1 transition-all duration-300"
+              onMouseEnter={() => setHoveredCard(index)}
+              onMouseLeave={() => setHoveredCard(null)}
             >
               <div
-                className="inline-block p-4 rounded-full bg-white/10 mb-4 group-hover:scale-110 transition-transform"
+                className={`h-16 w-16 rounded-md flex items-center justify-center mb-6 mx-auto transition-all duration-300 ${hoveredCard === index
+                  ? 'bg-emerald-500 text-white'
+                  : 'bg-emerald-900/50 text-emerald-400'
+                  }`}
                 aria-label={stat.label}
               >
-                {/* Icon component with explicit size and color */}
-                <stat.icon
-                  size={48}
-                  className={stat.color}
-                  strokeWidth={1.5}
-                />
+                <stat.icon className="h-8 w-8" />
               </div>
-              
+
               <div className="text-4xl font-bold text-white mb-2">
                 {climateData.loading ? '...' : stat.value}
               </div>
-              
+
               <div className="text-white font-medium mb-1">{stat.label}</div>
-              
-              <div className="text-gray-400 text-sm">{stat.description}</div>
-              
-              <div className="relative bg-gray-700 h-2 w-full rounded-full mt-4">
+
+              <div className="text-gray-300 text-sm mb-4">{stat.description}</div>
+
+              <div className="relative bg-slate-700 h-2 w-full rounded-full">
                 <div
-                  className={`h-2 rounded-full ${stat.bgColor}`}
+                  className={`h-2 rounded-full bg-gradient-to-r ${stat.color}`}
                   style={{ width: `${stat.progress}%` }}
                 ></div>
               </div>
