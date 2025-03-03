@@ -66,6 +66,9 @@ function Header() {
 		{ name: 'Shop', icon: <FaShoppingCart className='w-4 h-4' /> },
 		{ name: 'Ecocenter', icon: <FaLeaf className='w-4 h-4' /> },
 		{ name: 'Chatbot', icon: <FaRobot className='w-4 h-4' /> },
+		// { name: 'About', icon: <FaRobot className='w-4 h-4' /> },
+		// { name: 'Contact', icon: <FaRobot className='w-4 h-4' /> },
+		// { name: 'Live', icon: <FaRobot className='w-4 h-4' /> },
 	];
 
 	return (

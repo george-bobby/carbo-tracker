@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { SearchBar } from "../../components/searchBar";
+import { SearchBar } from "./searchBar";
 import { CurrentConditions } from "./CurrentConditions";
 import { DetailedStats } from "./DetailedStats";
 import { WeatherTrends } from "./WeatherTrends";
@@ -184,8 +184,8 @@ export default function Live() {
                             <DetailedStats current={currentWeather} forecast={forecast} />
                             <WeeklyForecast location={location} />
                         </div>
-                      
-      
+
+
 
                         <DailyForecast data={generateHourlyForecast(forecast.list)} />
                         <WeatherTrends data={forecast.list} />

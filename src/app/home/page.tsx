@@ -1,11 +1,11 @@
 "use client";
 import React from 'react';
-import { SearchBar } from '../../components/searchBar';
-import { Hero } from '../../components/Hero';
-import { Features } from '../../components/Features';
-import Stats from '../../components/Stats';
-import { CallToAction } from '../../components/CallToAction';
-import { NewsSection } from '../../components/NewsSection';
+// import { SearchBar } from '../live/searchBar';
+import { Hero } from './Hero';
+import { Features } from './Features';
+import Stats from './Stats';
+import { CallToAction } from './CallToAction';
+import { NewsSection } from './NewsSection';
 import { useClerk } from '@clerk/clerk-react';
 
 export default function Home() {

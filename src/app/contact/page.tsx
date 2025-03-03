@@ -117,7 +117,7 @@ export default function Contact() {
                                             name="phone"
                                             required
                                             className="w-full px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-colors text-white placeholder-gray-400"
-                                            placeholder="+1 (555) 000-0000"
+                                            placeholder="+91 8967453210"
                                         />
                                     </div>
 
@@ -203,7 +203,7 @@ export default function Contact() {
                         </div>
                     </div>
 
-                    <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-6 rounded-xl transition-all duration-300 hover:border-emerald-500/50 hover:bg-slate-800/80">
                             <div className="h-12 w-12 rounded-md flex items-center justify-center mb-4 bg-emerald-900/50 text-emerald-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -212,7 +212,7 @@ export default function Contact() {
                             </div>
                             <h3 className="text-white font-semibold text-lg mb-2">Email Us</h3>
                             <p className="text-gray-400 text-sm leading-relaxed">
-                                support@carbonfootprint.com
+                                mail@christuniversity.in
                             </p>
                         </div>
 
@@ -224,7 +224,7 @@ export default function Contact() {
                             </div>
                             <h3 className="text-white font-semibold text-lg mb-2">Call Us</h3>
                             <p className="text-gray-400 text-sm leading-relaxed">
-                                +1 (555) 123-4567
+                                +91 804012 9100 / 9600
                             </p>
                         </div>
 
@@ -237,10 +237,10 @@ export default function Contact() {
                             </div>
                             <h3 className="text-white font-semibold text-lg mb-2">Office</h3>
                             <p className="text-gray-400 text-sm leading-relaxed">
-                                123 Eco Street, Green City, 10001
+                                Dharmaram College Post, Hosur Road, Bengaluru - 560029, Karnataka, India
                             </p>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

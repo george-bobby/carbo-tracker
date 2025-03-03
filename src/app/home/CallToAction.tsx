@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
@@ -29,7 +28,7 @@ const actions = [
     buttonText: 'Get Started',
     link: 'https://chat.whatsapp.com/D3dPl12GYDaGksPmOKrRPD'
   },
-  
+
 ];
 
 export function CallToAction() {
