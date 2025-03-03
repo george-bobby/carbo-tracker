@@ -22,6 +22,7 @@ import {
 	FaTimes,
 	FaSignInAlt,
 } from 'react-icons/fa';
+import { MdDashboard } from 'react-icons/md';
 
 function Header() {
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -52,13 +53,13 @@ function Header() {
 	}, []);
 
 	const footerItems = [
-		{ name: 'Dashboard', icon: <FaHome className='w-5 h-5' /> },
+		{ name: 'Dashboard', icon: <MdDashboard className='w-5 h-5' /> },
 		{ name: 'Calculator', icon: <FaCalculator className='w-5 h-5' /> },
 		{ name: 'Chatbot', icon: <FaRobot className='w-5 h-5' /> },
 	];
 
 	const headerItems = [
-		{ name: 'Dashboard', icon: <FaHome className='w-4 h-4' /> },
+		{ name: 'Dashboard', icon: <MdDashboard className='w-4 h-4' /> },
 		{ name: 'Calculator', icon: <FaCalculator className='w-4 h-4' /> },
 		{ name: 'News', icon: <FaNewspaper className='w-4 h-4' /> },
 		{ name: 'Carpool', icon: <FaCar className='w-4 h-4' /> },
@@ -139,7 +140,7 @@ function Header() {
 
 						{/* Profile Section */}
 						{!isSmallScreen && ( // Hide on smaller screens
-							<div className='relative flex items-center justify-end mt-4 md:mt-0 hidden md:flex'>
+							<div className='relative items-center justify-end mt-4 md:mt-0 hidden md:flex'>
 								<ClerkLoading>
 									<Spinner color='white' />
 								</ClerkLoading>

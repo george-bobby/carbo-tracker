@@ -75,7 +75,7 @@ export default function Footer() {
 									<div className='text-emerald-400'>{icon}</div>
 									<Link
 										href={href}
-										className='text-sm text-gray-300 hover:text-emerald-400 transition-colors duration-300 group-hover:translate-x-1 inline-block transform transition-transform'
+										className='text-sm text-gray-300 hover:text-emerald-400 transition-colors duration-300 group-hover:translate-x-1 inline-block transform'
 									>
 										{label}
 									</Link>
