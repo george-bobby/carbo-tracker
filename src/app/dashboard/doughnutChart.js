@@ -19,7 +19,16 @@ const CarbonGauge = ({ clerkId }) => {
 			const fetchedData = await response.json();
 
 			// Find the data for the given clerkId
-			const userData = fetchedData.find((item) => item.clerkId === clerkId);
+			let userData = fetchedData.find((item) => item.clerkId === clerkId);
+
+			// If no data found, fallback to default clerkId
+			if (!userData) {
+				console.warn(
+					`No data found for clerkId: ${clerkId}, fetching default clerkId`
+				);
+				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
+				userData = fetchedData.find((item) => item.clerkId === defaultClerkId);
+			}
 
 			if (userData) {
 				// Calculate total emissions from categories
@@ -30,7 +39,6 @@ const CarbonGauge = ({ clerkId }) => {
 				);
 
 				setTotalEmissions(total);
-				setLoading(false);
 
 				// Set status based on thresholds
 				if (total < lowThreshold) {
@@ -47,11 +55,11 @@ const CarbonGauge = ({ clerkId }) => {
 					setColor('rgb(239, 68, 68)'); // red-500
 				}
 			} else {
-				console.error('No data found for the given clerkId');
-				setLoading(false);
+				console.error('No data found for the default clerkId either');
 			}
 		} catch (error) {
 			console.error('Error fetching data:', error);
+		} finally {
 			setLoading(false);
 		}
 	};

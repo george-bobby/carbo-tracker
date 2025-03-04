@@ -14,12 +14,21 @@ const EquivalenciesTable = ({ clerkId }) => {
 	const fetchEquivalencies = async () => {
 		try {
 			const fetchedData = await fetch('/api/fetch').then((res) => res.json());
-			const userData = fetchedData.find((item) => item.clerkId === clerkId);
+			let userData = fetchedData.find((item) => item.clerkId === clerkId);
+
+			// If no data found, fallback to default clerkId
+			if (!userData) {
+				console.warn(
+					`No data found for clerkId: ${clerkId}, fetching default clerkId`
+				);
+				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
+				userData = fetchedData.find((item) => item.clerkId === defaultClerkId);
+			}
 
 			if (userData && userData.equivalencies) {
 				setEquivalencies(userData.equivalencies);
 			} else {
-				console.error('No data found for the given clerkId or equivalencies');
+				console.error('No data found for the default clerkId or equivalencies');
 			}
 		} catch (error) {
 			console.error('Error fetching equivalencies data:', error);

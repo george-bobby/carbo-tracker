@@ -6,10 +6,10 @@ import { CategoryScale } from 'chart.js';
 import BarGraph from './barGraph';
 import PieChart from './pieChart';
 import EquivalenciesTable from './eqvTable';
-import CarbonComparison from './CarbonComparison';
-import CarbonGauge from './CarbonGauge';
-import LineChart from './LineChart';
-import RadarChart from './RadarChart';
+import CarbonComparison from './compareChart';
+import CarbonGauge from './doughnutChart';
+import LineChart from './lineChart';
+import RadarChart from './radarChart';
 import { Tab } from '@headlessui/react';
 import {
 	FaLeaf,

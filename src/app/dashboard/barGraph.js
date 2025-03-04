@@ -11,16 +11,25 @@ const BarGraph = ({ clerkId }) => {
 			const fetchedData = await response.json();
 
 			// Find the data for the given clerkId
-			const userData = fetchedData.find((item) => item.clerkId === clerkId);
+			let userData = fetchedData.find((item) => item.clerkId === clerkId);
+
+			// If no data found for the current clerkId, fallback to default clerkId
+			if (!userData) {
+				console.warn(
+					`No data found for clerkId: ${clerkId}, fetching default clerkId`
+				);
+				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
+				userData = fetchedData.find((item) => item.clerkId === defaultClerkId);
+			}
 
 			if (userData) {
 				setDataArray(Object.values(userData.monthlyData)); // Get monthly data values
-				setLoading(false);
 			} else {
-				console.error('No data found for the given clerkId');
+				console.error('No data found for the default clerkId either');
 			}
 		} catch (error) {
 			console.error('Error fetching data:', error);
+		} finally {
 			setLoading(false);
 		}
 	};

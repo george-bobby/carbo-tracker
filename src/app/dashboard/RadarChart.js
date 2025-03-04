@@ -10,7 +10,17 @@ const RadarChart = ({ clerkId }) => {
 			const fetchedData = await fetch('/api/fetch').then((res) => res.json());
 
 			// Find the data for the given clerkId
-			const userData = fetchedData.find((item) => item.clerkId === clerkId);
+			let userData = fetchedData.find((item) => item.clerkId === clerkId);
+
+			// If no data found, fallback to default clerkId
+			if (!userData) {
+				console.warn(
+					`No data found for clerkId: ${clerkId}, fetching default clerkId`
+				);
+				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
+				userData = fetchedData.find((item) => item.clerkId === defaultClerkId);
+			}
+
 			if (userData) {
 				const { categories } = userData;
 
@@ -26,13 +36,12 @@ const RadarChart = ({ clerkId }) => {
 					'buildingMaintenance',
 				];
 
-				// Prepare data for the chart with nice labels
-				const labels = expectedCategories.map((category) => {
-					// Convert camelCase to Title Case with spaces
-					return category
+				// Prepare data for the chart with formatted labels
+				const labels = expectedCategories.map((category) =>
+					category
 						.replace(/([A-Z])/g, ' $1')
-						.replace(/^./, (str) => str.toUpperCase());
-				});
+						.replace(/^./, (str) => str.toUpperCase())
+				);
 
 				// Get values in the same order as labels, or 0 if missing
 				const dataValues = expectedCategories.map(
@@ -59,6 +68,8 @@ const RadarChart = ({ clerkId }) => {
 				};
 
 				setChartData(data);
+			} else {
+				console.error('No data found for the given or default clerkId');
 			}
 		} catch (error) {
 			console.error('Error fetching radar chart data:', error);

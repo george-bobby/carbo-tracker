@@ -10,7 +10,17 @@ const PieChart = ({ clerkId }) => {
 			const fetchedData = await fetch('/api/fetch').then((res) => res.json());
 
 			// Find the data for the given clerkId
-			const userData = fetchedData.find((item) => item.clerkId === clerkId);
+			let userData = fetchedData.find((item) => item.clerkId === clerkId);
+
+			// If no data found, fallback to default clerkId
+			if (!userData) {
+				console.warn(
+					`No data found for clerkId: ${clerkId}, fetching default clerkId`
+				);
+				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
+				userData = fetchedData.find((item) => item.clerkId === defaultClerkId);
+			}
+
 			if (userData) {
 				const { categories } = userData;
 
@@ -54,6 +64,8 @@ const PieChart = ({ clerkId }) => {
 				};
 
 				setChartData(data);
+			} else {
+				console.error('No data found for the given or default clerkId');
 			}
 		} catch (error) {
 			console.error('Error fetching data:', error);
