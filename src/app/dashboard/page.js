@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
-import BarGraph from './barGraph';
-import PieChart from './pieChart';
-import EquivalenciesTable from './eqvTable';
-import CarbonComparison from './compareChart';
-import CarbonGauge from './doughnutChart';
-import LineChart from './lineChart';
-import RadarChart from './radarChart';
+import BarGraph from './BarGraph';
+import PieChart from './PieChart';
+import EquivalenciesTable from './EqvalTable';
+import CarbonComparison from './CompareChart';
+import CarbonGauge from './DounutChart';
+import LineChart from './LineChart';
+import RadarChart from './RadarChart';
 import { Tab } from '@headlessui/react';
 import {
 	FaLeaf,
