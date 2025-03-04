@@ -9,7 +9,7 @@ import EquivalenciesTable from './eqvTable';
 import CarbonComparison from './compareChart';
 import CarbonGauge from './doughnutChart';
 import LineChart from './lineChart';
-import RadarChart from './RadarChart';
+import RadarChart from './radarChart';
 import { Tab } from '@headlessui/react';
 import {
 	FaLeaf,
