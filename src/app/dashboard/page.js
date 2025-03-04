@@ -8,7 +8,7 @@ import PieChart from './pieChart';
 import EquivalenciesTable from './eqvTable';
 import CarbonComparison from './compareChart';
 import CarbonGauge from './doughnutChart';
-import LineChart from './lineChart';
+import LineChart from './LineChart';
 import RadarChart from './RadarChart';
 import { Tab } from '@headlessui/react';
 import {
