@@ -94,12 +94,18 @@ export default function Footer() {
 							<div className='absolute left-0 top-0 w-16 h-1 bg-emerald-400'></div>
 						</div>
 						<p className='text-gray-300 leading-relaxed text-sm font-light mt-20'>
-							Christites for Climate Action (CCA) is a student-led initiative at
+							{/* Christites for Climate Action (CCA) is a student-led initiative at
 							CHRIST (Deemed to be University). Focused on promoting
 							sustainability and raising awareness about climate change, CCA
 							inspires eco-friendly practices and aligns with global efforts
 							like the United Nations Sustainable Development Goals,
-							particularly Goal 13.
+							particularly Goal 13. */}
+							A carbon footprint is the total amount of greenhouse gases,
+							particularly carbon dioxide (CO₂), that are emitted directly or
+							indirectly by human activities. It is measured in equivalent tons
+							of CO₂ (tCO₂e) and includes emissions from sources like
+							transportation, energy consumption, food production, and
+							industrial processes.
 						</p>
 					</div>
 
