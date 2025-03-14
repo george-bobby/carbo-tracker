@@ -1,5 +1,5 @@
 import React from "react";
-import { HeatMap } from "./HeatMap";
+// import { HeatMap } from "./HeatMap";
 import { Card, CardContent } from "./card";
 
 // Define the types for the 'coord' prop
@@ -18,11 +18,11 @@ export function TemperatureCard({ coord }: TemperatureCardProps) {
         <h3 className="text-2xl font-semibold mb-4">Temperature Heat Map</h3>
         {coord && (
           <div className="w-full h-[500px] rounded-lg overflow-hidden">
-            <HeatMap
+            {/* <HeatMap
               center={[coord.lat, coord.lon]}
               zoom={13}
               apiKey="1965ccbf28ec3943960a2e49ba7e4a04"
-            />
+            /> */}
           </div>
         )}
       </CardContent>

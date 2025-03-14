@@ -1,160 +1,131 @@
-'use client';
-
+// utils/weatherAPI.js
 import { useState, useEffect } from 'react';
 
-// API Configuration
-const API_KEY = '1965ccbf28ec3943960a2e49ba7e4a04';
-const BASE_URL = 'https://api.openweathermap.org/data/2.5';
-
-// Hook for Weather Data
 export const useWeatherData = (location) => {
 	const [currentWeather, setCurrentWeather] = useState(null);
 	const [forecast, setForecast] = useState(null);
 	const [airQuality, setAirQuality] = useState(null);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		const fetchAllData = async () => {
+		const fetchWeatherData = async () => {
 			if (!location) return;
 
 			setLoading(true);
 			setError(null);
 
 			try {
-				// Fetch Current Weather
-				const weatherResponse = await fetch(
-					`${BASE_URL}/weather?q=${location}&units=metric&appid=${API_KEY}`
+				// Fetch current weather
+				const currentResponse = await fetch(
+					`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
 				);
-				if (!weatherResponse.ok) throw new Error('Location not found');
-				const weatherData = await weatherResponse.json();
-				setCurrentWeather(weatherData);
 
-				// Fetch 5-Day Forecast
+				if (!currentResponse.ok) {
+					throw new Error(`Weather data not available for ${location}`);
+				}
+
+				const currentData = await currentResponse.json();
+				setCurrentWeather(currentData);
+
+				// Fetch forecast
 				const forecastResponse = await fetch(
-					`${BASE_URL}/forecast?q=${location}&units=metric&appid=${API_KEY}`
+					`https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
 				);
-				if (!forecastResponse.ok)
-					throw new Error('Failed to fetch forecast data');
+
+				if (!forecastResponse.ok) {
+					throw new Error(`Forecast data not available for ${location}`);
+				}
+
 				const forecastData = await forecastResponse.json();
 				setForecast(forecastData);
 
-				// Fetch Air Quality
-				const { coord } = weatherData;
+				// Fetch air quality
+				const { coord } = currentData;
 				const airQualityResponse = await fetch(
-					`${BASE_URL}/air_pollution?lat=${coord.lat}&lon=${coord.lon}&appid=${API_KEY}`
+					`https://api.openweathermap.org/data/2.5/air_pollution?lat=${coord.lat}&lon=${coord.lon}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
 				);
-				if (!airQualityResponse.ok)
-					throw new Error('Failed to fetch air quality data');
-				const airQualityData = await airQualityResponse.json();
-				setAirQuality(airQualityData);
+
+				if (airQualityResponse.ok) {
+					const airQualityData = await airQualityResponse.json();
+					setAirQuality(airQualityData);
+				}
 			} catch (err) {
-				setError(
-					err instanceof Error ? err.message : 'Failed to fetch weather data'
-				);
+				console.error('Error fetching weather data:', err);
+				setError(err.message);
 			} finally {
 				setLoading(false);
 			}
 		};
 
-		fetchAllData();
+		fetchWeatherData();
 	}, [location]);
 
-	// Fetch UV Index
-	const getUVIndex = async (lat, lon) => {
-		try {
-			const response = await fetch(
-				`${BASE_URL}/uvi?lat=${lat}&lon=${lon}&appid=${API_KEY}`
-			);
-			if (!response.ok) throw new Error('Failed to fetch UV index');
-			return await response.json();
-		} catch (error) {
-			throw new Error(
-				error instanceof Error ? error.message : 'Failed to fetch UV index'
-			);
-		}
-	};
-
-	return {
-		currentWeather,
-		forecast,
-		airQuality,
-		loading,
-		error,
-		getUVIndex,
-	};
+	return { currentWeather, forecast, airQuality, loading, error };
 };
 
-// Get Air Quality Description
+export const getWeatherAlertLevel = (conditions) => {
+	// This is a simple implementation. You can enhance it based on your requirements.
+	if (!conditions) return 'normal';
+
+	const { main, description } = conditions;
+	const severeWeatherTerms = [
+		'thunderstorm',
+		'tornado',
+		'hurricane',
+		'extreme',
+	];
+	const moderateWeatherTerms = ['rain', 'snow', 'sleet', 'hail', 'fog'];
+
+	const lowerDescription = description.toLowerCase();
+
+	if (severeWeatherTerms.some((term) => lowerDescription.includes(term))) {
+		return 'severe';
+	} else if (
+		moderateWeatherTerms.some((term) => lowerDescription.includes(term))
+	) {
+		return 'moderate';
+	}
+
+	return 'normal';
+};
+
 export const getAQIDescription = (aqi) => {
-	const descriptions = {
-		1: { level: 'Good', color: 'green' },
-		2: { level: 'Fair', color: 'yellow' },
-		3: { level: 'Moderate', color: 'orange' },
-		4: { level: 'Poor', color: 'red' },
-		5: { level: 'Very Poor', color: 'purple' },
-	};
-	return descriptions[aqi] || descriptions[1];
-};
-
-// Weather Alert Levels
-export const getWeatherAlertLevel = (data) => {
-	const alerts = [];
-
-	// Temperature Alerts
-	if (data.main.temp > 35) {
-		alerts.push({
-			type: 'Heat',
-			level: 'warning',
-			message:
-				'Extreme heat conditions. Stay hydrated and avoid outdoor activities.',
-		});
+	switch (aqi) {
+		case 1:
+			return {
+				level: 'Good',
+				description:
+					'Air quality is satisfactory, and air pollution poses little or no risk.',
+			};
+		case 2:
+			return {
+				level: 'Fair',
+				description:
+					'Air quality is acceptable. However, there may be a risk for some people, particularly those who are unusually sensitive to air pollution.',
+			};
+		case 3:
+			return {
+				level: 'Moderate',
+				description:
+					'Members of sensitive groups may experience health effects. The general public is less likely to be affected.',
+			};
+		case 4:
+			return {
+				level: 'Poor',
+				description:
+					'Health alerts for everyone may be necessary. Members of sensitive groups may experience more serious health effects.',
+			};
+		case 5:
+			return {
+				level: 'Very Poor',
+				description:
+					'Health warnings of emergency conditions. The entire population is more likely to be affected.',
+			};
+		default:
+			return {
+				level: 'Unknown',
+				description: 'Air quality information is not available.',
+			};
 	}
-
-	// Wind Alerts
-	if (data.wind.speed > 20) {
-		alerts.push({
-			type: 'Wind',
-			level: 'warning',
-			message: 'Strong winds expected. Secure loose objects outdoors.',
-		});
-	}
-
-	// Visibility Alerts
-	if (data.visibility < 1000) {
-		alerts.push({
-			type: 'Visibility',
-			level: 'warning',
-			message: 'Poor visibility conditions. Drive carefully.',
-		});
-	}
-
-	return alerts;
-};
-
-export const processWeeklyForecast = (forecastData) => {
-	if (!forecastData) return [];
-
-	const dailyForecasts = forecastData.list.reduce((acc, forecast) => {
-		const date = new Date(forecast.dt * 1000);
-		const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'short' });
-
-		if (!acc.find((day) => day.day === dayOfWeek)) {
-			acc.push({
-				day: dayOfWeek,
-				date: date,
-				highTemp: forecast.main.temp_max,
-				lowTemp: forecast.main.temp_min,
-				feelsLike: forecast.main.feels_like,
-				description: forecast.weather[0].main,
-				icon: forecast.weather[0].icon,
-				precipitation: forecast.pop * 100,
-				windSpeed: forecast.wind.speed,
-			});
-		}
-
-		return acc;
-	}, []);
-
-	return dailyForecasts.slice(0, 7); // Ensure we only return 7 days
 };

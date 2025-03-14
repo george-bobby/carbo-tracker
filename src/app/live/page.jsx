@@ -1,23 +1,23 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { SearchBar } from './searchBar';
+import { SearchBar } from './SearchBar';
 import { CurrentConditions } from './CurrentConditions';
 import { DetailedStats } from './DetailedStats';
 import { WeatherTrends } from './WeatherTrends';
-import { WeatherAlerts } from './WeatherAlerts';
 import { AdvancedMetrics } from './AdvancedMetrics';
 import { AirQualityDetails } from './AirQualityDetails';
 import { DailyForecast } from './DailyForecast';
 import { WeeklyForecast } from './WeeklyForecast';
-import {
-	useWeatherData,
-	getWeatherAlertLevel,
-	getAQIDescription,
-} from '../../whetherAPI.js';
+// import { WeatherGraphs } from './WeatherGraphs';
+import { useWeatherData } from '../../whetherAPI'; // Fixed import path
 import dynamic from 'next/dynamic';
 
-const HeatMap = dynamic(() => import('./HeatMap'), { ssr: false });
+// Weather alerts component import was in the original but not used
+// Uncomment if you need it
+// import { WeatherAlerts } from './WeatherAlerts';
+
+// const HeatMap = dynamic(() => import('./HeatMap'), { ssr: false });
 
 export default function Live() {
 	const searchParams = useSearchParams();
@@ -99,6 +99,10 @@ export default function Live() {
 	};
 
 	const generateHourlyForecast = (forecastList) => {
+		if (!forecastList || !Array.isArray(forecastList)) {
+			return [];
+		}
+
 		const hourlyForecast = [];
 		const now = new Date();
 		now.setMinutes(0, 0, 0);
@@ -107,6 +111,20 @@ export default function Live() {
 			const forecastTime = new Date(now.getTime() + i * 60 * 60 * 1000);
 			const hour = forecastTime.getHours().toString().padStart(2, '0');
 			const time = `${hour}:00`;
+
+			// Guard against empty forecast list
+			if (forecastList.length === 0) {
+				hourlyForecast.push({
+					time,
+					temp: null,
+					weather: {
+						main: 'Unknown',
+						icon: '01d',
+						description: 'No data available',
+					},
+				});
+				continue;
+			}
 
 			const closestForecast = forecastList.reduce((prev, curr) => {
 				const prevDiff = Math.abs(
@@ -183,14 +201,17 @@ export default function Live() {
 								description={currentWeather.weather[0].description}
 							/>
 						</div>
-						<div className='flex space-x-6 mt-6'>
+						<div className='flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0 mt-6'>
 							<DetailedStats current={currentWeather} forecast={forecast} />
 							<WeeklyForecast location={location} />
 						</div>
 						<DailyForecast data={generateHourlyForecast(forecast.list)} />
 						<WeatherTrends data={forecast.list} />
 						<AdvancedMetrics data={currentWeather} />
+						{/* <WeatherGraphs /> */}
 						{airQuality && <AirQualityDetails data={airQuality.list[0]} />}
+						{/* Uncomment if you're using the HeatMap component
+            <HeatMap data={some_data_for_heatmap} /> */}
 					</div>
 				)}
 			</div>

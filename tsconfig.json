@@ -28,7 +28,8 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/app/live/page.jsx"
+    "src/app/live/page.jsx",
+    "src/app/live/WeeklyForecast.jsx"
   ],
   "exclude": [
     "node_modules"
