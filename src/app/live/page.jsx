@@ -9,21 +9,15 @@ import { AdvancedMetrics } from './AdvancedMetrics';
 import { AirQualityDetails } from './AirQualityDetails';
 import { DailyForecast } from './DailyForecast';
 import { WeeklyForecast } from './WeeklyForecast';
-// import { WeatherGraphs } from './WeatherGraphs';
-import { useWeatherData } from '../../whetherAPI'; // Fixed import path
+import { useWeatherData } from '../../whetherAPI';
+import { FaLocationArrow, FaCloudSun } from 'react-icons/fa';
 import dynamic from 'next/dynamic';
-
-// Weather alerts component import was in the original but not used
-// Uncomment if you need it
-// import { WeatherAlerts } from './WeatherAlerts';
-
-// const HeatMap = dynamic(() => import('./HeatMap'), { ssr: false });
 
 export default function Live() {
 	const searchParams = useSearchParams();
 	const router = useRouter();
 	const [isLoadingLocation, setIsLoadingLocation] = useState(true);
-	const [userLocation, setUserLocation] = useState('Bengaluru');
+	const [userLocation, setUserLocation] = useState('Bangalore'); // Changed to Bangalore (correct English spelling)
 
 	useEffect(() => {
 		const detectLocation = async () => {
@@ -42,22 +36,28 @@ export default function Live() {
 							`https://api.openweathermap.org/geo/1.0/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&limit=1&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
 						);
 						const [data] = await response.json();
-						const locationName = data.name;
-						router.push(`/live?location=${locationName}`);
-						setUserLocation(locationName);
+						if (data && data.name) {
+							const locationName = data.name;
+							router.push(`/live?location=${locationName}`);
+							setUserLocation(locationName);
+						} else {
+							// No data available, set to Bangalore
+							router.push(`/live?location=Bangalore`);
+							setUserLocation('Bangalore');
+						}
 					} catch (error) {
 						console.error('Error getting location name:', error);
-						router.push(`/live?location=Bengaluru`);
-						setUserLocation('Bengaluru');
+						router.push(`/live?location=Bangalore`);
+						setUserLocation('Bangalore');
 					}
 				} catch (error) {
 					console.error('Geolocation error:', error);
-					router.push(`/live?location=Bengaluru`);
-					setUserLocation('Bengaluru');
+					router.push(`/live?location=Bangalore`);
+					setUserLocation('Bangalore');
 				}
 			} else {
-				router.push(`/live?location=Bengaluru`);
-				setUserLocation('Bengaluru');
+				router.push(`/live?location=Bangalore`);
+				setUserLocation('Bangalore');
 			}
 			setIsLoadingLocation(false);
 		};
@@ -65,7 +65,7 @@ export default function Live() {
 		if (!searchParams.get('location')) {
 			detectLocation();
 		} else {
-			setUserLocation(searchParams.get('location') || 'Bengaluru');
+			setUserLocation(searchParams.get('location') || 'Bangalore');
 			setIsLoadingLocation(false);
 		}
 	}, [searchParams, router]);
@@ -73,6 +73,14 @@ export default function Live() {
 	const location = searchParams.get('location') || userLocation;
 	const { currentWeather, forecast, airQuality, loading, error } =
 		useWeatherData(location);
+
+	// If weather data fails to load, redirect to Bangalore
+	useEffect(() => {
+		if (error && !loading && !isLoadingLocation) {
+			router.push(`/live?location=Bangalore`);
+			setUserLocation('Bangalore');
+		}
+	}, [error, loading, isLoadingLocation, router]);
 
 	const formatDate = () => {
 		const selectedDate = searchParams.get('date');
@@ -112,7 +120,6 @@ export default function Live() {
 			const hour = forecastTime.getHours().toString().padStart(2, '0');
 			const time = `${hour}:00`;
 
-			// Guard against empty forecast list
 			if (forecastList.length === 0) {
 				hourlyForecast.push({
 					time,
@@ -151,50 +158,75 @@ export default function Live() {
 
 	if (isLoadingLocation || loading) {
 		return (
-			<div className='min-h-screen bg-gray-100 flex items-center justify-center'>
-				<p className='text-lg'>
-					{isLoadingLocation
-						? 'Detecting your location...'
-						: 'Loading weather data...'}
-				</p>
+			<div className='min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center'>
+				<div className='flex flex-col items-center space-y-4'>
+					<div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500'></div>
+					<p className='text-lg text-gray-300'>
+						{isLoadingLocation
+							? 'Detecting your location...'
+							: 'Loading weather data...'}
+					</p>
+				</div>
 			</div>
 		);
 	}
 
 	if (error) {
+		// Instead of showing an error, we'll use a fallback message
+		// while the redirect to Bangalore happens
 		return (
-			<div className='min-h-screen bg-gray-100 flex items-center justify-center'>
-				<p className='text-red-500'>{error}</p>
+			<div className='min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center'>
+				<div className='flex flex-col items-center space-y-4'>
+					<div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500'></div>
+					<p className='text-lg text-gray-300'>
+						Weather information unavailable. Redirecting to Bangalore...
+					</p>
+				</div>
 			</div>
 		);
 	}
 
 	return (
-		<div className='min-h-screen bg-gray-100'>
-			<div
-				className='h-[300px] relative bg-cover bg-center'
-				style={{
-					backgroundImage:
-						'url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80")',
-				}}
-			>
-				<div className='absolute inset-0 bg-black bg-opacity-40'></div>
-				<div className='relative pt-32 px-4'>
-					<div className='container mx-auto'>
-						<div className='max-w-xl mx-auto'>
-							<SearchBar />
+		<div className='min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
+			{/* Modern text-based header section */}
+			<div className='relative overflow-hidden bg-gradient-to-b from-emerald-900/40 to-slate-900/90 backdrop-blur-sm'>
+				{/* Background Elements */}
+				<div className='absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl'></div>
+				<div className='absolute top-20 -left-20 w-64 h-64 bg-emerald-500/5 rounded-full blur-2xl'></div>
+
+				<div className='container mx-auto px-4 pt-16 pb-24'>
+					<div className='text-center mb-8'>
+						<div className='inline-flex items-center justify-center mb-4'>
+							<div className='h-12 w-12 rounded-full bg-emerald-500/20 backdrop-blur-sm flex items-center justify-center border border-emerald-500/30'>
+								<FaCloudSun className='h-6 w-6 text-emerald-400' />
+							</div>
 						</div>
+						<h1 className='text-3xl md:text-4xl font-bold text-white mb-2'>
+							Live <span className='text-emerald-400'>Weather</span> Insights
+						</h1>
+						<p className='text-gray-300 max-w-lg mx-auto'>
+							Get real-time weather data and forecasts for any location around
+							the world
+						</p>
+					</div>
+
+					<div className='max-w-xl mx-auto'>
+						<SearchBar />
 					</div>
 				</div>
 			</div>
+
 			<div className='container mx-auto px-4 py-8'>
 				{currentWeather && forecast && (
 					<div className='space-y-8'>
-						<div className='bg-white rounded-lg shadow-lg p-6 -mt-20 relative z-10'>
-							<h2 className='text-2xl font-bold mb-2'>
-								{currentWeather.name}, {currentWeather.sys.country}
-							</h2>
-							<p className='text-gray-600 mb-6'>{formatDate()}</p>
+						<div className='bg-slate-800/90 backdrop-blur-sm border border-slate-700 rounded-lg shadow-lg p-6 -mt-10 relative z-10'>
+							<div className='flex items-center mb-2'>
+								<FaLocationArrow className='text-emerald-400 mr-2 h-4 w-4' />
+								<h2 className='text-2xl font-bold text-white'>
+									{currentWeather.name}, {currentWeather.sys.country}
+								</h2>
+							</div>
+							<p className='text-gray-400 mb-6'>{formatDate()}</p>
 							<CurrentConditions
 								{...currentWeather.main}
 								weatherIcon={currentWeather.weather[0].icon}
@@ -208,10 +240,7 @@ export default function Live() {
 						<DailyForecast data={generateHourlyForecast(forecast.list)} />
 						<WeatherTrends data={forecast.list} />
 						<AdvancedMetrics data={currentWeather} />
-						{/* <WeatherGraphs /> */}
 						{airQuality && <AirQualityDetails data={airQuality.list[0]} />}
-						{/* Uncomment if you're using the HeatMap component
-            <HeatMap data={some_data_for_heatmap} /> */}
 					</div>
 				)}
 			</div>

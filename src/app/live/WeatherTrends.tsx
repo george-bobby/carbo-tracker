@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { Thermometer, Droplets, Wind } from 'lucide-react';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Thermometer, Droplets, Wind, Cloud } from 'lucide-react';
 
 interface WeatherTrendsProps {
     data: Array<{
@@ -29,84 +29,113 @@ export function WeatherTrends({ data }: WeatherTrendsProps) {
     }));
 
     const metrics = [
-        { id: 'temperature', icon: Thermometer, label: 'Temperature', color: '#ff7c43' },
-        { id: 'precipitation', icon: Droplets, label: 'Precipitation', color: '#4299e1' },
-        { id: 'humidity', icon: Droplets, label: 'Humidity', color: '#667eea' },
-        { id: 'wind', icon: Wind, label: 'Wind', color: '#48bb78' }
+        { id: 'temperature', icon: Thermometer, label: 'Temperature', color: '#f97316' },
+        { id: 'precipitation', icon: Cloud, label: 'Precipitation', color: '#3b82f6' },
+        { id: 'humidity', icon: Droplets, label: 'Humidity', color: '#10b981' },
+        { id: 'wind', icon: Wind, label: 'Wind', color: '#8b5cf6' }
     ];
 
     const renderGraph = () => {
         switch (activeMetric) {
             case 'temperature':
                 return (
-                    <ResponsiveContainer width="100%" height={400}>
+                    <ResponsiveContainer width="100%" height={300}>
                         <LineChart data={formattedData}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="time" />
-                            <YAxis domain={[0, 40]} />
-                            <Tooltip />
-                            <Line type="monotone" dataKey="temp" stroke="#ff7c43" name="Temperature (°C)" strokeWidth={2} />
+                            <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.2} />
+                            <XAxis dataKey="time" stroke="#94a3b8" />
+                            <YAxis domain={[0, 40]} stroke="#94a3b8" />
+                            <Tooltip contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#f8fafc' }} />
+                            <Line type="monotone" dataKey="temp" stroke="#f97316" name="Temperature (°C)" strokeWidth={2} dot={{ fill: '#f97316', r: 4 }} />
                         </LineChart>
                     </ResponsiveContainer>
                 );
             case 'precipitation':
                 return (
-                    <ResponsiveContainer width="100%" height={400}>
+                    <ResponsiveContainer width="100%" height={300}>
                         <BarChart data={formattedData}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="time" />
-                            <YAxis domain={[0, 100]} />
-                            <Tooltip />
-                            <Bar dataKey="precipitation" fill="#4299e1" name="Precipitation (%)" />
+                            <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.2} />
+                            <XAxis dataKey="time" stroke="#94a3b8" />
+                            <YAxis domain={[0, 100]} stroke="#94a3b8" />
+                            <Tooltip contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#f8fafc' }} />
+                            <Bar dataKey="precipitation" fill="#3b82f6" name="Precipitation (%)" radius={[4, 4, 0, 0]} />
                         </BarChart>
                     </ResponsiveContainer>
                 );
             case 'humidity':
                 return (
-                    <ResponsiveContainer width="100%" height={400}>
+                    <ResponsiveContainer width="100%" height={300}>
                         <LineChart data={formattedData}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="time" />
-                            <YAxis domain={[0, 100]} />
-                            <Tooltip />
-                            <Line type="monotone" dataKey="humidity" stroke="#00b5d8" name="Humidity (%)" strokeWidth={2} />
+                            <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.2} />
+                            <XAxis dataKey="time" stroke="#94a3b8" />
+                            <YAxis domain={[0, 100]} stroke="#94a3b8" />
+                            <Tooltip contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#f8fafc' }} />
+                            <Line type="monotone" dataKey="humidity" stroke="#10b981" name="Humidity (%)" strokeWidth={2} dot={{ fill: '#10b981', r: 4 }} />
                         </LineChart>
                     </ResponsiveContainer>
                 );
             case 'wind':
                 return (
-                    <ResponsiveContainer width="100%" height={400}>
+                    <ResponsiveContainer width="100%" height={300}>
                         <LineChart data={formattedData}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="time" />
-                            <YAxis />
-                            <Tooltip />
-                            <Line type="monotone" dataKey="wind" stroke="#48bb78" name="Wind Speed (km/h)" strokeWidth={2} />
+                            <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.2} />
+                            <XAxis dataKey="time" stroke="#94a3b8" />
+                            <YAxis stroke="#94a3b8" />
+                            <Tooltip contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#f8fafc' }} />
+                            <Line type="monotone" dataKey="wind" stroke="#8b5cf6" name="Wind Speed (km/h)" strokeWidth={2} dot={{ fill: '#8b5cf6', r: 4 }} />
                         </LineChart>
                     </ResponsiveContainer>
                 );
-            // Add other cases for humidity and wind
         }
     };
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-            <div className="flex space-x-4 mb-6">
+        <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg backdrop-blur-sm">
+            <h2 className="text-2xl font-bold text-white mb-4">Weather Forecast</h2>
+
+            <div className="flex flex-wrap gap-3 mb-6">
                 {metrics.map(({ id, icon: Icon, label, color }) => (
                     <button
                         key={id}
                         onClick={() => setActiveMetric(id as typeof activeMetric)}
-                        className={`flex items-center px-4 py-2 rounded-full transition-colors ${activeMetric === id
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-600 hover:bg-gray-50'
+                        className={`flex items-center px-4 py-2 rounded-md transition-all duration-300 ${activeMetric === id
+                            ? 'bg-slate-700 border border-slate-600 text-white'
+                            : 'bg-slate-800/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700'
                             }`}
                     >
-                        <Icon className="w-4 h-4 mr-2" style={{ color }} />
-                        {label}
+                        <Icon className="w-5 h-5 mr-2" style={{ color }} />
+                        <div className='text-white'>{label}</div>
                     </button>
                 ))}
             </div>
-            {renderGraph()}
+
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg p-4">
+                {renderGraph()}
+            </div>
+
+            <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {metrics.map(({ id, icon: Icon, label, color }) => {
+                    const metricData = {
+                        temperature: { value: formattedData[0]?.temp || 0, unit: '°C' },
+                        precipitation: { value: formattedData[0]?.precipitation || 0, unit: '%' },
+                        humidity: { value: formattedData[0]?.humidity || 0, unit: '%' },
+                        wind: { value: formattedData[0]?.wind || 0, unit: 'km/h' }
+                    };
+
+                    return (
+                        <div
+                            key={id}
+                            className="bg-slate-700/50 p-3 rounded-lg border border-slate-600 flex flex-col items-center justify-center"
+                        >
+                            <Icon className="h-6 w-6 mb-1" style={{ color }} />
+                            <p className="text-xs text-gray-400">{label}</p>
+                            <p className="text-white font-medium">
+                                {metricData[id as keyof typeof metricData].value}
+                                {metricData[id as keyof typeof metricData].unit}
+                            </p>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 }
