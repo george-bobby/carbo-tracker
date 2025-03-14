@@ -115,12 +115,10 @@ export default function AboutUs() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col mt-10">
+        <div className="min-h-screen flex flex-col">
 
-            {/* Hero Section with Parallax Effect */}
-            <div className="relative h-screen bg-cover bg-center bg-fixed" style={{
-                backgroundImage: `url(${images.hero})`
-            }}>
+            {/* Hero Section */}
+            <div className="relative h-screen bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${images.hero})` }}>
                 <div className="absolute inset-0 bg-slate-900 bg-opacity-70"></div>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                     <motion.div
@@ -129,23 +127,15 @@ export default function AboutUs() {
                         transition={{ duration: 0.8 }}
                         className="text-center text-white px-4"
                     >
-                        <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-6 font-serif text-center">
+                        <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-6 font-serif">
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600">
                                 Christites for Climate Action
                             </span>
                         </h1>
-
-                        <div className="flex justify-center items-center space-x-4 mb-8">
-                            <p className="text-lg sm:text-xl font-semibold text-gray-300">
-                                Preserve nature, protect the future, act for change. <br /> Sustain To Survive
-                            </p>
-                        </div>
-
-                        <a
-                            href="https://chat.whatsapp.com/D3dPl12GYDaGksPmOKrRPD"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                        <p className="text-lg sm:text-xl font-semibold text-gray-300 mb-8">
+                            Preserve nature, protect the future, act for change. <br /> Sustain To Survive
+                        </p>
+                        <a href="https://chat.whatsapp.com/D3dPl12GYDaGksPmOKrRPD" target="_blank" rel="noopener noreferrer">
                             <motion.button
                                 whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(72,187,120,0.5)" }}
                                 whileTap={{ scale: 0.95 }}
@@ -184,10 +174,6 @@ export default function AboutUs() {
 
             {/* About Section */}
             <div className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-                {/* Background Elements */}
-                <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
-                <div className="absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
-
                 <div className="max-w-4xl mx-auto px-4">
                     <h2 className="text-4xl font-bold text-white mb-6">About <span className="text-emerald-400">CCA</span></h2>
                     <p className="text-gray-300 leading-relaxed mb-8">
@@ -212,10 +198,6 @@ export default function AboutUs() {
 
             {/* Messages Section */}
             <div className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-                {/* Background Elements */}
-                <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
-                <div className="absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
-
                 <div className="max-w-5xl mx-auto px-4">
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-lg relative mt-20 hover:shadow-emerald-500/20 hover:border-emerald-500/50 hover:bg-slate-800/80 hover:translate-y-1 transition-all duration-300">
@@ -263,10 +245,6 @@ export default function AboutUs() {
 
             {/* Featured Activities */}
             <div className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-                {/* Background Elements */}
-                <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
-                <div className="absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
-
                 <div className="container mx-auto px-4">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
@@ -309,45 +287,8 @@ export default function AboutUs() {
                 </div>
             </div>
 
-            {/* About Section with Timeline */}
-            <div className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-                <div className="container mx-auto px-4">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="max-w-4xl mx-auto"
-                    >
-                        <h2 className="text-4xl font-bold text-white mb-16 text-center">Our <span className="text-emerald-400">Journey</span></h2>
-                        <div className="relative">
-                            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-emerald-500/20"></div>
-                            <div className="space-y-20">
-                                <div className="relative">
-                                    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-emerald-500 rounded-full border-2 border-white"></div>
-                                    <div className="ml-auto mr-8 md:ml-8 md:mr-auto md:w-5/12 bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-6 rounded-lg shadow-md">
-                                        <h3 className="text-xl font-bold text-emerald-400 mb-2">2023</h3>
-                                        <p className="text-gray-300">Launch of CCA with the vision to create a sustainable future</p>
-                                    </div>
-                                </div>
-                                <div className="relative">
-                                    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-emerald-500 rounded-full border-2 border-white"></div>
-                                    <div className="ml-8 mr-auto md:ml-auto md:mr-8 md:w-5/12 md:text-right bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-6 rounded-lg shadow-md">
-                                        <h3 className="text-xl font-bold text-emerald-400 mb-2">2024</h3>
-                                        <p className="text-gray-300">Expanded to multiple campuses and launched major initiatives</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                </div>
-            </div>
-
             {/* Vision & Mission */}
             <div className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-                {/* Background Elements */}
-                <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
-                <div className="absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
-
                 <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto px-4">
                     <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-lg shadow-lg hover:shadow-emerald-500/20 hover:border-emerald-500/50 hover:bg-slate-800/80 hover:translate-y-1 transition-all duration-300">
                         <h3 className="text-2xl font-bold text-white mb-4">Vision</h3>
@@ -369,10 +310,6 @@ export default function AboutUs() {
 
             {/* Objectives */}
             <div className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-                {/* Background Elements */}
-                <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
-                <div className="absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
-
                 <div className="max-w-4xl mx-auto px-4">
                     <h3 className="text-2xl font-bold text-white mb-6">Our <span className="text-emerald-400">Objectives</span></h3>
                     <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-lg shadow-lg">
@@ -394,7 +331,7 @@ export default function AboutUs() {
                 </div>
             </div>
 
-            {/* Gallery Section with Filtering */}
+            {/* Gallery Section */}
             <div className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
                 <div className="container mx-auto px-4">
                     <h2 className="text-4xl font-bold text-white mb-12 text-center">Our <span className="text-emerald-400">Gallery</span></h2>
@@ -409,7 +346,7 @@ export default function AboutUs() {
                             <button
                                 key={category}
                                 onClick={() => setActiveTab(category)}
-                                className={`px-4 py-2 mb-3 rounded-full transition-all ${activeTab === category ? 'bg-emerald-500 text-white' : 'bg-slate-700/50 backdrop-blur-sm border border-slate-600 text-white hover:bg-slate-700'}`}
+                                className={`px-4 py-2                                 mb-3 rounded-full transition-all ${activeTab === category ? 'bg-emerald-500 text-white' : 'bg-slate-700/50 backdrop-blur-sm border border-slate-600 text-white hover:bg-slate-700'}`}
                             >
                                 {category}
                             </button>
@@ -445,6 +382,21 @@ export default function AboutUs() {
                     </div>
                 </div>
             </div>
+
+            {/* Scroll to Top Button */}
+            {isVisible && (
+                <motion.button
+                    onClick={scrollToTop}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed bottom-8 right-8 p-3 bg-emerald-500 text-white rounded-full shadow-lg hover:bg-emerald-600 transition-colors"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                    </svg>
+                </motion.button>
+            )}
         </div>
     );
 }
