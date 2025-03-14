@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+// import { SearchBar } from './SearchBar';
 import { SearchBar } from './SearchBar';
 import { CurrentConditions } from './CurrentConditions';
 import { DetailedStats } from './DetailedStats';
