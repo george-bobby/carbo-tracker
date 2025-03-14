@@ -41,11 +41,11 @@ export default function Footer() {
 						</p>
 						<div className='space-y-4'>
 							{[
-								{
-									icon: <FaHome className='text-emerald-400' />,
-									label: 'Dashboard',
-									href: '/dashboard',
-								},
+								// {
+								// 	icon: <FaHome className='text-emerald-400' />,
+								// 	label: 'Dashboard',
+								// 	href: '/dashboard',
+								// },
 								{
 									icon: <FaCalculator className='text-emerald-400' />,
 									label: 'Carbon Calculator',
