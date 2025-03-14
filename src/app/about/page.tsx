@@ -116,7 +116,6 @@ export default function AboutUs() {
 
     return (
         <div className="min-h-screen flex flex-col">
-
             {/* Hero Section */}
             <div className="relative h-screen bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${images.hero})` }}>
                 <div className="absolute inset-0 bg-slate-900 bg-opacity-70"></div>
@@ -127,22 +126,22 @@ export default function AboutUs() {
                         transition={{ duration: 0.8 }}
                         className="text-center text-white px-4"
                     >
-                        <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-6 font-serif">
+                        {/* <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-6 font-serif">
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600">
                                 Christites for Climate Action
                             </span>
                         </h1>
                         <p className="text-lg sm:text-xl font-semibold text-gray-300 mb-8">
                             Preserve nature, protect the future, act for change. <br /> Sustain To Survive
-                        </p>
+                        </p> */}
                         <a href="https://chat.whatsapp.com/D3dPl12GYDaGksPmOKrRPD" target="_blank" rel="noopener noreferrer">
-                            <motion.button
+                            {/* <motion.button
                                 whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(72,187,120,0.5)" }}
                                 whileTap={{ scale: 0.95 }}
                                 className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-xl hover:shadow-emerald-500/20 transition-all ease-in-out duration-300 transform"
                             >
                                 Join Our Movement
-                            </motion.button>
+                            </motion.button> */}
                         </a>
                     </motion.div>
                 </div>
@@ -199,37 +198,34 @@ export default function AboutUs() {
             {/* Messages Section */}
             <div className="relative overflow-hidden py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
                 <div className="max-w-5xl mx-auto px-4">
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-lg relative mt-20 hover:shadow-emerald-500/20 hover:border-emerald-500/50 hover:bg-slate-800/80 hover:translate-y-1 transition-all duration-300">
-                            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
-                                <img
-                                    src={images.viceChancellor}
-                                    alt="Vice Chancellor"
-                                    className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full border-4 border-emerald-500 shadow-lg object-cover"
-                                />
-                            </div>
-                            <div className="pt-16">
-                                <h3 className="text-2xl font-bold text-emerald-400 mb-4 text-center">Vice Chancellor's Message</h3>
-                                <p className="text-gray-300 italic">
-                                    "Climate change poses a global threat, with global warming serving as its undeniable signal.
-                                    Christites for Climate Action (CCA) is a movement to educate and create awareness among
-                                    the human community to take responsible action towards conservation and stop destruction.
-                                    Our collective actions today significantly influence the climate of tomorrow."
-                                </p>
-                                <p className="mt-4 font-semibold text-white text-center text-xl">- Rev.Fr.Dr.Jose CC </p>
-                                <p className="font-semibold text-gray-400 text-center text-sm">Vice Chancellor<br />Founder of CCA</p>
-                            </div>
+                    <div className="grid md:grid-cols-2 gap-12">
+                        {/* Vice Chancellor's Message */}
+                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-lg relative flex flex-col items-center text-center hover:shadow-emerald-500/20 hover:border-emerald-500/50 hover:bg-slate-800/80 hover:translate-y-1 transition-all duration-300">
+                            <img
+                                src={images.viceChancellor}
+                                alt="Vice Chancellor"
+                                className="w-32 h-32 rounded-full border-4 border-emerald-500 shadow-lg object-cover mx-auto mb-4"
+                            />
+                            <h3 className="text-2xl font-bold text-emerald-400 mb-4">Vice Chancellor's Message</h3>
+                            <p className="text-gray-300 italic">
+                                "Climate change poses a global threat, with global warming serving as its undeniable signal.
+                                Christites for Climate Action (CCA) is a movement to educate and create awareness among
+                                the human community to take responsible action towards conservation and stop destruction.
+                                Our collective actions today significantly influence the climate of tomorrow."
+                            </p>
+                            <p className="mt-4 font-semibold text-white text-center text-xl">- Rev.Fr.Dr.Jose CC </p>
+                            <p className="font-semibold text-gray-400 text-center text-sm">Vice Chancellor<br />Founder of CCA</p>
                         </div>
-                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-lg relative mt-20 hover:shadow-emerald-500/20 hover:border-emerald-500/50 hover:bg-slate-800/80 hover:translate-y-1 transition-all duration-300">
-                            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
-                                <img
-                                    src={images.coordinator}
-                                    alt="Student Coordinator"
-                                    className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full border-4 border-emerald-500 shadow-lg object-cover"
-                                />
-                            </div>
-                            <div className="pt-16">
-                                <h3 className="text-2xl font-bold text-emerald-400 mb-4 text-center">Student Coordinator's Message</h3>
+
+                        {/* Student Coordinator's Message */}
+                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 rounded-lg relative hover:shadow-emerald-500/20 hover:border-emerald-500/50 hover:bg-slate-800/80 hover:translate-y-1 transition-all duration-300 flex flex-col items-center">
+                            <img
+                                src={images.coordinator}
+                                alt="Student Coordinator"
+                                className="w-32 h-32 rounded-full border-4 border-emerald-500 shadow-lg object-cover mb-6"
+                            />
+                            <div className="text-center">
+                                <h3 className="text-2xl font-bold text-emerald-400 mb-4">Student Coordinator's Message</h3>
                                 <p className="text-gray-300 italic">
                                     "CCA is a dynamic student-led movement which was initiated to create awareness about
                                     climate changes and its effects on the mother earth. Our main objective is to make
@@ -346,7 +342,7 @@ export default function AboutUs() {
                             <button
                                 key={category}
                                 onClick={() => setActiveTab(category)}
-                                className={`px-4 py-2                                 mb-3 rounded-full transition-all ${activeTab === category ? 'bg-emerald-500 text-white' : 'bg-slate-700/50 backdrop-blur-sm border border-slate-600 text-white hover:bg-slate-700'}`}
+                                className={`px-4 py-2 mb-3 rounded-full transition-all ${activeTab === category ? 'bg-emerald-500 text-white' : 'bg-slate-700/50 backdrop-blur-sm border border-slate-600 text-white hover:bg-slate-700'}`}
                             >
                                 {category}
                             </button>
