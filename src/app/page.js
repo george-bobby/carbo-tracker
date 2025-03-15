@@ -7,7 +7,8 @@ import {
 	FaArrowRight,
 } from 'react-icons/fa';
 import Link from 'next/link';
-// import { CallToAction } from '../app/home/CallToAction';
+import NewsSection from '../components/News';
+import CallToAction from '../components/Action';
 
 export default function Hero() {
 	const [hoveredCard, setHoveredCard] = useState(null);
@@ -172,7 +173,8 @@ export default function Hero() {
 					))}
 				</div>
 			</div>
-			{/* <CallToAction /> */}
+			<NewsSection />
+			<CallToAction />
 		</div>
 	);
 }

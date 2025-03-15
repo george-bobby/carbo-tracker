@@ -29,7 +29,9 @@
     "**/*.ts",
     "**/*.tsx",
     "src/app/live/page.jsx",
-    "src/app/live/WeeklyForecast.jsx"
+    "src/app/live/WeeklyForecast.jsx",
+    "src/components/Action.jsx",
+    "src/components/NewsSection.jsx"
   ],
   "exclude": [
     "node_modules"
