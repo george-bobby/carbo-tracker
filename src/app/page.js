@@ -9,6 +9,7 @@ import {
 import Link from 'next/link';
 import NewsSection from '../components/News';
 import CallToAction from '../components/Action';
+import ComingSoon from '../components/Coming';
 
 export default function Hero() {
 	const [hoveredCard, setHoveredCard] = useState(null);
@@ -174,6 +175,7 @@ export default function Hero() {
 				</div>
 			</div>
 			<NewsSection />
+			<ComingSoon />
 			<CallToAction />
 		</div>
 	);
