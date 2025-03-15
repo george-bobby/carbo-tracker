@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-// import { SearchBar } from './SearchBar';
+import SearchBar from './SearchBar';
 import { CurrentConditions } from './CurrentConditions';
 import { DetailedStats } from './DetailedStats';
 import { WeatherTrends } from './WeatherTrends';
@@ -210,9 +210,9 @@ export default function Live() {
 						</p>
 					</div>
 
-					{/* <div className='max-w-xl mx-auto'>
+					<div className='max-w-xl mx-auto'>
 						<SearchBar />
-					</div> */}
+					</div>
 				</div>
 			</div>
 
