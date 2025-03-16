@@ -32,7 +32,8 @@
     "src/app/live/WeeklyForecast.jsx",
     "src/components/Action.jsx",
     "src/components/NewsSection.jsx",
-    "src/app/live/SearchBar.jsx"
+    "src/app/live/SearchBar.jsx",
+    "src/app/about/page.jsx"
   ],
   "exclude": [
     "node_modules"
