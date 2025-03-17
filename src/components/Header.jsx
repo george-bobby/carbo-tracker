@@ -59,19 +59,19 @@ function Header() {
 		{ name: 'Dashboard', icon: <MdDashboard className='w-5 h-5' /> },
 		{ name: 'Calculator', icon: <FaCalculator className='w-5 h-5' /> },
 		{ name: 'Chatbot', icon: <FaRobot className='w-5 h-5' /> },
-		{ name: 'Live', icon: <FaLocationDot className='w-4 h-4' /> },
+		// { name: 'Live', icon: <FaLocationDot className='w-4 h-4' /> },
 	];
 
 	const headerItems = [
 		{ name: 'Calculator', icon: <FaCalculator className='w-4 h-4' /> },
 		{ name: 'News', icon: <FaNewspaper className='w-4 h-4' /> },
 		{ name: 'Shop', icon: <FaShoppingCart className='w-4 h-4' /> },
-		{ name: 'Live', icon: <FaLocationDot className='w-4 h-4' /> },
+		// { name: 'Live', icon: <FaLocationDot className='w-4 h-4' /> },
 		{ name: 'Ecocenter', icon: <FaLeaf className='w-4 h-4' /> },
 		// { name: 'Carpool', icon: <FaCar className='w-4 h-4' /> },
 		{ name: 'Chatbot', icon: <FaRobot className='w-4 h-4' /> },
 		{ name: 'Contact', icon: <IoMdMailOpen className='w-4 h-4' /> },
-		{ name: 'About', icon: <FaInfo className='w-4 h-4' /> },
+		// { name: 'About', icon: <FaInfo className='w-4 h-4' /> },
 		{ name: 'Dashboard', icon: <MdDashboard className='w-4 h-4' /> },
 	];
 
