@@ -89,30 +89,30 @@ export function WeatherTrends({ data }: WeatherTrendsProps) {
     };
 
     return (
-        <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg backdrop-blur-sm">
-            <h2 className="text-2xl font-bold text-white mb-4">Weather Forecast</h2>
+        <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 rounded-xl border border-slate-700 shadow-xl backdrop-blur-sm">
+            <h2 className="text-2xl font-bold text-white mb-6">Weather Forecast</h2>
 
-            <div className="flex flex-wrap gap-3 mb-6">
+            <div className="flex flex-wrap gap-4 mb-8">
                 {metrics.map(({ id, icon: Icon, label, color }) => (
                     <button
                         key={id}
                         onClick={() => setActiveMetric(id as typeof activeMetric)}
-                        className={`flex items-center px-4 py-2 rounded-md transition-all duration-300 ${activeMetric === id
+                        className={`flex items-center px-5 py-3 rounded-lg transition-all duration-300 ${activeMetric === id
                             ? 'bg-slate-700 border border-slate-600 text-white'
                             : 'bg-slate-800/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700'
                             }`}
                     >
-                        <Icon className="w-5 h-5 mr-2" style={{ color }} />
+                        <Icon className="w-5 h-5 mr-3" style={{ color }} />
                         <div className='text-white'>{label}</div>
                     </button>
                 ))}
             </div>
 
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg p-4">
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 {renderGraph()}
             </div>
 
-            <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {metrics.map(({ id, icon: Icon, label, color }) => {
                     const metricData = {
                         temperature: { value: formattedData[0]?.temp || 0, unit: '°C' },
@@ -124,10 +124,10 @@ export function WeatherTrends({ data }: WeatherTrendsProps) {
                     return (
                         <div
                             key={id}
-                            className="bg-slate-700/50 p-3 rounded-lg border border-slate-600 flex flex-col items-center justify-center"
+                            className="bg-slate-700/50 p-4 rounded-xl border border-slate-600 flex flex-col items-center justify-center"
                         >
-                            <Icon className="h-6 w-6 mb-1" style={{ color }} />
-                            <p className="text-xs text-gray-400">{label}</p>
+                            <Icon className="h-6 w-6 mb-2" style={{ color }} />
+                            <p className="text-xs text-gray-400 mb-1">{label}</p>
                             <p className="text-white font-medium">
                                 {metricData[id as keyof typeof metricData].value}
                                 {metricData[id as keyof typeof metricData].unit}

@@ -167,19 +167,13 @@ export default function Footer() {
 					<p>© Carbo 2025. All rights reserved.</p>
 					<div className='flex space-x-6 mt-4 md:mt-0'>
 						<a
-							href='#'
+							href='/about'
 							className='hover:text-emerald-400 transition-colors duration-300'
 						>
-							Privacy Policy
+							About Us
 						</a>
 						<a
-							href='#'
-							className='hover:text-emerald-400 transition-colors duration-300'
-						>
-							Terms of Service
-						</a>
-						<a
-							href='#'
+							href='/contact'
 							className='hover:text-emerald-400 transition-colors duration-300'
 						>
 							Contact Us

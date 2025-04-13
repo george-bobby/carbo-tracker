@@ -31,7 +31,7 @@ export default function CallToAction() {
 	const [hoveredCard, setHoveredCard] = useState(null);
 
 	return (
-		<section className='relative overflow-hidden py-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
+		<section>
 			{/* Background Elements */}
 			<div className='absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl'></div>
 			<div className='absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl'></div>

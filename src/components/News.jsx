@@ -8,44 +8,45 @@ const newsItems = [
 		id: 1,
 		image:
 			'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?auto=format&fit=crop&q=80&w=400&h=300',
-		title: 'Global CO2 Levels Hit New Record',
-		date: 'March 15, 2024',
+		title: 'La Niña Has Ended, ENSO Neutral Conditions Prevail',
+		date: 'April 10, 2025',
 		excerpt:
-			'Scientists warn of unprecedented rise in atmospheric carbon dioxide levels...',
-		tag: 'Research',
-		link: '/news/1',
+			'The La Niña event has officially ended, with the tropical Pacific returning to ENSO-neutral conditions...',
+		tag: 'Climate',
+		link: 'https://www.climate.gov/news-features/blogs/enso/april-2025-enso-update-la-nina-has-ended',
 	},
 	{
 		id: 2,
 		image:
 			'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=400&h=300',
-		title: 'Renewable Energy Surpasses Coal',
-		date: 'March 14, 2024',
+		title: 'March 2025: Second Warmest on Record',
+		date: 'April 10, 2025',
 		excerpt:
-			'Solar and wind power generation reaches historic milestone in energy sector...',
-		tag: 'Energy',
-		link: '/news/2',
+			'March 2025 was the second warmest globally and the hottest March in Europe...',
+		tag: 'Temperature',
+		link: 'https://earth.org/week-in-review-top-climate-news-for-april-7-11-2025/',
 	},
 	{
 		id: 3,
 		image:
 			'https://images.unsplash.com/photo-1533577116850-9cc66cad8a9b?auto=format&fit=crop&q=80&w=400&h=300',
-		title: 'Arctic Ice Reaches Historic Low',
-		date: 'March 13, 2024',
+		title: 'Economic Risks from Climate Change Intensify',
+		date: 'April 10, 2025',
 		excerpt:
-			'Satellite data reveals concerning trends in polar ice coverage...',
-		tag: 'Arctic',
-		link: '/news/3',
+			'A report warns of profound economic risks from climate change, including rising temperatures and severe weather events...',
+		tag: 'Economy',
+		link: 'https://www.nytimes.com/2025/04/10/climate/climate-change-economic-effects.html',
 	},
 	{
 		id: 4,
 		image:
 			'https://images.unsplash.com/photo-1516214104703-d870798883c5?auto=format&fit=crop&q=80&w=400&h=300',
-		title: 'New Climate Policy Announced',
-		date: 'March 12, 2024',
-		excerpt: 'Major nations agree to strengthen emission reduction targets...',
-		tag: 'Policy',
-		link: '/news/4',
+		title: 'Central Asia Heatwave Intensified by Climate Change',
+		date: 'April 11, 2025',
+		excerpt:
+			'A late-March heatwave in Central Asia saw temperatures up to 15°C above seasonal averages...',
+		tag: 'Heatwave',
+		link: 'https://earth.org/week-in-review-top-climate-news-for-april-7-11-2025/',
 	},
 ];
 
@@ -65,7 +66,7 @@ export default function NewsSection() {
 	};
 
 	return (
-		<section className='relative py-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden'>
+		<section>
 			{/* Simplified background elements */}
 			<div className='absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl'></div>
 			<div className='absolute top-60 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl'></div>
