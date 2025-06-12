@@ -88,24 +88,24 @@ export default function Footer() {
 					{/* Our Mission */}
 					<div>
 						<h3 className='text-emerald-400 font-semibold text-lg mb-6 tracking-wide'>
-							ABOUT US
+							Carbon Footprint
 						</h3>
 						<div className='relative mb-8'>
 							<div className='absolute left-0 top-0 w-16 h-1 bg-emerald-400'></div>
 						</div>
 						<p className='text-gray-300 leading-relaxed text-sm font-light mt-20'>
-							Christites for Climate Action (CCA) is a student-led initiative at
+							{/* Christites for Climate Action (CCA) is a student-led initiative at
 							CHRIST (Deemed to be University). Focused on promoting
 							sustainability and raising awareness about climate change, CCA
 							inspires eco-friendly practices and aligns with global efforts
 							like the United Nations Sustainable Development Goals,
-							particularly Goal 13.
-							{/* A carbon footprint is the total amount of greenhouse gases,
+							particularly Goal 13. */}
+							A carbon footprint is the total amount of greenhouse gases,
 							particularly carbon dioxide (CO₂), that are emitted directly or
 							indirectly by human activities. It is measured in equivalent tons
 							of CO₂ (tCO₂e) and includes emissions from sources like
 							transportation, energy consumption, food production, and
-							industrial processes. */}
+							industrial processes.
 						</p>
 					</div>
 
@@ -130,7 +130,7 @@ export default function Footer() {
 							</p>
 
 							{/* Social Media Icons */}
-							<div className='flex space-x-4 mb-8 justify-center md:justify-start'>
+							{/* <div className='flex space-x-4 mb-8 justify-center md:justify-start'>
 								<a
 									href='https://www.facebook.com/www.christuniversity.in/photos/christites-for-climate-action-cca-invites-you-to-be-a-part-of-a-meaningful-envir/1067363768739736/'
 									className='w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-emerald-600 transition-colors duration-300'
@@ -149,7 +149,7 @@ export default function Footer() {
 								>
 									<FaLinkedin className='text-white' />
 								</a>
-							</div>
+							</div> */}
 
 							{/* <button
 								onClick={scrollToTop}
@@ -165,7 +165,7 @@ export default function Footer() {
 				{/* Footer Bottom */}
 				<div className='mt-16 border-t border-slate-700/50 pt-8 text-center text-gray-400 text-sm font-light flex flex-col md:flex-row justify-between items-center'>
 					<p>© Carbo 2025. All rights reserved.</p>
-					<div className='flex space-x-6 mt-4 md:mt-0'>
+					{/* <div className='flex space-x-6 mt-4 md:mt-0'>
 						<a
 							href='/about'
 							className='hover:text-emerald-400 transition-colors duration-300'
@@ -178,7 +178,7 @@ export default function Footer() {
 						>
 							Contact Us
 						</a>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</footer>
