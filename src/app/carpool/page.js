@@ -1,10 +1,17 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from '../../components/ui/card';
 import { Input } from '../../components/ui/input';
 import { Button } from '../../components/ui/button';
-import { Star, Check, MapPin, Car, Users, Navigation } from 'lucide-react';
-import allRides from './ridesData';
+import {
+	Star,
+	Check,
+	MapPin,
+	Car,
+	Users,
+	Navigation,
+	Loader2,
+} from 'lucide-react';
 import {
 	Dialog,
 	DialogContent,
@@ -23,24 +30,70 @@ const RideBooking = () => {
 	const [filteredRides, setFilteredRides] = useState([]);
 	const [isSearchActive, setIsSearchActive] = useState(false);
 	const [confirmedRideId, setConfirmedRideId] = useState(null);
-	const [searchOn, setSearchOn] = useState(false);
+	const [allRides, setAllRides] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [creating, setCreating] = useState(false);
+	const [booking, setBooking] = useState(false);
+	const [userBookings, setUserBookings] = useState([]);
 	const [newRide, setNewRide] = useState({
 		start: '',
 		end: '',
 		car: '',
 		seats: 0,
-		driver: '',
 		distance: '',
 		pickupPoint: '',
 	});
 
 	const { user } = useUser();
 
+	// Fetch rides from API
+	const fetchRides = async () => {
+		try {
+			setLoading(true);
+			const response = await fetch('/api/rides');
+			if (response.ok) {
+				const rides = await response.json();
+				setAllRides(rides);
+			} else {
+				console.error('Failed to fetch rides');
+			}
+		} catch (error) {
+			console.error('Error fetching rides:', error);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	// Fetch user bookings
+	const fetchUserBookings = async () => {
+		if (!user?.id) return;
+		try {
+			const response = await fetch(`/api/bookings?clerkId=${user.id}`);
+			if (response.ok) {
+				const bookings = await response.json();
+				setUserBookings(bookings);
+			}
+		} catch (error) {
+			console.error('Error fetching bookings:', error);
+		}
+	};
+
+	// Load data on component mount
+	useEffect(() => {
+		fetchRides();
+	}, []);
+
+	// Load user bookings when user is available
+	useEffect(() => {
+		if (user?.id) {
+			fetchUserBookings();
+		}
+	}, [user?.id]);
+
 	const handleSearch = () => {
 		if (!startLocation && !destination) {
 			setFilteredRides(allRides);
 			setIsSearchActive(false);
-			setSearchOn(false);
 			return;
 		}
 
@@ -54,7 +107,6 @@ const RideBooking = () => {
 
 		setFilteredRides(filtered);
 		setIsSearchActive(true);
-		setSearchOn(true);
 	};
 
 	const handleCancelSearch = () => {
@@ -62,7 +114,6 @@ const RideBooking = () => {
 		setDestination('');
 		setFilteredRides([]);
 		setIsSearchActive(false);
-		setSearchOn(false);
 	};
 
 	const handleBookRide = (ride) => {
@@ -70,38 +121,110 @@ const RideBooking = () => {
 		setShowConfirmDialog(true);
 	};
 
-	const handleConfirmBooking = () => {
-		setConfirmedRideId(selectedRide.id);
-		setShowConfirmDialog(false);
-		setSelectedRide(null);
+	const handleConfirmBooking = async () => {
+		if (!user?.id || !selectedRide) return;
+
+		try {
+			setBooking(true);
+			const response = await fetch('/api/bookings', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					rideId: selectedRide._id,
+					passengerClerkId: user.id,
+					passengerName: `${user.firstName || ''} ${
+						user.lastName || ''
+					}`.trim(),
+				}),
+			});
+
+			if (response.ok) {
+				setConfirmedRideId(selectedRide._id);
+				await fetchUserBookings(); // Refresh bookings
+				alert('Booking confirmed successfully!');
+			} else {
+				const error = await response.json();
+				alert(error.error || 'Failed to book ride');
+			}
+		} catch (error) {
+			console.error('Error booking ride:', error);
+			alert('Failed to book ride');
+		} finally {
+			setBooking(false);
+			setShowConfirmDialog(false);
+			setSelectedRide(null);
+		}
 	};
 
-	const handleCreateRide = () => {
-		if (newRide.start && newRide.end && newRide.car && newRide.seats > 0) {
-			const newRideEntry = {
-				id: allRides.length + 1,
-				...newRide,
-			};
-			allRides.push(newRideEntry);
-			alert('Ride created successfully!');
-			setNewRide({
-				start: '',
-				end: '',
-				car: '',
-				seats: 0,
-				driver: '',
-				distance: '',
-				pickupPoint: '',
+	const handleCreateRide = async () => {
+		if (!user?.id) {
+			alert('Please sign in to create a ride');
+			return;
+		}
+
+		if (
+			!newRide.start ||
+			!newRide.end ||
+			!newRide.car ||
+			!newRide.seats ||
+			newRide.seats <= 0
+		) {
+			alert('Please fill all required fields to create a ride.');
+			return;
+		}
+
+		try {
+			setCreating(true);
+			const response = await fetch('/api/rides', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					driver: `${user.firstName || ''} ${user.lastName || ''}`.trim(),
+					driverClerkId: user.id,
+					start: newRide.start,
+					end: newRide.end,
+					car: newRide.car,
+					seats: newRide.seats,
+					distance: newRide.distance,
+					pickupPoint: newRide.pickupPoint,
+					rating: 0,
+					image: user.imageUrl || '/api/placeholder/40/40',
+				}),
 			});
-		} else {
-			alert('Please fill all fields to create a ride.');
+
+			if (response.ok) {
+				alert('Ride created successfully!');
+				setNewRide({
+					start: '',
+					end: '',
+					car: '',
+					seats: 0,
+					distance: '',
+					pickupPoint: '',
+				});
+				await fetchRides(); // Refresh rides list
+			} else {
+				const error = await response.json();
+				alert(error.error || 'Failed to create ride');
+			}
+		} catch (error) {
+			console.error('Error creating ride:', error);
+			alert('Failed to create ride');
+		} finally {
+			setCreating(false);
 		}
 	};
 
 	const displayRides = isSearchActive ? filteredRides : allRides;
 
 	const RideCard = ({ ride }) => {
-		const isConfirmed = ride.id === confirmedRideId;
+		const isConfirmed =
+			ride._id === confirmedRideId ||
+			userBookings.some(
+				(booking) =>
+					booking.rideId === ride._id && booking.status === 'confirmed'
+			);
+		const isOwnRide = ride.driverClerkId === user?.id;
 
 		return (
 			<Card
@@ -122,10 +245,15 @@ const RideBooking = () => {
 							<div>
 								<h3 className='font-medium flex items-center text-white'>
 									{ride.driver}
+									{isOwnRide && (
+										<span className='ml-2 text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded'>
+											Your Ride
+										</span>
+									)}
 									<span className='text-gray-400 text-sm ml-2'>
 										{ride.distance}
 									</span>
-									{isConfirmed && (
+									{isConfirmed && !isOwnRide && (
 										<span className='ml-2 flex items-center text-emerald-400 text-sm font-medium'>
 											<Check className='w-4 h-4 mr-1' />
 											Booking Confirmed
@@ -142,27 +270,30 @@ const RideBooking = () => {
 									</p>
 									<p className='text-xs text-gray-400 flex items-center'>
 										<Users className='w-3 h-3 mr-1' />
-										{isConfirmed ? ride.seats - 1 : ride.seats} seats
+										{ride.seats} seats available
 									</p>
 								</div>
-								<div className='flex items-center mt-1 text-xs text-gray-400'>
-									<MapPin className='w-3 h-3 mr-1' />
-									{ride.pickupPoint}
-								</div>
+								{ride.pickupPoint && (
+									<div className='flex items-center mt-1 text-xs text-gray-400'>
+										<MapPin className='w-3 h-3 mr-1' />
+										{ride.pickupPoint}
+									</div>
+								)}
 							</div>
 							<div className='flex items-center bg-slate-700/50 px-2 py-1 rounded text-xs'>
-								{ride.rating}
+								{ride.rating || 0}
 								<Star className='w-3 h-3 text-yellow-400 ml-1' />
 							</div>
 						</div>
-						{!isConfirmed && (
+						{!isConfirmed && !isOwnRide && (
 							<Button
 								variant='outline'
 								size='sm'
 								className='mt-3 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/10 transition-all duration-300 hover:border-emerald-500'
 								onClick={() => handleBookRide(ride)}
+								disabled={booking}
 							>
-								Book this ride
+								{booking ? 'Booking...' : 'Book this ride'}
 							</Button>
 						)}
 					</div>
@@ -287,8 +418,16 @@ const RideBooking = () => {
 							<Button
 								className='px-8 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-md font-medium shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 hover:translate-y-1 w-full'
 								onClick={handleCreateRide}
+								disabled={creating}
 							>
-								Create Ride
+								{creating ? (
+									<>
+										<Loader2 className='w-4 h-4 mr-2 animate-spin' />
+										Creating...
+									</>
+								) : (
+									'Create Ride'
+								)}
 							</Button>
 						</div>
 					</div>
@@ -363,7 +502,12 @@ const RideBooking = () => {
 						)}
 
 						<div className='space-y-4 max-h-96 overflow-y-auto pr-2 custom-scrollbar'>
-							{searchOn && (
+							{loading ? (
+								<div className='text-center py-8 text-gray-400'>
+									<Loader2 className='w-6 h-6 animate-spin mx-auto mb-2' />
+									Loading rides...
+								</div>
+							) : (
 								<>
 									{displayRides.length === 0 && isSearchActive ? (
 										<div className='text-center py-8 text-gray-400 backdrop-blur-sm bg-slate-700/20 rounded-xl border border-slate-700/50'>
@@ -371,9 +515,13 @@ const RideBooking = () => {
 											Please try different locations or cancel search to see all
 											rides.
 										</div>
+									) : displayRides.length === 0 ? (
+										<div className='text-center py-8 text-gray-400 backdrop-blur-sm bg-slate-700/20 rounded-xl border border-slate-700/50'>
+											No rides available yet. Create the first ride!
+										</div>
 									) : (
 										displayRides.map((ride) => (
-											<RideCard key={ride.id} ride={ride} />
+											<RideCard key={ride._id} ride={ride} />
 										))
 									)}
 								</>
@@ -414,14 +562,23 @@ const RideBooking = () => {
 								variant='ghost'
 								className='text-gray-400 hover:bg-slate-700'
 								onClick={() => setShowConfirmDialog(false)}
+								disabled={booking}
 							>
 								Cancel
 							</Button>
 							<Button
 								className='bg-gradient-to-r from-emerald-500 to-emerald-600 text-white'
 								onClick={handleConfirmBooking}
+								disabled={booking}
 							>
-								Confirm Booking
+								{booking ? (
+									<>
+										<Loader2 className='w-4 h-4 mr-2 animate-spin' />
+										Booking...
+									</>
+								) : (
+									'Confirm Booking'
+								)}
 							</Button>
 						</DialogFooter>
 					</DialogContent>
