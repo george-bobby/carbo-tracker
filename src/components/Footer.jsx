@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
 	FaHome,
 	FaCalculator,
@@ -16,6 +17,8 @@ import {
 import Link from 'next/link';
 
 export default function Footer() {
+	const { t } = useTranslation('common');
+
 	// Function to scroll to the top of the page
 	const scrollToTop = () => {
 		window.scrollTo({
@@ -33,42 +36,37 @@ export default function Footer() {
 						<div className='flex items-center mb-6'>
 							<FaLeaf className='text-emerald-400 text-2xl mr-2' />
 							<h2 className='font-bold text-2xl tracking-tight text-emerald-400'>
-								Carbo
+								{t('header.appName')}
 							</h2>
 						</div>
 						<p className='text-sm text-gray-300 mb-8 font-light'>
-							Making carbon footprint tracking simple and actionable
+							{t('footer.description')}
 						</p>
 						<div className='space-y-4'>
 							{[
-								// {
-								// 	icon: <FaHome className='text-emerald-400' />,
-								// 	label: 'Dashboard',
-								// 	href: '/dashboard',
-								// },
 								{
 									icon: <FaCalculator className='text-emerald-400' />,
-									label: 'Carbon Calculator',
+									label: t('header.navigation.calculator'),
 									href: '/calculator',
 								},
 								{
 									icon: <FaNewspaper className='text-emerald-400' />,
-									label: 'Climate News',
+									label: t('header.navigation.news'),
 									href: '/news',
 								},
 								{
 									icon: <FaComments className='text-emerald-400' />,
-									label: 'Activity Analyzer',
+									label: t('header.navigation.chatbot'),
 									href: '/chatbot',
 								},
 								{
 									icon: <FaLeaf className='text-emerald-400' />,
-									label: 'Electric Appliances',
+									label: t('header.navigation.ecocenter'),
 									href: '/ecocenter',
 								},
 								{
 									icon: <FaShoppingCart className='text-emerald-400' />,
-									label: 'Sustainable Shop',
+									label: t('header.navigation.shop'),
 									href: '/shop',
 								},
 							].map(({ icon, label, href }, index) => (
@@ -88,24 +86,13 @@ export default function Footer() {
 					{/* Our Mission */}
 					<div>
 						<h3 className='text-emerald-400 font-semibold text-lg mb-6 tracking-wide'>
-							Carbon Footprint
+							{t('footer.carbonFootprintTitle')}
 						</h3>
 						<div className='relative mb-8'>
 							<div className='absolute left-0 top-0 w-16 h-1 bg-emerald-400'></div>
 						</div>
 						<p className='text-gray-300 leading-relaxed text-sm font-light mt-20'>
-							{/* Christites for Climate Action (CCA) is a student-led initiative at
-							CHRIST (Deemed to be University). Focused on promoting
-							sustainability and raising awareness about climate change, CCA
-							inspires eco-friendly practices and aligns with global efforts
-							like the United Nations Sustainable Development Goals,
-							particularly Goal 13. */}
-							A carbon footprint is the total amount of greenhouse gases,
-							particularly carbon dioxide (CO₂), that are emitted directly or
-							indirectly by human activities. It is measured in equivalent tons
-							of CO₂ (tCO₂e) and includes emissions from sources like
-							transportation, energy consumption, food production, and
-							industrial processes.
+							{t('footer.carbonFootprintDescription')}
 						</p>
 					</div>
 
@@ -116,17 +103,15 @@ export default function Footer() {
 								<div className='flex items-center'>
 									<FaLeaf className='text-emerald-400 text-3xl mr-2' />
 									<span className='text-emerald-400 font-bold text-2xl'>
-										Carbo
+										{t('header.appName')}
 									</span>
 								</div>
 							</div>
 							<h3 className='text-emerald-400 font-semibold text-lg mb-4 tracking-wide mt-10'>
-								CONNECT WITH US
+								{t('footer.connectTitle')}
 							</h3>
 							<p className='text-gray-300 leading-relaxed max-w-md mb-8 text-sm font-light'>
-								Join our community of eco-conscious individuals working together
-								to combat climate change. Share your journey, learn from others,
-								and be part of the solution.
+								{t('footer.connectDescription')}
 							</p>
 
 							{/* Social Media Icons */}
@@ -164,7 +149,7 @@ export default function Footer() {
 
 				{/* Footer Bottom */}
 				<div className='mt-16 border-t border-slate-700/50 pt-8 text-center text-gray-400 text-sm font-light flex flex-col md:flex-row justify-between items-center'>
-					<p>© Carbo 2025. All rights reserved.</p>
+					<p>{t('footer.copyright')}</p>
 					{/* <div className='flex space-x-6 mt-4 md:mt-0'>
 						<a
 							href='/about'

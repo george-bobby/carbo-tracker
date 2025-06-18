@@ -1,10 +1,12 @@
 // src/app/news/page.js
 'use client';
 import React, { useState, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import Parser from 'rss-parser';
 import { FaSearch, FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 
 const NewsPage = () => {
+	const { t } = useTranslation('common');
 	const [initialFeeds, setInitialFeeds] = useState([]);
 	const [searchTerm, setSearchTerm] = useState('');
 	const [currentPage, setCurrentPage] = useState(1);
@@ -94,16 +96,14 @@ const NewsPage = () => {
 				<div className='text-center space-y-6 mb-12'>
 					<div className='inline-block px-4 py-1 bg-emerald-900/50 rounded-full mb-2 backdrop-blur-sm border border-emerald-500/20'>
 						<p className='text-xs md:text-sm font-medium text-emerald-400 tracking-wide'>
-							CLIMATE · UPDATES · NEWS
+							{t('news.tagline')}
 						</p>
 					</div>
 					<h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-white'>
-						Latest <span className='text-emerald-400'>Climate News</span> &
-						Updates
+						{t('news.title')}
 					</h1>
 					<p className='text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed font-light'>
-						Stay informed about climate change and carbon footprint news from
-						trusted sources.
+						{t('news.subtitle')}
 					</p>
 				</div>
 
@@ -126,7 +126,7 @@ const NewsPage = () => {
 					</div>
 					<input
 						type='text'
-						placeholder='Search news articles...'
+						placeholder={t('news.searchPlaceholder')}
 						value={searchTerm}
 						onChange={(e) => setSearchTerm(e.target.value)}
 						className='w-full pl-12 pr-4 py-3 bg-slate-800/70 border border-slate-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300'
@@ -136,7 +136,7 @@ const NewsPage = () => {
 				{/* Results Summary */}
 				{searchTerm && (
 					<div className='mb-6 text-gray-400 text-center'>
-						Found {filteredItems.length} results for "{searchTerm}"
+						{t('news.foundResults', { count: filteredItems.length, searchTerm })}
 					</div>
 				)}
 
@@ -168,7 +168,7 @@ const NewsPage = () => {
 									{item.title}
 								</h2>
 								<p className='text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3'>
-									{item.contentSnippet || 'No description available.'}
+									{item.contentSnippet || t('news.noDescription')}
 								</p>
 								<div className='mt-4 flex justify-between items-center'>
 									<div className='text-xs text-gray-500'>
@@ -184,7 +184,7 @@ const NewsPage = () => {
 												: 'text-emerald-500'
 										}`}
 									>
-										Read More
+										{t('news.readMore')}
 										<FaArrowRight className='w-3 h-3 group-hover:translate-x-1 transition-transform duration-300' />
 									</a>
 								</div>
@@ -200,10 +200,10 @@ const NewsPage = () => {
 							<FaSearch className='h-10 w-10 text-emerald-500/50' />
 						</div>
 						<h3 className='text-xl font-medium text-white mb-2'>
-							No results found
+							{t('news.noResults')}
 						</h3>
 						<p className='text-gray-400'>
-							No news items found matching "{searchTerm}"
+							{t('news.noResultsMessage', { searchTerm })}
 						</p>
 					</div>
 				)}
@@ -217,14 +217,14 @@ const NewsPage = () => {
 							className='px-4 py-2 flex items-center gap-2 bg-slate-800 border border-slate-700 text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700 transition-colors duration-300'
 						>
 							<FaArrowLeft className='w-3 h-3' />
-							Previous
+							{t('news.previous')}
 						</button>
 						<div className='text-gray-300'>
-							Page{' '}
+							{t('news.page')}{' '}
 							<span className='text-emerald-400 font-medium'>
 								{currentPage}
 							</span>{' '}
-							of{' '}
+							{t('news.of')}{' '}
 							<span className='text-emerald-400 font-medium'>{totalPages}</span>
 						</div>
 						<button
@@ -234,7 +234,7 @@ const NewsPage = () => {
 							disabled={currentPage === totalPages}
 							className='px-4 py-2 flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300'
 						>
-							Next
+							{t('news.next')}
 							<FaArrowRight className='w-3 h-3' />
 						</button>
 					</div>

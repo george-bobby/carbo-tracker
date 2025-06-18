@@ -188,7 +188,7 @@ export default function AboutUs() {
 						</p>
 						<div className='flex flex-col sm:flex-row gap-4 justify-center'>
 							<a
-								href='https://chat.whatsapp.com/D3dPl12GYDaGksPmOKrRPD'
+								href='https://www.unv.org/news/unv-launches-first-regional-report-volunteering-central-asia'
 								target='_blank'
 								rel='noopener noreferrer'
 							>

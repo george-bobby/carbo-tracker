@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useUser } from '@clerk/nextjs';
 import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
@@ -25,6 +26,7 @@ import {
 Chart.register(CategoryScale);
 
 export default function UserProfile() {
+	const { t } = useTranslation('common');
 	const { user } = useUser();
 	const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -49,24 +51,24 @@ export default function UserProfile() {
 				<div className='mb-10 text-center space-y-3'>
 					<div className='inline-block px-4 py-1 bg-emerald-900/50 rounded-full mb-2 backdrop-blur-sm border border-emerald-500/20'>
 						<p className='text-xs md:text-sm font-medium text-emerald-400 tracking-wide'>
-							YOUR CARBON DASHBOARD
+							{t('dashboard.yourCarbonDashboard')}
 						</p>
 					</div>
 					<h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-white'>
-						Welcome,{' '}
+						{t('dashboard.welcome')},{' '}
 						<span className='text-emerald-400'>
 							{user?.firstName || 'User'}
 						</span>
 					</h1>
 					<p className='text-gray-300 text-md max-w-2xl mx-auto leading-relaxed font-light'>
-						Tracking your environmental impact since {formattedDate}
+						{t('dashboard.trackingSince', { date: formattedDate })}
 					</p>
 				</div>
 
 				{/* Dashboard Content */}
 				<Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
 					<Tab.List className='flex space-x-1 rounded-xl bg-slate-800/50 p-1 mb-6'>
-						{['Overview', 'Charts', 'Comparison'].map((category, idx) => (
+						{[t('dashboard.overview'), t('dashboard.charts'), t('dashboard.comparison')].map((category, idx) => (
 							<Tab
 								key={idx}
 								className={({ selected }) =>
@@ -93,7 +95,7 @@ export default function UserProfile() {
 											<div className='h-8 w-8 rounded-md bg-emerald-900/50 flex items-center justify-center text-emerald-400'>
 												<FaChartBar />
 											</div>
-											Carbon Status
+											{t('dashboard.carbonStatus')}
 										</h2>
 										<CarbonGauge clerkId={user?.id} />
 									</div>
@@ -102,7 +104,7 @@ export default function UserProfile() {
 											<div className='h-8 w-8 rounded-md bg-emerald-900/50 flex items-center justify-center text-emerald-400'>
 												<FaChartLine />
 											</div>
-											Carbon Trends
+											{t('dashboard.carbonTrends')}
 										</h2>
 										<LineChart clerkId={user?.id} />
 									</div>
@@ -119,7 +121,7 @@ export default function UserProfile() {
 											<div className='h-8 w-8 rounded-md bg-emerald-900/50 flex items-center justify-center text-emerald-400'>
 												<FaChartPie />
 											</div>
-											Impact by Category
+											{t('dashboard.impactByCategory')}
 										</h2>
 										<PieChart clerkId={user?.id} />
 									</div>
@@ -128,7 +130,7 @@ export default function UserProfile() {
 											<div className='h-8 w-8 rounded-md bg-emerald-900/50 flex items-center justify-center text-emerald-400'>
 												<FaChartBar />
 											</div>
-											Category Breakdown
+											{t('dashboard.categoryBreakdown')}
 										</h2>
 										<RadarChart clerkId={user?.id} />
 									</div>
@@ -139,7 +141,7 @@ export default function UserProfile() {
 										<div className='h-8 w-8 rounded-md bg-emerald-900/50 flex items-center justify-center text-emerald-400'>
 											<FaChartBar />
 										</div>
-										Monthly Carbon Footprint
+										{t('dashboard.monthlyCarbonFootprint')}
 									</h2>
 									<BarGraph clerkId={user?.id} />
 								</div>
@@ -155,7 +157,7 @@ export default function UserProfile() {
 											<div className='h-8 w-8 rounded-md bg-emerald-900/50 flex items-center justify-center text-emerald-400'>
 												<FaBalanceScale />
 											</div>
-											National Comparison
+											{t('dashboard.nationalComparison')}
 										</h2>
 										<CarbonComparison clerkId={user?.id} />
 									</div>

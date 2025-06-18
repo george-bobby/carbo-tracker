@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
 	Star,
 	Search,
@@ -13,13 +14,14 @@ import {
 import productsData from './products.json';
 
 const ShoppingTracker = () => {
+	const { t } = useTranslation('common');
 	const [searchTerm, setSearchTerm] = useState('');
 	const [filteredProducts, setFilteredProducts] = useState(productsData);
 	const [showFilters, setShowFilters] = useState(false);
 	const [favorites, setFavorites] = useState([]);
-	const [priceRange, setPriceRange] = useState('All Prices');
-	const [ratingFilter, setRatingFilter] = useState('All Ratings');
-	const [storeFilter, setStoreFilter] = useState('All Stores');
+	const [priceRange, setPriceRange] = useState('allPrices');
+	const [ratingFilter, setRatingFilter] = useState('allRatings');
+	const [storeFilter, setStoreFilter] = useState('allStores');
 
 	// Filter products when search term or filters change
 	useEffect(() => {
@@ -31,26 +33,26 @@ const ShoppingTracker = () => {
 
 			// Price range filter
 			const matchesPrice =
-				priceRange === 'All Prices' ||
-				(priceRange === 'Under ₹500' && parseFloat(product.price) < 500) ||
-				(priceRange === '₹500 - ₹1000' &&
+				priceRange === 'allPrices' ||
+				(priceRange === 'under500' && parseFloat(product.price) < 500) ||
+				(priceRange === 'range500to1000' &&
 					parseFloat(product.price) >= 500 &&
 					parseFloat(product.price) <= 1000) ||
-				(priceRange === '₹1000 - ₹2000' &&
+				(priceRange === 'range1000to2000' &&
 					parseFloat(product.price) >= 1000 &&
 					parseFloat(product.price) <= 2000) ||
-				(priceRange === 'Over ₹2000' && parseFloat(product.price) > 2000);
+				(priceRange === 'over2000' && parseFloat(product.price) > 2000);
 
 			// Rating filter
 			const matchesRating =
-				ratingFilter === 'All Ratings' ||
-				(ratingFilter === '4★ & Above' && parseFloat(product.rating) >= 4) ||
-				(ratingFilter === '3★ & Above' && parseFloat(product.rating) >= 3) ||
-				(ratingFilter === '2★ & Above' && parseFloat(product.rating) >= 2);
+				ratingFilter === 'allRatings' ||
+				(ratingFilter === 'rating4Above' && parseFloat(product.rating) >= 4) ||
+				(ratingFilter === 'rating3Above' && parseFloat(product.rating) >= 3) ||
+				(ratingFilter === 'rating2Above' && parseFloat(product.rating) >= 2);
 
 			// Store filter
 			const matchesStore =
-				storeFilter === 'All Stores' ||
+				storeFilter === 'allStores' ||
 				(storeFilter === 'Amazon' && product.productUrl.includes('amazon')) ||
 				(storeFilter === 'Flipkart' && product.productUrl.includes('flipkart'));
 
@@ -62,7 +64,7 @@ const ShoppingTracker = () => {
 
 	const RatingStars = ({ rating }) => {
 		if (rating === 'N/A' || !rating)
-			return <span className='text-gray-400'>No Rating</span>;
+			return <span className='text-gray-400'>{t('shop.noRating')}</span>;
 
 		const numRating = parseFloat(rating);
 		const fullStars = Math.floor(numRating);
@@ -114,11 +116,10 @@ const ShoppingTracker = () => {
 				<div className='text-center mb-12'>
 					<h1 className='text-3xl md:text-4xl font-bold text-white mb-3 flex items-center justify-center'>
 						<ShoppingBag className='inline-block mr-2 mb-1' size={32} />
-						Sustainable Products
+						{t('shop.title')}
 					</h1>
 					<p className='text-gray-400 max-w-2xl mx-auto'>
-						Browse our collection of eco-friendly products to reduce your carbon
-						footprint and support sustainable living
+						{t('shop.subtitle')}
 					</p>
 				</div>
 
@@ -127,7 +128,7 @@ const ShoppingTracker = () => {
 					<div className='relative flex items-center mb-4'>
 						<input
 							type='text'
-							placeholder='Search sustainable products...'
+							placeholder={t('shop.searchPlaceholder')}
 							value={searchTerm}
 							onChange={handleSearchChange}
 							className='w-full px-4 py-3 pl-12 pr-12 bg-slate-700/50 border border-slate-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300 text-white placeholder-gray-400'
@@ -149,12 +150,11 @@ const ShoppingTracker = () => {
 							className='flex items-center text-sm font-medium text-emerald-400 hover:text-emerald-500 transition-colors'
 						>
 							<Filter size={16} className='mr-1' />
-							{showFilters ? 'Hide Filters' : 'Show Filters'}
+							{showFilters ? t('shop.hideFilters') : t('shop.showFilters')}
 						</button>
 
 						<span className='text-sm text-gray-400'>
-							Showing {filteredProducts.length} of {productsData.length}{' '}
-							products
+							{t('shop.showingProducts', { count: filteredProducts.length, total: productsData.length })}
 						</span>
 					</div>
 
@@ -163,49 +163,49 @@ const ShoppingTracker = () => {
 						<div className='bg-slate-800/90 backdrop-blur-sm border border-slate-700 p-4 mt-3 rounded-lg shadow-2xl grid grid-cols-1 md:grid-cols-3 gap-4 animate-fadeIn'>
 							<div>
 								<label className='block text-sm font-medium text-gray-400 mb-2'>
-									Price Range
+									{t('shop.priceRange')}
 								</label>
 								<select
 									value={priceRange}
 									onChange={(e) => setPriceRange(e.target.value)}
 									className='w-full p-2 bg-slate-700/50 border border-slate-600 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white'
 								>
-									<option>All Prices</option>
-									<option>Under ₹500</option>
-									<option>₹500 - ₹1000</option>
-									<option>₹1000 - ₹2000</option>
-									<option>Over ₹2000</option>
+									<option value="allPrices">{t('shop.allPrices')}</option>
+									<option value="under500">{t('shop.under500')}</option>
+									<option value="range500to1000">{t('shop.range500to1000')}</option>
+									<option value="range1000to2000">{t('shop.range1000to2000')}</option>
+									<option value="over2000">{t('shop.over2000')}</option>
 								</select>
 							</div>
 
 							<div>
 								<label className='block text-sm font-medium text-gray-400 mb-2'>
-									Rating
+									{t('shop.rating')}
 								</label>
 								<select
 									value={ratingFilter}
 									onChange={(e) => setRatingFilter(e.target.value)}
 									className='w-full p-2 bg-slate-700/50 border border-slate-600 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white'
 								>
-									<option>All Ratings</option>
-									<option>4★ & Above</option>
-									<option>3★ & Above</option>
-									<option>2★ & Above</option>
+									<option value="allRatings">{t('shop.allRatings')}</option>
+									<option value="rating4Above">{t('shop.rating4Above')}</option>
+									<option value="rating3Above">{t('shop.rating3Above')}</option>
+									<option value="rating2Above">{t('shop.rating2Above')}</option>
 								</select>
 							</div>
 
 							<div>
 								<label className='block text-sm font-medium text-gray-400 mb-2'>
-									Store
+									{t('shop.store')}
 								</label>
 								<select
 									value={storeFilter}
 									onChange={(e) => setStoreFilter(e.target.value)}
 									className='w-full p-2 bg-slate-700/50 border border-slate-600 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white'
 								>
-									<option>All Stores</option>
-									<option>Amazon</option>
-									<option>Flipkart</option>
+									<option value="allStores">{t('shop.allStores')}</option>
+									<option value="Amazon">Amazon</option>
+									<option value="Flipkart">Flipkart</option>
 								</select>
 							</div>
 						</div>
@@ -281,7 +281,7 @@ const ShoppingTracker = () => {
 										rel='noopener noreferrer'
 										className='mt-4 flex items-center justify-center w-full text-center bg-emerald-500 text-white py-2 px-4 rounded-lg hover:bg-emerald-600 transition-colors duration-300 group'
 									>
-										<span>View Product</span>
+										<span>{t('shop.viewProduct')}</span>
 										<ExternalLink
 											size={16}
 											className='ml-2 transform group-hover:translate-x-1 transition-transform'
@@ -296,17 +296,16 @@ const ShoppingTracker = () => {
 								<div className='bg-slate-800/90 backdrop-blur-sm border border-slate-700 p-8 rounded-lg shadow-2xl'>
 									<X size={48} className='mx-auto text-gray-400 mb-4' />
 									<h3 className='text-xl font-semibold text-white mb-2'>
-										No matching products found
+										{t('shop.noProductsFound')}
 									</h3>
 									<p className='text-gray-400 mb-4'>
-										Try adjusting your search or filter criteria to find what
-										you're looking for.
+										{t('shop.noProductsMessage')}
 									</p>
 									<button
 										onClick={clearSearch}
 										className='inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-emerald-500 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500'
 									>
-										Clear Search
+										{t('shop.clearSearch')}
 									</button>
 								</div>
 							</div>
@@ -322,7 +321,7 @@ const ShoppingTracker = () => {
 								href='#'
 								className='px-4 py-2 bg-slate-700/50 text-emerald-400 border border-slate-600 rounded-l-md hover:bg-slate-700/80'
 							>
-								Previous
+								{t('shop.previous')}
 							</a>
 							<a
 								href='#'
@@ -340,7 +339,7 @@ const ShoppingTracker = () => {
 								href='#'
 								className='px-4 py-2 bg-slate-700/50 text-emerald-400 border border-slate-600 rounded-r-md hover:bg-slate-700/80'
 							>
-								Next
+								{t('shop.next')}
 							</a>
 						</nav>
 					</div>

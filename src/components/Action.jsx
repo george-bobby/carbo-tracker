@@ -1,34 +1,35 @@
 'use client';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Users, Heart, TreePine } from 'lucide-react';
 
-const actions = [
-	{
-		icon: Users,
-		title: 'Join Community',
-		description:
-			'Connect with climate activists and make a difference together.',
-		buttonText: 'Join Now',
-		link: 'https://www.instagram.com/cca.christ/?igsh=ZnhkeDFsNmoxeHBj#',
-	},
-	{
-		icon: Heart,
-		title: 'Donate',
-		description: 'Support organizations fighting climate change globally.',
-		buttonText: 'Donate',
-		link: 'https://sankalptaru.org/location/',
-	},
-	{
-		icon: TreePine,
-		title: 'Volunteer',
-		description: 'Participate in local tree-planting and clean-up events.',
-		buttonText: 'Get Started',
-		link: 'https://chat.whatsapp.com/D3dPl12GYDaGksPmOKrRPD',
-	},
-];
-
 export default function CallToAction() {
+	const { t } = useTranslation('common');
 	const [hoveredCard, setHoveredCard] = useState(null);
+
+	const actions = [
+		{
+			icon: Users,
+			title: t('action.joinCommunity.title'),
+			description: t('action.joinCommunity.description'),
+			buttonText: t('action.joinCommunity.buttonText'),
+			link: 'https://iiasa.ac.at/news/dec-2024/carbon-farming-for-kazakhstan-and-asian-drylands-belt-discussed-at-cop29',
+		},
+		{
+			icon: Heart,
+			title: t('action.donate.title'),
+			description: t('action.donate.description'),
+			buttonText: t('action.donate.buttonText'),
+			link: 'https://pulitzercenter.org/stories/kazakhstan-voluntary-carbon-market-grows-seed?form=donate',
+		},
+		{
+			icon: TreePine,
+			title: t('action.volunteer.title'),
+			description: t('action.volunteer.description'),
+			buttonText: t('action.volunteer.buttonText'),
+			link: 'https://www.unv.org/news/unv-launches-first-regional-report-volunteering-central-asia',
+		},
+	];
 
 	return (
 		<section>
@@ -40,13 +41,13 @@ export default function CallToAction() {
 				<div className='flex justify-center mb-4'>
 					<div className='inline-block px-4 py-1 bg-emerald-900/50 rounded-full backdrop-blur-sm border border-emerald-500/20'>
 						<p className='text-xs md:text-sm font-medium text-emerald-400 tracking-wide text-center'>
-							CONNECT · SUPPORT · VOLUNTEER
+							{t('action.subtitle')}
 						</p>
 					</div>
 				</div>
 
 				<h2 className='text-4xl md:text-5xl font-bold text-white text-center mb-16'>
-					Get <span className='text-emerald-400'>Involved</span> Today
+					{t('action.title')}
 				</h2>
 
 				<div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-10'>

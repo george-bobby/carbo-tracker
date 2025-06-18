@@ -17,7 +17,7 @@ export default function Live() {
 	const searchParams = useSearchParams();
 	const router = useRouter();
 	const [isLoadingLocation, setIsLoadingLocation] = useState(true);
-	const [userLocation, setUserLocation] = useState('Bangalore'); // Changed to Bangalore (correct English spelling)
+	const [userLocation, setUserLocation] = useState('Astana'); // Changed to Astana (correct English spelling)
 
 	useEffect(() => {
 		const detectLocation = async () => {
@@ -41,23 +41,23 @@ export default function Live() {
 							router.push(`/live?location=${locationName}`);
 							setUserLocation(locationName);
 						} else {
-							// No data available, set to Bangalore
-							router.push(`/live?location=Bangalore`);
-							setUserLocation('Bangalore');
+							// No data available, set to Astana
+							router.push(`/live?location=Astana`);
+							setUserLocation('Astana');
 						}
 					} catch (error) {
 						console.error('Error getting location name:', error);
-						router.push(`/live?location=Bangalore`);
-						setUserLocation('Bangalore');
+						router.push(`/live?location=Astana`);
+						setUserLocation('Astana');
 					}
 				} catch (error) {
 					console.error('Geolocation error:', error);
-					router.push(`/live?location=Bangalore`);
-					setUserLocation('Bangalore');
+					router.push(`/live?location=Astana`);
+					setUserLocation('Astana');
 				}
 			} else {
-				router.push(`/live?location=Bangalore`);
-				setUserLocation('Bangalore');
+				router.push(`/live?location=Astana`);
+				setUserLocation('Astana');
 			}
 			setIsLoadingLocation(false);
 		};
@@ -65,7 +65,7 @@ export default function Live() {
 		if (!searchParams.get('location')) {
 			detectLocation();
 		} else {
-			setUserLocation(searchParams.get('location') || 'Bangalore');
+			setUserLocation(searchParams.get('location') || 'Astana');
 			setIsLoadingLocation(false);
 		}
 	}, [searchParams, router]);
@@ -74,11 +74,11 @@ export default function Live() {
 	const { currentWeather, forecast, airQuality, loading, error } =
 		useWeatherData(location);
 
-	// If weather data fails to load, redirect to Bangalore
+	// If weather data fails to load, redirect to Astana
 	useEffect(() => {
 		if (error && !loading && !isLoadingLocation) {
-			router.push(`/live?location=Bangalore`);
-			setUserLocation('Bangalore');
+			router.push(`/live?location=Astana`);
+			setUserLocation('Astana');
 		}
 	}, [error, loading, isLoadingLocation, router]);
 
@@ -173,13 +173,13 @@ export default function Live() {
 
 	if (error) {
 		// Instead of showing an error, we'll use a fallback message
-		// while the redirect to Bangalore happens
+		// while the redirect to Astana happens
 		return (
 			<div className='min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center'>
 				<div className='flex flex-col items-center space-y-4'>
 					<div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500'></div>
 					<p className='text-lg text-gray-300'>
-						Weather information unavailable. Redirecting to Bangalore...
+						Weather information unavailable. Redirecting to Astana...
 					</p>
 				</div>
 			</div>

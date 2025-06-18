@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Alert, AlertDescription } from '../../components/ui/alert';
 import {
 	Card,
@@ -29,6 +30,7 @@ import categories from './categories';
 import equivalencies from './equivalencies';
 
 const CarbonFootprintCalculator = () => {
+	const { t } = useTranslation('common');
 	const [answers, setAnswers] = useState({});
 	const [currentCategory, setCurrentCategory] = useState(0);
 	const [showResults, setShowResults] = useState(false);
@@ -104,17 +106,17 @@ const CarbonFootprintCalculator = () => {
 	const getEmissionLevel = (emissions) => {
 		if (emissions < 1000)
 			return {
-				text: 'Low Impact',
+				text: t('calculator.lowImpact'),
 				color: 'text-emerald-500',
 				bg: 'bg-emerald-500/10',
 			};
 		if (emissions < 5000)
 			return {
-				text: 'Moderate Impact',
+				text: t('calculator.moderateImpact'),
 				color: 'text-amber-500',
 				bg: 'bg-amber-500/10',
 			};
-		return { text: 'High Impact', color: 'text-red-500', bg: 'bg-red-500/10' };
+		return { text: t('calculator.highImpact'), color: 'text-red-500', bg: 'bg-red-500/10' };
 	};
 
 	const { user } = useUser();
@@ -180,16 +182,14 @@ const CarbonFootprintCalculator = () => {
 			<div className='w-full px-4 py-12 text-center'>
 				<div className='inline-block px-4 py-1 bg-emerald-900/50 rounded-full mb-2 backdrop-blur-sm border border-emerald-500/20'>
 					<p className='text-xs md:text-sm font-medium text-emerald-400 tracking-wide'>
-						CALCULATE · UNDERSTAND · IMPROVE
+						{t('calculator.tagline')}
 					</p>
 				</div>
 				<h1 className='text-3xl md:text-4xl font-bold text-white mb-4'>
-					Your <span className='text-emerald-400'>Carbon Footprint</span>{' '}
-					Calculator
+					{t('calculator.title')}
 				</h1>
 				<p className='text-gray-300 max-w-2xl mx-auto'>
-					Discover your environmental impact and get personalized suggestions to
-					reduce your carbon footprint.
+					{t('calculator.subtitle')}
 				</p>
 			</div>
 
@@ -199,7 +199,7 @@ const CarbonFootprintCalculator = () => {
 				<div className='flex items-center justify-between mb-6 border-b border-slate-700/50 pb-4 max-w-screen-2xl mx-auto'>
 					<h2 className='text-xl font-bold text-white flex items-center gap-2'>
 						<TreeDeciduous className='h-5 w-5 text-emerald-400' />
-						Carbon Footprint Calculator
+						{t('calculator.calculatorTitle')}
 					</h2>
 					<button
 						onClick={() => setShowFormula(!showFormula)}
@@ -216,17 +216,16 @@ const CarbonFootprintCalculator = () => {
 							<AlertDescription>
 								<div className='space-y-2'>
 									<p className='font-medium text-white'>
-										Calculation Formula (Based on IPCC Guidelines):
+										{t('calculator.formulaTitle')}
 									</p>
 									<p className='font-mono text-sm text-emerald-400'>
-										Total Emissions = Σ (Activity Data × Emission Factor)
+										{t('calculator.formulaText')}
 									</p>
 									<p className='text-sm'>
-										Where:
+										{t('calculator.formulaWhere')}
 										<br />
-										- Activity Data = Your input (e.g., distance driven)
-										<br />- Emission Factor = Standard CO₂ equivalent per unit
-										(from EPA/IPCC)
+										- {t('calculator.activityData')}
+										<br />- {t('calculator.emissionFactor')}
 									</p>
 								</div>
 							</AlertDescription>
@@ -346,7 +345,7 @@ const CarbonFootprintCalculator = () => {
 									disabled={currentCategory === 0}
 									className='px-5 py-2 border border-emerald-500/30 text-emerald-400 rounded-md hover:bg-emerald-500/10 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent'
 								>
-									Previous
+									{t('calculator.previous')}
 								</button>
 								{currentCategory === categories.length - 1 ? (
 									<button
@@ -356,14 +355,14 @@ const CarbonFootprintCalculator = () => {
 										}}
 										className='px-6 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-md font-medium shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 hover:translate-y-1 flex items-center justify-center gap-2 group'
 									>
-										View Results
+										{t('calculator.viewResults')}
 									</button>
 								) : (
 									<button
 										onClick={() => setCurrentCategory(currentCategory + 1)}
 										className='px-6 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-md font-medium shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 hover:translate-y-1 flex items-center justify-center gap-2 group'
 									>
-										Next
+										{t('calculator.next')}
 									</button>
 								)}
 							</div>
@@ -379,7 +378,7 @@ const CarbonFootprintCalculator = () => {
 								>
 									<CardContent className='p-6'>
 										<h3 className='text-lg font-medium mb-2 text-white'>
-											Total Annual Emissions
+											{t('calculator.totalAnnualEmissions')}
 										</h3>
 										<p
 											className={`text-3xl font-bold ${
@@ -454,7 +453,7 @@ const CarbonFootprintCalculator = () => {
 													/>
 												</div>
 												<p className='text-sm text-gray-400 mt-1'>
-													{percentage.toFixed(1)}% of total
+													{t('calculator.ofTotal', { percentage: percentage.toFixed(1) })}
 												</p>
 											</CardContent>
 										</Card>
@@ -469,22 +468,22 @@ const CarbonFootprintCalculator = () => {
 										<div className='flex items-center gap-2 mb-4'>
 											<Lightbulb className='w-6 h-6 text-emerald-400' />
 											<h3 className='text-lg font-bold text-emerald-400'>
-												Personalized Suggestion
+												{t('calculator.personalizedSuggestion')}
 											</h3>
 										</div>
 										<p className='text-lg mb-2 text-white'>
 											{dailySuggestion.text}
 										</p>
 										<p className='text-sm text-emerald-300'>
-											Potential Impact: {dailySuggestion.impact}
+											{t('calculator.potentialImpact')}: {dailySuggestion.impact}
 										</p>
 										<div className='mt-4'>
 											<p className='text-sm text-gray-400'>
-												Based on your{' '}
-												{categories
-													.find((c) => c.id === suggestionCategory)
-													?.title.toLowerCase()}{' '}
-												emissions
+												{t('calculator.basedOnEmissions', {
+													category: categories
+														.find((c) => c.id === suggestionCategory)
+														?.title.toLowerCase()
+												})}
 											</p>
 										</div>
 									</CardContent>
@@ -500,7 +499,7 @@ const CarbonFootprintCalculator = () => {
 								}}
 								className='w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-md font-medium shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 hover:translate-y-1 flex items-center justify-center gap-2 group'
 							>
-								Calculate Again
+								{t('calculator.calculateAgain')}
 							</button>
 						</div>
 					)}

@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card } from '../../components/ui/card';
 import { Input } from '../../components/ui/input';
 import { Button } from '../../components/ui/button';
@@ -23,6 +24,7 @@ import {
 import { useUser } from '@clerk/nextjs';
 
 const RideBooking = () => {
+	const { t } = useTranslation('common');
 	const [startLocation, setStartLocation] = useState('');
 	const [destination, setDestination] = useState('');
 	const [selectedRide, setSelectedRide] = useState(null);
@@ -141,14 +143,14 @@ const RideBooking = () => {
 			if (response.ok) {
 				setConfirmedRideId(selectedRide._id);
 				await fetchUserBookings(); // Refresh bookings
-				alert('Booking confirmed successfully!');
+				alert(t('carpool.confirmBooking.success'));
 			} else {
 				const error = await response.json();
-				alert(error.error || 'Failed to book ride');
+				alert(error.error || t('carpool.confirmBooking.error'));
 			}
 		} catch (error) {
 			console.error('Error booking ride:', error);
-			alert('Failed to book ride');
+			alert(t('carpool.confirmBooking.error'));
 		} finally {
 			setBooking(false);
 			setShowConfirmDialog(false);
@@ -158,7 +160,7 @@ const RideBooking = () => {
 
 	const handleCreateRide = async () => {
 		if (!user?.id) {
-			alert('Please sign in to create a ride');
+			alert(t('carpool.createRide.signInRequired'));
 			return;
 		}
 
@@ -169,7 +171,7 @@ const RideBooking = () => {
 			!newRide.seats ||
 			newRide.seats <= 0
 		) {
-			alert('Please fill all required fields to create a ride.');
+			alert(t('carpool.createRide.fillAllFields'));
 			return;
 		}
 
@@ -193,7 +195,7 @@ const RideBooking = () => {
 			});
 
 			if (response.ok) {
-				alert('Ride created successfully!');
+				alert(t('carpool.createRide.success'));
 				setNewRide({
 					start: '',
 					end: '',
@@ -205,11 +207,11 @@ const RideBooking = () => {
 				await fetchRides(); // Refresh rides list
 			} else {
 				const error = await response.json();
-				alert(error.error || 'Failed to create ride');
+				alert(error.error || t('carpool.createRide.error'));
 			}
 		} catch (error) {
 			console.error('Error creating ride:', error);
-			alert('Failed to create ride');
+			alert(t('carpool.createRide.error'));
 		} finally {
 			setCreating(false);
 		}
@@ -247,7 +249,7 @@ const RideBooking = () => {
 									{ride.driver}
 									{isOwnRide && (
 										<span className='ml-2 text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded'>
-											Your Ride
+											{t('carpool.joinRide.yourRide')}
 										</span>
 									)}
 									<span className='text-gray-400 text-sm ml-2'>
@@ -256,7 +258,7 @@ const RideBooking = () => {
 									{isConfirmed && !isOwnRide && (
 										<span className='ml-2 flex items-center text-emerald-400 text-sm font-medium'>
 											<Check className='w-4 h-4 mr-1' />
-											Booking Confirmed
+											{t('carpool.joinRide.bookingConfirmed')}
 										</span>
 									)}
 								</h3>
@@ -270,7 +272,7 @@ const RideBooking = () => {
 									</p>
 									<p className='text-xs text-gray-400 flex items-center'>
 										<Users className='w-3 h-3 mr-1' />
-										{ride.seats} seats available
+										{t('carpool.joinRide.seatsAvailable', { count: ride.seats })}
 									</p>
 								</div>
 								{ride.pickupPoint && (
@@ -293,7 +295,7 @@ const RideBooking = () => {
 								onClick={() => handleBookRide(ride)}
 								disabled={booking}
 							>
-								{booking ? 'Booking...' : 'Book this ride'}
+								{booking ? t('carpool.joinRide.booking') : t('carpool.joinRide.bookThisRide')}
 							</Button>
 						)}
 					</div>
@@ -311,13 +313,12 @@ const RideBooking = () => {
 			<div className='container mx-auto px-4 py-12'>
 				<div className='inline-block px-4 py-1 bg-emerald-900/50 rounded-full mb-6 backdrop-blur-sm border border-emerald-500/20 mx-auto'>
 					<p className='text-xs md:text-sm font-medium text-emerald-400 tracking-wide'>
-						SHARE · RIDE · REDUCE EMISSIONS
+						{t('carpool.tagline')}
 					</p>
 				</div>
 
 				<h1 className='text-3xl md:text-4xl font-bold text-white text-center mb-10 leading-tight'>
-					Smart <span className='text-emerald-400'>Carpooling</span> for a
-					Greener Planet
+					{t('carpool.title')}
 				</h1>
 
 				<div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
@@ -327,11 +328,11 @@ const RideBooking = () => {
 							<div className='h-8 w-8 rounded-md flex items-center justify-center bg-emerald-900/50 text-emerald-400 mr-2'>
 								<Car className='h-5 w-5' />
 							</div>
-							Create a Ride
+							{t('carpool.createRide.title')}
 						</h2>
 						<div className='grid grid-cols-1 gap-4 w-full'>
 							<Input
-								placeholder={`Name: ${user?.firstName || ''}${
+								placeholder={`${t('carpool.createRide.name')}: ${user?.firstName || ''}${
 									user?.lastName ? ` ${user?.lastName}` : ''
 								}`}
 								value={`${user?.firstName || ''}${
@@ -342,7 +343,7 @@ const RideBooking = () => {
 							/>
 							<div className='relative'>
 								<Input
-									placeholder='Start Location'
+									placeholder={t('carpool.createRide.startLocation')}
 									value={newRide.start}
 									onChange={(e) =>
 										setNewRide({ ...newRide, start: e.target.value })
@@ -360,7 +361,7 @@ const RideBooking = () => {
 							</div>
 							<div className='relative'>
 								<Input
-									placeholder='Destination'
+									placeholder={t('carpool.createRide.destination')}
 									value={newRide.end}
 									onChange={(e) =>
 										setNewRide({ ...newRide, end: e.target.value })
@@ -377,7 +378,7 @@ const RideBooking = () => {
 								</datalist>
 							</div>
 							<Input
-								placeholder='Car Model'
+								placeholder={t('carpool.createRide.carModel')}
 								value={newRide.car}
 								onChange={(e) =>
 									setNewRide({ ...newRide, car: e.target.value })
@@ -385,7 +386,7 @@ const RideBooking = () => {
 								className='bg-slate-700/50 border-slate-600 text-white'
 							/>
 							<Input
-								placeholder='Distance'
+								placeholder={t('carpool.createRide.distance')}
 								value={newRide.distance}
 								onChange={(e) =>
 									setNewRide({ ...newRide, distance: e.target.value })
@@ -393,7 +394,7 @@ const RideBooking = () => {
 								className='bg-slate-700/50 border-slate-600 text-white'
 							/>
 							<Input
-								placeholder='Pickup Point'
+								placeholder={t('carpool.createRide.pickupPoint')}
 								value={newRide.pickupPoint}
 								onChange={(e) =>
 									setNewRide({ ...newRide, pickupPoint: e.target.value })
@@ -403,7 +404,7 @@ const RideBooking = () => {
 							<div className='relative'>
 								<Input
 									type='number'
-									placeholder='Seats Available'
+									placeholder={t('carpool.createRide.seatsAvailable')}
 									value={newRide.seats || ''}
 									onChange={(e) =>
 										setNewRide({
@@ -423,10 +424,10 @@ const RideBooking = () => {
 								{creating ? (
 									<>
 										<Loader2 className='w-4 h-4 mr-2 animate-spin' />
-										Creating...
+										{t('carpool.createRide.creating')}
 									</>
 								) : (
-									'Create Ride'
+									t('carpool.createRide.createButton')
 								)}
 							</Button>
 						</div>
@@ -438,15 +439,15 @@ const RideBooking = () => {
 							<div className='h-8 w-8 rounded-md flex items-center justify-center bg-emerald-900/50 text-emerald-400 mr-2'>
 								<Users className='h-5 w-5' />
 							</div>
-							Join a Ride
+							{t('carpool.joinRide.title')}
 						</h2>
 						<div className='grid grid-cols-12 gap-4 mb-6 border border-slate-700/50 p-6 rounded-xl backdrop-blur-sm bg-slate-700/20'>
 							<div className='col-span-12 md:col-span-5'>
 								<label className='block text-xs font-medium mb-2 text-emerald-400'>
-									START FROM
+									{t('carpool.joinRide.startFrom')}
 								</label>
 								<Input
-									placeholder='e.g. Kengeri'
+									placeholder={t('carpool.joinRide.startPlaceholder')}
 									value={startLocation}
 									onChange={(e) => setStartLocation(e.target.value)}
 									className='bg-slate-700/50 border-slate-600 text-white'
@@ -462,10 +463,10 @@ const RideBooking = () => {
 							</div>
 							<div className='col-span-12 md:col-span-5'>
 								<label className='block text-xs font-medium mb-2 text-emerald-400'>
-									DESTINATION
+									{t('carpool.joinRide.destination')}
 								</label>
 								<Input
-									placeholder='e.g. Rajajinagar'
+									placeholder={t('carpool.joinRide.destinationPlaceholder')}
 									value={destination}
 									onChange={(e) => setDestination(e.target.value)}
 									className='bg-slate-700/50 border-slate-600 text-white'
@@ -484,7 +485,7 @@ const RideBooking = () => {
 									className='w-full px-4 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-md font-medium shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 hover:translate-y-1'
 									onClick={handleSearch}
 								>
-									Search
+									{t('carpool.joinRide.search')}
 								</Button>
 							</div>
 						</div>
@@ -496,7 +497,7 @@ const RideBooking = () => {
 									onClick={handleCancelSearch}
 									className='text-gray-400 hover:text-white'
 								>
-									Cancel search ✕
+									{t('carpool.joinRide.cancelSearch')}
 								</Button>
 							</div>
 						)}
@@ -511,13 +512,11 @@ const RideBooking = () => {
 								<>
 									{displayRides.length === 0 && isSearchActive ? (
 										<div className='text-center py-8 text-gray-400 backdrop-blur-sm bg-slate-700/20 rounded-xl border border-slate-700/50'>
-											No rides available from {startLocation} to {destination}.
-											Please try different locations or cancel search to see all
-											rides.
+											{t('carpool.joinRide.noRidesFound', { start: startLocation, destination })}
 										</div>
 									) : displayRides.length === 0 ? (
 										<div className='text-center py-8 text-gray-400 backdrop-blur-sm bg-slate-700/20 rounded-xl border border-slate-700/50'>
-											No rides available yet. Create the first ride!
+											{t('carpool.joinRide.noRidesAvailable')}
 										</div>
 									) : (
 										displayRides.map((ride) => (
@@ -534,23 +533,23 @@ const RideBooking = () => {
 					<DialogContent className='bg-slate-800 border border-slate-700 text-white'>
 						<DialogHeader>
 							<DialogTitle className='text-emerald-400'>
-								Confirm Booking
+								{t('carpool.confirmBooking.title')}
 							</DialogTitle>
 							<DialogDescription>
 								{selectedRide && (
 									<div className='py-4 space-y-2 text-gray-300'>
 										<p className='font-medium text-white'>
-											Driver: {selectedRide.driver}
+											{t('carpool.confirmBooking.driver')}: {selectedRide.driver}
 										</p>
-										<p>From: {selectedRide.start}</p>
-										<p>To: {selectedRide.end}</p>
-										<p>Car: {selectedRide.car}</p>
-										<p>Available Seats: {selectedRide.seats}</p>
-										<p>Distance: {selectedRide.distance}</p>
+										<p>{t('carpool.confirmBooking.from')}: {selectedRide.start}</p>
+										<p>{t('carpool.confirmBooking.to')}: {selectedRide.end}</p>
+										<p>{t('carpool.confirmBooking.car')}: {selectedRide.car}</p>
+										<p>{t('carpool.confirmBooking.availableSeats')}: {selectedRide.seats}</p>
+										<p>{t('carpool.confirmBooking.distance')}: {selectedRide.distance}</p>
 										<div className='mt-4 p-3 bg-slate-700/50 rounded-lg border border-slate-600/50'>
 											<p className='font-medium text-emerald-400 flex items-center'>
 												<MapPin className='w-4 h-4 mr-2' />
-												Pickup Point: {selectedRide.pickupPoint}
+												{t('carpool.confirmBooking.pickupPoint')}: {selectedRide.pickupPoint}
 											</p>
 										</div>
 									</div>
@@ -564,7 +563,7 @@ const RideBooking = () => {
 								onClick={() => setShowConfirmDialog(false)}
 								disabled={booking}
 							>
-								Cancel
+								{t('carpool.confirmBooking.cancel')}
 							</Button>
 							<Button
 								className='bg-gradient-to-r from-emerald-500 to-emerald-600 text-white'
@@ -574,10 +573,10 @@ const RideBooking = () => {
 								{booking ? (
 									<>
 										<Loader2 className='w-4 h-4 mr-2 animate-spin' />
-										Booking...
+										{t('carpool.confirmBooking.booking')}
 									</>
 								) : (
-									'Confirm Booking'
+									t('carpool.confirmBooking.confirm')
 								)}
 							</Button>
 						</DialogFooter>

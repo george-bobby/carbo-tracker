@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
 	Card,
 	CardContent,
@@ -69,6 +70,7 @@ const ApplianceCard = ({
 	onDurationChange,
 	isOverLimit,
 }) => {
+	const { t } = useTranslation('common');
 	const energyConsumption = ENERGY_CONSUMPTION[name] || 0;
 	const CARBON_INTENSITY = 0.42; // kg CO2 per kWh
 	const carbonFootprint = (
@@ -90,7 +92,7 @@ const ApplianceCard = ({
 							className={`w-4 h-4 ${isOn ? 'text-white' : 'text-emerald-400'}`}
 						/>
 					</div>
-					<span className='text-white font-semibold'>{name}</span>
+					<span className='text-white font-semibold'>{t(`ecocenter.devices.${name}`) || name}</span>
 				</div>
 				<div className='flex items-center gap-2'>
 					<div
@@ -99,14 +101,14 @@ const ApplianceCard = ({
 						}`}
 					/>
 					<span className='text-xs text-gray-400'>
-						{isOn ? 'Active' : 'Inactive'}
+						{isOn ? t('ecocenter.appliance.active') : t('ecocenter.appliance.inactive')}
 					</span>
 				</div>
 			</div>
 
 			<div className='space-y-4'>
 				<div className='flex items-center justify-between'>
-					<span className='text-sm text-gray-400'>Duration</span>
+					<span className='text-sm text-gray-400'>{t('ecocenter.appliance.duration')}</span>
 					<div className='flex gap-2 items-center'>
 						<select
 							value={Math.floor(duration)}
@@ -117,7 +119,7 @@ const ApplianceCard = ({
 						>
 							{Array.from({ length: 24 }, (_, i) => (
 								<option key={i} value={i}>
-									{i} hrs
+									{i} {t('ecocenter.appliance.hours')}
 								</option>
 							))}
 						</select>
@@ -132,7 +134,7 @@ const ApplianceCard = ({
 						>
 							{Array.from({ length: 12 }, (_, i) => (
 								<option key={i} value={i * 5}>
-									{i * 5} mins
+									{i * 5} {t('ecocenter.appliance.minutes')}
 								</option>
 							))}
 						</select>
@@ -140,7 +142,7 @@ const ApplianceCard = ({
 				</div>
 
 				<div className='flex items-center justify-between'>
-					<span className='text-sm text-gray-400'>Status</span>
+					<span className='text-sm text-gray-400'>{t('ecocenter.appliance.status')}</span>
 					<div
 						className={`w-12 h-6 rounded-full p-1 cursor-pointer transition-colors duration-200 ease-in-out ${
 							isOn ? 'bg-emerald-500' : 'bg-slate-600'
@@ -157,7 +159,7 @@ const ApplianceCard = ({
 
 				{isOn && duration > 0 && (
 					<div className='flex items-center justify-between mt-2'>
-						<span className='text-sm text-gray-400'>Carbon Footprint</span>
+						<span className='text-sm text-gray-400'>{t('ecocenter.appliance.carbonFootprint')}</span>
 						<span
 							className={`text-sm font-medium ${
 								isOverLimit ? 'text-red-400' : 'text-emerald-400'
@@ -173,6 +175,7 @@ const ApplianceCard = ({
 };
 
 const EcoCenter = () => {
+	const { t } = useTranslation('common');
 	// State for energy appliances
 	const [searchTerm, setSearchTerm] = useState('');
 	const [appliances, setAppliances] = useState(() => {
@@ -208,10 +211,13 @@ const EcoCenter = () => {
 	// Get all appliances as an array of entries
 	const allAppliances = Object.entries(appliances);
 
-	// Filter appliances based on search term
-	const filteredAppliances = allAppliances.filter(([name]) =>
-		name.toLowerCase().includes(searchTerm.toLowerCase())
-	);
+	// Filter appliances based on search term (search both original and translated names)
+	const filteredAppliances = allAppliances.filter(([name]) => {
+		const originalName = name.toLowerCase();
+		const translatedName = (t(`ecocenter.devices.${name}`) || name).toLowerCase();
+		const search = searchTerm.toLowerCase();
+		return originalName.includes(search) || translatedName.includes(search);
+	});
 
 	// Display first 9 appliances if no search term, otherwise show all filtered results
 	const displayedAppliances = searchTerm
@@ -249,14 +255,14 @@ const EcoCenter = () => {
 				<div className='mb-8 text-center'>
 					<div className='inline-block px-4 py-1 bg-emerald-900/50 rounded-full mb-2 backdrop-blur-sm border border-emerald-500/20'>
 						<p className='text-xs md:text-sm font-medium text-emerald-400 tracking-wide'>
-							MONITOR · ANALYZE · REDUCE
+							{t('ecocenter.tagline')}
 						</p>
 					</div>
 					<h1 className='text-3xl md:text-4xl font-bold text-white mb-2'>
-						Your <span className='text-emerald-400'>Eco Center</span> Dashboard
+						{t('ecocenter.title')}
 					</h1>
 					<p className='text-gray-300 max-w-2xl mx-auto'>
-						Track your energy usage to reduce your carbon footprint.
+						{t('ecocenter.subtitle')}
 					</p>
 				</div>
 
@@ -265,7 +271,7 @@ const EcoCenter = () => {
 						<div>
 							<h3 className='text-xl font-semibold text-white mb-2 flex items-center gap-2'>
 								<Zap className='text-emerald-400 w-5 h-5' />
-								Current Energy Impact
+								{t('ecocenter.currentEnergyImpact')}
 							</h3>
 							<div
 								className={`text-3xl font-bold ${
@@ -289,25 +295,25 @@ const EcoCenter = () => {
 									/>
 								</div>
 								<span className='text-sm text-gray-300 whitespace-nowrap'>
-									{DAILY_CARBON_LIMIT} kg limit
+									{DAILY_CARBON_LIMIT} {t('ecocenter.carbonLimit')}
 								</span>
 							</div>
 						</div>
 
 						<div className='bg-slate-700/50 backdrop-blur-sm border border-slate-600 p-4 rounded-lg max-w-md w-full'>
 							<h3 className='text-sm font-semibold text-white mb-3'>
-								Active Appliances:
+								{t('ecocenter.activeAppliances')}
 							</h3>
 							<div className='space-y-2 max-h-32 overflow-y-auto pr-2'>
 								{Object.entries(appliances)
-									.filter(([name, data]) => data.isOn && data.duration > 0)
-									.map(([name, data]) => {
+									.filter(([applianceName, data]) => data.isOn && data.duration > 0)
+									.map(([applianceName, data]) => {
 										const emissions =
-											(ENERGY_CONSUMPTION[name] || 0) * data.duration * 0.42;
+											(ENERGY_CONSUMPTION[applianceName] || 0) * data.duration * 0.42;
 										return (
-											<div key={name} className='flex justify-between text-sm'>
+											<div key={applianceName} className='flex justify-between text-sm'>
 												<span className='text-gray-300'>
-													{name} ({data.duration}h)
+													{t(`ecocenter.devices.${applianceName}`) || applianceName} ({data.duration}h)
 												</span>
 												<span
 													className={`font-medium ${
@@ -320,10 +326,10 @@ const EcoCenter = () => {
 										);
 									})}
 								{Object.entries(appliances).filter(
-									([name, data]) => data.isOn && data.duration > 0
+									([applianceName, data]) => data.isOn && data.duration > 0
 								).length === 0 && (
 									<div className='text-gray-400 text-sm'>
-										No active appliances
+										{t('ecocenter.noActiveAppliances')}
 									</div>
 								)}
 							</div>
@@ -334,12 +340,10 @@ const EcoCenter = () => {
 						<div className='mt-6 p-4 bg-red-500/20 border border-red-500/30 rounded-lg text-white'>
 							<div className='flex items-center gap-2 mb-1'>
 								<AlertTriangle className='h-5 w-5 text-red-400' />
-								<h3 className='font-semibold'>Carbon Limit Exceeded</h3>
+								<h3 className='font-semibold'>{t('ecocenter.carbonLimitExceeded')}</h3>
 							</div>
 							<p className='text-sm text-gray-300'>
-								Your current usage exceeds the daily limit of{' '}
-								{DAILY_CARBON_LIMIT} kg CO₂. Consider reducing appliance usage
-								or duration.
+								{t('ecocenter.carbonLimitExceededMessage', { limit: DAILY_CARBON_LIMIT })}
 							</p>
 						</div>
 					)}
@@ -349,7 +353,7 @@ const EcoCenter = () => {
 					<div className='relative'>
 						<Input
 							type='search'
-							placeholder='Search appliances...'
+							placeholder={t('ecocenter.searchPlaceholder')}
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
 							className='w-full bg-slate-800 border-slate-700 text-white placeholder:text-gray-400 focus:border-emerald-500'
@@ -389,7 +393,7 @@ const EcoCenter = () => {
 
 				{searchTerm && filteredAppliances.length === 0 && (
 					<div className='text-center py-8 text-gray-400'>
-						No appliances found matching "{searchTerm}"
+						{t('ecocenter.noAppliancesFound', { searchTerm })}
 					</div>
 				)}
 			</div>

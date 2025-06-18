@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
 	FaLeaf,
 	FaChartLine,
@@ -7,74 +8,101 @@ import {
 	FaArrowRight,
 } from 'react-icons/fa';
 import Link from 'next/link';
+import KazakhstanAnimation from './KazakhstanAnimation';
 
 const Hero = () => {
+	const { t } = useTranslation('common');
 	const [hoveredCard, setHoveredCard] = useState(null);
 
 	const features = [
 		{
 			icon: <FaLeaf className='h-6 w-6' />,
-			title: 'Track Your Footprint',
-			description:
-				'Monitor your daily carbon emissions and see your environmental impact in real-time.',
+			title: t('hero.features.trackFootprint.title'),
+			description: t('hero.features.trackFootprint.description'),
 		},
 		{
 			icon: <FaChartLine className='h-6 w-6' />,
-			title: 'Analyze Trends',
-			description:
-				'Visualize your progress over time with detailed charts and personalized insights.',
+			title: t('hero.features.analyzeTrends.title'),
+			description: t('hero.features.analyzeTrends.description'),
 		},
 		{
 			icon: <FaCalculator className='h-6 w-6' />,
-			title: 'Calculate Impact',
-			description:
-				'Make informed decisions with our comprehensive carbon calculator tool.',
+			title: t('hero.features.calculateImpact.title'),
+			description: t('hero.features.calculateImpact.description'),
 		},
 	];
 
 	return (
-		<div>
-			<div className='container mx-auto px-4 py-20 md:py-28'>
+		<div className='relative'>
+			{/* Animated Kazakhstan Background */}
+			<KazakhstanAnimation />
+
+			<div className='container mx-auto px-4 py-20 md:py-28 relative z-10'>
 				{/* Main Hero Content */}
 				<div className='flex flex-col md:flex-row gap-12 items-center justify-between'>
 					{/* Left Content - Text */}
 					<div className='w-full md:w-1/2 space-y-6 text-center md:text-left'>
 						<div className='inline-block px-4 py-1 bg-emerald-900/50 rounded-full mb-2 backdrop-blur-sm border border-emerald-500/20'>
 							<p className='text-xs md:text-sm font-medium text-emerald-400 tracking-wide'>
-								REDUCE · TRACK · IMPROVE
+								{t('hero.tagline')}
 							</p>
 						</div>
 
 						<h1 className='text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight'>
-							Track Your{' '}
-							<span className='text-emerald-400'>Carbon Footprint</span> in
-							Real-Time
+							{(() => {
+								const title = t('hero.title');
+								// Define carbon footprint terms in different languages
+								const carbonFootprintTerms = [
+									'Carbon Footprint',           // English
+									'углеродный след',           // Russian
+									'көміртек ізіңізді',         // Kazakh (your carbon footprint)
+									'көміртек ізі'               // Kazakh (carbon footprint)
+								];
+
+								// Create a regex pattern that matches any of the terms
+								const pattern = new RegExp(`(${carbonFootprintTerms.join('|')})`, 'gi');
+								const parts = title.split(pattern);
+
+								return parts.map((part, index) => {
+									// Check if this part matches any carbon footprint term
+									const isMatch = carbonFootprintTerms.some(term =>
+										part.toLowerCase() === term.toLowerCase()
+									);
+
+									if (isMatch) {
+										return (
+											<span key={index} className='text-emerald-400 drop-shadow-lg'>
+												{part}
+											</span>
+										);
+									}
+									return part;
+								});
+							})()}
 						</h1>
 
 						<p className='text-gray-300 text-lg md:text-xl max-w-xl leading-relaxed font-light'>
-							Take control of your environmental impact with our intuitive
-							dashboard and personalized insights.
+							{t('hero.subtitle')}
 						</p>
 
 						<div className='flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start'>
 							<Link href='/calculator'>
 								<button className='px-8 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-md font-medium shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 hover:translate-y-1 flex items-center justify-center gap-2 group'>
-									Start Tracking
+									{t('hero.startTracking')}
 									<FaArrowRight className='w-4 h-4 group-hover:translate-x-1 transition-transform duration-300' />
 								</button>
 							</Link>
 
 							<Link href='/shop'>
 								<button className='px-8 py-3 bg-transparent border border-emerald-500/30 text-emerald-400 rounded-md font-medium hover:bg-emerald-500/10 transition-all duration-300 hover:border-emerald-500'>
-									View Shop
+									{t('hero.viewShop')}
 								</button>
 							</Link>
 						</div>
 
 						<div className='pt-6'>
 							<p className='text-gray-400 text-sm'>
-								Join <span className='text-white font-medium'>15,000+</span>{' '}
-								eco-conscious users making a difference
+								{t('hero.joinUsers', { count: '15,000' })}
 							</p>
 						</div>
 					</div>
@@ -90,11 +118,11 @@ const Hero = () => {
 											<FaLeaf className='text-white' />
 										</div>
 										<span className='text-white font-bold'>
-											Carbon Dashboard
+											{t('hero.carbonDashboard')}
 										</span>
 									</div>
 									<div className='text-emerald-400 text-sm font-medium'>
-										Today
+										{t('hero.today')}
 									</div>
 								</div>
 
@@ -103,7 +131,7 @@ const Hero = () => {
 										<div className='h-full w-3/4 bg-emerald-500 rounded-full'></div>
 									</div>
 									<div className='flex justify-between text-sm'>
-										<span className='text-gray-400'>Your Footprint</span>
+										<span className='text-gray-400'>{t('hero.yourFootprint')}</span>
 										<span className='text-white font-medium'>8.2 kg CO₂</span>
 									</div>
 
@@ -111,26 +139,26 @@ const Hero = () => {
 										<div className='h-full w-1/2 bg-emerald-500 rounded-full'></div>
 									</div>
 									<div className='flex justify-between text-sm'>
-										<span className='text-gray-400'>Average</span>
+										<span className='text-gray-400'>{t('hero.average')}</span>
 										<span className='text-white font-medium'>12.5 kg CO₂</span>
 									</div>
 								</div>
 
 								<div className='grid grid-cols-2 gap-4'>
 									<div className='bg-slate-700/50 p-4 rounded-lg'>
-										<div className='text-xs text-gray-400 mb-1'>Transport</div>
+										<div className='text-xs text-gray-400 mb-1'>{t('hero.transport')}</div>
 										<div className='text-white font-medium'>3.6 kg CO₂</div>
 									</div>
 									<div className='bg-slate-700/50 p-4 rounded-lg'>
-										<div className='text-xs text-gray-400 mb-1'>Energy</div>
+										<div className='text-xs text-gray-400 mb-1'>{t('hero.energy')}</div>
 										<div className='text-white font-medium'>2.8 kg CO₂</div>
 									</div>
 									<div className='bg-slate-700/50 p-4 rounded-lg'>
-										<div className='text-xs text-gray-400 mb-1'>Food</div>
+										<div className='text-xs text-gray-400 mb-1'>{t('hero.food')}</div>
 										<div className='text-white font-medium'>1.5 kg CO₂</div>
 									</div>
 									<div className='bg-slate-700/50 p-4 rounded-lg'>
-										<div className='text-xs text-gray-400 mb-1'>Other</div>
+										<div className='text-xs text-gray-400 mb-1'>{t('hero.other')}</div>
 										<div className='text-white font-medium'>0.3 kg CO₂</div>
 									</div>
 								</div>
