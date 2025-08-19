@@ -140,6 +140,14 @@ const CarbonFootprintCalculator = () => {
 
 			const data = {
 				clerkId: user?.id,
+				// Optional profile fields to enrich leaderboard display
+				displayName:
+					user?.fullName ||
+					[user?.firstName, user?.lastName].filter(Boolean).join(' ') ||
+					undefined,
+				firstName: user?.firstName,
+				lastName: user?.lastName,
+				imageUrl: user?.imageUrl,
 				updatedAt: new Date().toISOString(),
 				categories: categoryEmissions,
 				equivalencies: getEquivalencies(totalEmissions).reduce((acc, eq) => {

@@ -10,6 +10,7 @@ import CarbonComparison from './compareChart';
 import CarbonGauge from './DounutChart';
 import LineChart from './LineChart';
 import RadarChart from './RadarChart';
+import Leaderboard from './Leaderboard';
 import { Tab } from '@headlessui/react';
 import {
 	FaLeaf,
@@ -66,22 +67,24 @@ export default function UserProfile() {
 				{/* Dashboard Content */}
 				<Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
 					<Tab.List className='flex space-x-1 rounded-xl bg-slate-800/50 p-1 mb-6'>
-						{['Overview', 'Charts', 'Comparison'].map((category, idx) => (
-							<Tab
-								key={idx}
-								className={({ selected }) =>
-									`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-emerald-400
+						{['Overview', 'Charts', 'Comparison', 'Leaderboard'].map(
+							(category, idx) => (
+								<Tab
+									key={idx}
+									className={({ selected }) =>
+										`w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-emerald-400
 									ring-white ring-opacity-60 ring-offset-2 ring-offset-emerald-400 focus:outline-none focus:ring-2
 									${
 										selected
 											? 'bg-emerald-900/50 shadow'
 											: 'text-emerald-100 hover:bg-emerald-900/50 hover:text-white'
 									}`
-								}
-							>
-								{category}
-							</Tab>
-						))}
+									}
+								>
+									{category}
+								</Tab>
+							)
+						)}
 					</Tab.List>
 					<Tab.Panels className='mt-2'>
 						{/* Overview Tab */}
@@ -164,6 +167,10 @@ export default function UserProfile() {
 									</div>
 								</div>
 							</div>
+						</Tab.Panel>
+						{/* Leaderboard Tab */}
+						<Tab.Panel className={`rounded-xl bg-slate-800/50 p-3`}>
+							<Leaderboard clerkId={user?.id} />
 						</Tab.Panel>
 					</Tab.Panels>
 				</Tab.Group>
