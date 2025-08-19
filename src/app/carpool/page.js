@@ -243,14 +243,14 @@ const RideBooking = () => {
 					<div className='flex-1'>
 						<div className='flex justify-between items-start'>
 							<div>
-								<h3 className='font-medium flex items-center text-white'>
+								<h3 className='font-medium flex items-center text-black'>
 									{ride.driver}
 									{isOwnRide && (
 										<span className='ml-2 text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded'>
 											Your Ride
 										</span>
 									)}
-									<span className='text-gray-400 text-sm ml-2'>
+									<span className='text-black text-sm ml-2'>
 										{ride.distance}
 									</span>
 									{isConfirmed && !isOwnRide && (
@@ -260,21 +260,21 @@ const RideBooking = () => {
 										</span>
 									)}
 								</h3>
-								<p className='text-sm text-gray-300 flex items-center mt-1'>
+								<p className='text-sm text-black flex items-center mt-1'>
 									<Navigation className='w-3 h-3 mr-1' />
 									{ride.start} to {ride.end}
 								</p>
 								<div className='flex items-center gap-4 mt-2'>
-									<p className='text-xs text-gray-400 flex items-center'>
+									<p className='text-xs text-black flex items-center'>
 										<Car className='w-3 h-3 mr-1' /> {ride.car}
 									</p>
-									<p className='text-xs text-gray-400 flex items-center'>
+									<p className='text-xs text-black flex items-center'>
 										<Users className='w-3 h-3 mr-1' />
 										{ride.seats} seats available
 									</p>
 								</div>
 								{ride.pickupPoint && (
-									<div className='flex items-center mt-1 text-xs text-gray-400'>
+									<div className='flex items-center mt-1 text-xs text-black'>
 										<MapPin className='w-3 h-3 mr-1' />
 										{ride.pickupPoint}
 									</div>
