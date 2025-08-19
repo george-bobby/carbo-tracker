@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { MdContentCopy, MdReceiptLong } from 'react-icons/md';
-import { FaLeaf, FaFilePdf } from 'react-icons/fa';
+import { FaLeaf } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUser } from '@clerk/nextjs';
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
@@ -20,6 +20,7 @@ export default function Page() {
 	const [receiptPreview, setReceiptPreview] = useState(null);
 	const [parsed, setParsed] = useState(null);
 	const [saving, setSaving] = useState(false);
+	const [analyzing, setAnalyzing] = useState(false);
 
 	const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API);
 
@@ -54,6 +55,33 @@ export default function Page() {
 		} catch (err) {
 			console.error('Failed to copy: ', err);
 		}
+	};
+
+	const handleUseSample = async () => {
+		setAnalyzing(true);
+		setParsed(null);
+		setReceiptPreview('/sample-recipt.png');
+
+		// Simulate analyzing for 1 second
+		await new Promise((resolve) => setTimeout(resolve, 1000));
+
+		// Set realistic sample data based on a grocery receipt
+		const sampleData = {
+			merchant: 'FreshMart Grocery Store',
+			date: new Date().toISOString().slice(0, 10),
+			categories: {
+				foodConsumption: 12.5,
+				shopping: 8.3,
+				transportation: 2.1,
+			},
+		};
+		sampleData.totalKg = Object.values(sampleData.categories).reduce(
+			(a, b) => a + b,
+			0
+		);
+
+		setParsed(sampleData);
+		setAnalyzing(false);
 	};
 
 	return (
@@ -173,56 +201,76 @@ export default function Page() {
 									</p>
 
 									<div className='space-y-4'>
-										<label className='flex items-center gap-2 text-gray-200 text-sm cursor-pointer'>
-											<MdReceiptLong className='text-emerald-400' /> Upload
-											receipt image
-											<input
-												type='file'
-												accept='image/*'
-												onChange={(e) => {
-													const file = e.target.files?.[0];
-													if (!file) return;
-													setReceiptPreview(URL.createObjectURL(file));
-													const demo = {
-														merchant: 'Green Grocers',
-														date: new Date().toISOString().slice(0, 10),
-														categories: {
-															shopping: 14,
-															foodConsumption: 8,
-															transportation: 3,
-														},
-													};
-													demo.totalKg = Object.values(demo.categories).reduce(
-														(a, b) => a + b,
-														0
-													);
-													setParsed(demo);
-												}}
-												className='hidden'
-											/>
-										</label>
+										<div className='flex flex-col sm:flex-row gap-3'>
+											<label className='flex items-center gap-2 text-gray-200 text-sm cursor-pointer bg-slate-700/50 px-4 py-2 rounded-lg hover:bg-slate-700/70 transition-colors'>
+												<MdReceiptLong className='text-emerald-400' /> Upload
+												receipt image
+												<input
+													type='file'
+													accept='image/*'
+													onChange={(e) => {
+														const file = e.target.files?.[0];
+														if (!file) return;
+														setReceiptPreview(URL.createObjectURL(file));
+														const demo = {
+															merchant: 'Green Grocers',
+															date: new Date().toISOString().slice(0, 10),
+															categories: {
+																shopping: 14,
+																foodConsumption: 8,
+																transportation: 3,
+															},
+														};
+														demo.totalKg = Object.values(
+															demo.categories
+														).reduce((a, b) => a + b, 0);
+														setParsed(demo);
+													}}
+													className='hidden'
+												/>
+											</label>
 
-										{/* <div className='flex items-center gap-3'>
-											<div className='w-16 h-16 rounded-md bg-slate-700 border border-slate-600 flex items-center justify-center overflow-hidden'>
-												{receiptPreview ? (
+											<button
+												onClick={handleUseSample}
+												disabled={analyzing}
+												className='flex items-center gap-2 text-gray-200 text-sm bg-emerald-600/20 px-4 py-2 rounded-lg hover:bg-emerald-600/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+											>
+												<MdReceiptLong className='text-emerald-400' />
+												{analyzing ? 'Analyzing...' : 'Use Sample'}
+											</button>
+										</div>
+
+										{/* Receipt Preview */}
+										{receiptPreview && (
+											<div className='flex items-center gap-3'>
+												<div className='w-16 h-16 rounded-md bg-slate-700 border border-slate-600 flex items-center justify-center overflow-hidden'>
 													<img
 														src={receiptPreview}
 														alt='receipt preview'
 														className='w-full h-full object-cover'
 													/>
-												) : (
-													<FaFilePdf className='text-3xl text-emerald-400' />
-												)}
+												</div>
+												<div className='text-sm text-gray-300'>
+													Receipt loaded successfully
+												</div>
 											</div>
-											<a
-												href='https://www.invoicesimple.com/wp-content/uploads/2019/08/Receipt-Template-PDF.pdf'
-												target='_blank'
-												rel='noopener noreferrer'
-												className='text-emerald-300 hover:text-emerald-200 text-sm underline'
-											>
-												Sample receipt (PDF)
-											</a>
-										</div> */}
+										)}
+
+										{/* Analyzing State */}
+										{analyzing && (
+											<div className='mt-4 space-y-3 bg-slate-700/30 border border-slate-600 rounded-lg p-4'>
+												<div className='flex items-center gap-3'>
+													<div className='animate-spin rounded-full h-6 w-6 border-b-2 border-emerald-400'></div>
+													<h3 className='text-white font-semibold text-sm'>
+														Analyzing Receipt...
+													</h3>
+												</div>
+												<p className='text-gray-300 text-sm'>
+													Processing receipt data and calculating carbon
+													footprint...
+												</p>
+											</div>
+										)}
 
 										{parsed && (
 											<div className='mt-4 space-y-3 bg-slate-700/30 border border-slate-600 rounded-lg p-4'>
