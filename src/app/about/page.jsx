@@ -274,7 +274,7 @@ export default function AboutUs() {
 					>
 						<div className='md:w-1/2'>
 							<img
-								src='/about-image.png'
+								src='/img3.png'
 								alt='CCA Team'
 								className='rounded-xl shadow-2xl border border-slate-700 w-full h-auto'
 							/>
