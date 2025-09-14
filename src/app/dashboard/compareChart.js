@@ -23,8 +23,11 @@ const CarbonComparison = ({ clerkId }) => {
 			const response = await fetch('/api/fetch');
 			const fetchedData = await response.json();
 
+			// Ensure fetchedData is always an array
+			const safeData = Array.isArray(fetchedData) ? fetchedData : [];
+
 			// Find the data for the given clerkId
-			let data = fetchedData.find((item) => item.clerkId === clerkId);
+			let data = safeData.find((item) => item.clerkId === clerkId);
 
 			// If no data found, fallback to default clerkId
 			if (!data) {
@@ -32,7 +35,7 @@ const CarbonComparison = ({ clerkId }) => {
 					`No data found for clerkId: ${clerkId}, fetching default clerkId`
 				);
 				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
-				data = fetchedData.find((item) => item.clerkId === defaultClerkId);
+				data = safeData.find((item) => item.clerkId === defaultClerkId);
 			}
 
 			if (data) {
@@ -55,7 +58,7 @@ const CarbonComparison = ({ clerkId }) => {
 
 	// Format data for side-by-side comparison
 	const prepareComparisonData = () => {
-		if (!userData) return null;
+		if (!userData || !userData.categories) return null;
 
 		const { categories } = userData;
 

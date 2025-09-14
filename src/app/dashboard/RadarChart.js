@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Radar } from 'react-chartjs-2';
 
-const RadarChart = ({ clerkId }) => {
+const RadarChart = ({ clerkId, refresh }) => {
 	const [chartData, setChartData] = useState(null);
 
 	// Fetch the data from the API
@@ -78,7 +78,7 @@ const RadarChart = ({ clerkId }) => {
 
 	useEffect(() => {
 		if (clerkId) fetchData();
-	}, [clerkId]);
+	}, [clerkId, refresh]); // Added refresh dependency
 
 	const options = {
 		responsive: true,
@@ -135,7 +135,7 @@ const RadarChart = ({ clerkId }) => {
 		return (
 			<div className='flex flex-col items-center justify-center text-center py-12'>
 				<div className='h-16 w-16 rounded-full bg-emerald-900/30 flex items-center justify-center mb-4'>
-					<div className='h-8 w-8 text-emerald-400'>
+					<div className='h-8 w-8 text-emerald-400 animate-spin'>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							viewBox='0 0 24 24'

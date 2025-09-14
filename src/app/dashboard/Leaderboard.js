@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react';
-import { FaTrophy, FaArrowDown, FaArrowUp } from 'react-icons/fa';
+import { FaTrophy } from 'react-icons/fa';
 
 // Leaderboard of lowest total emissions
 // Uses /api/fetch which returns documents from the `overall` collection
@@ -150,7 +150,6 @@ export default function Leaderboard({ clerkId: currentClerkId }) {
 										<td className='py-3 pr-4'>
 											<div className='flex items-center gap-2'>
 												{u.imageUrl ? (
-													// eslint-disable-next-line @next/next/no-img-element
 													<img
 														src={u.imageUrl}
 														alt='avatar'
@@ -213,7 +212,6 @@ export default function Leaderboard({ clerkId: currentClerkId }) {
 				</div>
 				<div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
 					{top3.map((u, i) => {
-						// Compute top 3 categories for detail
 						const entries = Object.entries(u.categories || {});
 						const topCats = entries.sort((a, b) => b[1] - a[1]).slice(0, 4);
 						const idShort = u.clerkId?.slice(-6) || 'unknown';
@@ -250,7 +248,6 @@ export default function Leaderboard({ clerkId: currentClerkId }) {
 										>
 											<FaTrophy /> #{i + 1}
 											{u.imageUrl ? (
-												// eslint-disable-next-line @next/next/no-img-element
 												<img
 													src={u.imageUrl}
 													alt='avatar'

@@ -7,76 +7,79 @@ const CarbonGauge = ({ clerkId }) => {
 	const [status, setStatus] = useState('');
 	const [color, setColor] = useState('');
 
-	// Define thresholds for different statuses
+	// Define thresholds
 	const lowThreshold = 100;
 	const mediumThreshold = 500;
 	const highThreshold = 1000;
 
-	// Fetch data from API
+	// Fetch data from API safely
 	const fetchData = async () => {
+		setLoading(true);
 		try {
 			const response = await fetch('/api/fetch');
 			const fetchedData = await response.json();
+			const safeData = Array.isArray(fetchedData) ? fetchedData : [];
 
-			// Find the data for the given clerkId
-			let userData = fetchedData.find((item) => item.clerkId === clerkId);
+			// Find user data
+			let userData = safeData.find((item) => item.clerkId === clerkId);
 
-			// If no data found, fallback to default clerkId
+			// Fallback to default clerkId
 			if (!userData) {
-				console.warn(
-					`No data found for clerkId: ${clerkId}, fetching default clerkId`
-				);
+				console.warn(`No data found for clerkId: ${clerkId}, trying default clerkId`);
 				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
-				userData = fetchedData.find((item) => item.clerkId === defaultClerkId);
+				userData = safeData.find((item) => item.clerkId === defaultClerkId);
 			}
 
-			if (userData) {
-				// Calculate total emissions from categories
-				const { categories } = userData;
-				const total = Object.values(categories).reduce(
-					(sum, value) => sum + value,
-					0
-				);
+			if (!userData) {
+				console.warn('No data found for the default clerkId either');
+				setTotalEmissions(0);
+				setStatus('No Data');
+				setColor('rgb(107, 114, 128)'); // gray-500
+				return;
+			}
 
-				setTotalEmissions(total);
+			// Calculate total emissions safely
+			const { categories } = userData;
+			const total = categories
+				? Object.values(categories).reduce((sum, value) => sum + (value || 0), 0)
+				: 0;
+			setTotalEmissions(total);
 
-				// Set status based on thresholds
-				if (total < lowThreshold) {
-					setStatus('Low Impact');
-					setColor('rgb(34, 197, 94)'); // green-500
-				} else if (total < mediumThreshold) {
-					setStatus('Medium Impact');
-					setColor('rgb(250, 204, 21)'); // yellow-400
-				} else if (total < highThreshold) {
-					setStatus('High Impact');
-					setColor('rgb(249, 115, 22)'); // orange-500
-				} else {
-					setStatus('Very High Impact');
-					setColor('rgb(239, 68, 68)'); // red-500
-				}
+			// Set status & color
+			if (total < lowThreshold) {
+				setStatus('Low Impact');
+				setColor('rgb(34, 197, 94)');
+			} else if (total < mediumThreshold) {
+				setStatus('Medium Impact');
+				setColor('rgb(250, 204, 21)');
+			} else if (total < highThreshold) {
+				setStatus('High Impact');
+				setColor('rgb(249, 115, 22)');
 			} else {
-				console.error('No data found for the default clerkId either');
+				setStatus('Very High Impact');
+				setColor('rgb(239, 68, 68)');
 			}
 		} catch (error) {
 			console.error('Error fetching data:', error);
+			setTotalEmissions(0);
+			setStatus('Error');
+			setColor('rgb(239, 68, 68)');
 		} finally {
 			setLoading(false);
 		}
 	};
 
 	useEffect(() => {
-		if (clerkId) {
-			fetchData();
-		}
+		if (clerkId) fetchData();
 	}, [clerkId]);
 
-	// Create data for gauge chart
+	// Gauge chart data
 	const gaugeData = {
 		labels: ['Carbon Footprint', 'Remaining'],
 		datasets: [
 			{
-				data: [totalEmissions, highThreshold * 1.5 - totalEmissions], // Using highThreshold as max for gauge
-				backgroundColor: [color, 'rgba(30, 41, 59, 0.6)'], // The second color is slate-800 with opacity
+				data: [totalEmissions, highThreshold * 1.5 - totalEmissions],
+				backgroundColor: [color, 'rgba(30, 41, 59, 0.6)'],
 				borderColor: ['transparent', 'transparent'],
 				borderWidth: 0,
 				cutout: '80%',
@@ -89,34 +92,20 @@ const CarbonGauge = ({ clerkId }) => {
 	const gaugeOptions = {
 		responsive: true,
 		maintainAspectRatio: false,
-		plugins: {
-			legend: {
-				display: false,
-			},
-			tooltip: {
-				enabled: false,
-			},
-		},
-		layout: {
-			padding: {
-				bottom: 30,
-			},
-		},
+		plugins: { legend: { display: false }, tooltip: { enabled: false } },
+		layout: { padding: { bottom: 30 } },
 	};
 
-	// Function to determine color class based on status
+	// Tailwind class for status
 	const getStatusColorClass = () => {
 		switch (status) {
-			case 'Low Impact':
-				return 'text-green-500';
-			case 'Medium Impact':
-				return 'text-yellow-400';
-			case 'High Impact':
-				return 'text-orange-500';
-			case 'Very High Impact':
-				return 'text-red-500';
-			default:
-				return 'text-emerald-400';
+			case 'Low Impact': return 'text-green-500';
+			case 'Medium Impact': return 'text-yellow-400';
+			case 'High Impact': return 'text-orange-500';
+			case 'Very High Impact': return 'text-red-500';
+			case 'No Data': return 'text-gray-500';
+			case 'Error': return 'text-red-500';
+			default: return 'text-emerald-400';
 		}
 	};
 
@@ -124,7 +113,7 @@ const CarbonGauge = ({ clerkId }) => {
 		return (
 			<div className='flex flex-col items-center justify-center text-center py-12'>
 				<div className='h-16 w-16 rounded-full bg-emerald-900/30 flex items-center justify-center mb-4'>
-					<div className='h-8 w-8 text-emerald-400'>
+					<div className='h-8 w-8 text-emerald-400 animate-spin'>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							viewBox='0 0 24 24'
@@ -148,8 +137,6 @@ const CarbonGauge = ({ clerkId }) => {
 			<div className='w-full h-full'>
 				<Doughnut data={gaugeData} options={gaugeOptions} />
 			</div>
-
-			{/* Gauge label overlay */}
 			<div className='absolute bottom-8 flex flex-col items-center'>
 				<div className={`text-4xl font-bold ${getStatusColorClass()}`}>
 					{totalEmissions.toFixed(1)}

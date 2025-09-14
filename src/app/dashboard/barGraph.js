@@ -5,13 +5,16 @@ const BarGraph = ({ clerkId }) => {
 	const [dataArray, setDataArray] = useState([]);
 	const [loading, setLoading] = useState(true);
 
+	// Fetch existing data from MongoDB
 	const fetchData = async () => {
 		try {
 			const response = await fetch('/api/fetch');
 			const fetchedData = await response.json();
 
 			// Find the data for the given clerkId
-			let userData = fetchedData.find((item) => item.clerkId === clerkId);
+			let userData = Array.isArray(fetchedData) 
+				? fetchedData.find((item) => item.clerkId === clerkId) 
+				: null;
 
 			// If no data found for the current clerkId, fallback to default clerkId
 			if (!userData) {
@@ -19,7 +22,9 @@ const BarGraph = ({ clerkId }) => {
 					`No data found for clerkId: ${clerkId}, fetching default clerkId`
 				);
 				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
-				userData = fetchedData.find((item) => item.clerkId === defaultClerkId);
+				userData = Array.isArray(fetchedData) 
+					? fetchedData.find((item) => item.clerkId === defaultClerkId) 
+					: null;
 			}
 
 			if (userData) {
@@ -31,6 +36,20 @@ const BarGraph = ({ clerkId }) => {
 			console.error('Error fetching data:', error);
 		} finally {
 			setLoading(false);
+		}
+	};
+
+	// Add a new monthly value to MongoDB
+	const addMonthlyValue = async (month, value) => {
+		try {
+			await fetch('/api/fetch', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ clerkId, month, value }),
+			});
+			fetchData(); // refresh chart data after updating
+		} catch (err) {
+			console.error('Failed to add value:', err);
 		}
 	};
 

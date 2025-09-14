@@ -1,0 +1,87 @@
+{
+  "meat": {
+    "beef": 0.20,
+    "lamb": 0.20,
+    "pork": 0.20,
+    "chicken": 0.25,
+    "turkey": 0.30,
+    "fish": 0.18
+  },
+  "dairy_eggs": {
+    "eggs": 0.06,
+    "milk": 1.00,
+    "cheese": 0.02,
+    "butter": 0.01,
+    "yogurt": 0.15
+  },
+  "plant_protein": {
+    "tofu": 0.20,
+    "beans": 0.20,
+    "lentils": 0.20,
+    "nuts": 0.05
+  },
+  "grains_starches": {
+    "rice": 0.10,
+    "wheat": 0.10,
+    "bread": 0.05,
+    "pasta": 0.10,
+    "potatoes": 0.15
+  },
+  "vegetables": {
+    "tomatoes": 0.10,
+    "onions": 0.12,
+    "carrots": 0.10,
+    "broccoli": 0.25,
+    "leafy greens": 0.08,
+    "avocado": 0.20
+  },
+  "fruits": {
+    "apples": 0.18,
+    "bananas": 0.12,
+    "oranges": 0.20,
+    "berries": 0.05
+  },
+  "drinks": {
+    "coffee": 0.01,
+    "tea": 0.01,
+    "beer": 0.33,
+    "wine": 0.75,
+    "soft drink": 0.33,
+    "bottled water": 0.50,
+    "juice": 0.25
+  },
+  "snacks_sweets": {
+    "chocolate": 0.10,
+    "ice cream": 0.10,
+    "processed snack": 0.05,
+    "chips": 0.05,
+    "biscuits": 0.02
+  },
+  "ready_meals": {
+    "pizza": 0.30,
+    "burger": 0.25,
+    "sandwich": 0.20,
+    "salad": 0.15,
+    "frozen meal": 0.35
+  },
+  "packaged_food": {
+    "packaged food": 0.30,
+    "canned food": 0.40
+  },
+  "household": {
+    "toothpaste": 0.10,
+    "soap": 0.10,
+    "shampoo": 0.40,
+    "detergent": 1.00,
+    "toilet paper": 0.25
+  },
+  "packaging": {
+    "plastic packaging": 0.05,
+    "glass packaging": 0.30,
+    "aluminum can": 0.33,
+    "paper packaging": 0.10
+  },
+  "misc": {
+    "miscellaneous": 0.25
+  }
+}

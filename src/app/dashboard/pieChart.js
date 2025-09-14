@@ -1,80 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import { Pie } from 'react-chartjs-2';
 
-const PieChart = ({ clerkId }) => {
+const PieChart = ({ clerkId, refresh }) => {
 	const [chartData, setChartData] = useState(null);
 
-	// Fetch the data from the API
 	const fetchData = async () => {
 		try {
-			const fetchedData = await fetch('/api/fetch').then((res) => res.json());
+			const fetchedData = await fetch('/api/fetch').then(res => res.json());
 
-			// Find the data for the given clerkId
-			let userData = fetchedData.find((item) => item.clerkId === clerkId);
+			let userData = fetchedData.find(item => item.clerkId === clerkId);
 
-			// If no data found, fallback to default clerkId
 			if (!userData) {
-				console.warn(
-					`No data found for clerkId: ${clerkId}, fetching default clerkId`
-				);
+				console.warn(`No data for clerkId: ${clerkId}, using default.`);
 				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
-				userData = fetchedData.find((item) => item.clerkId === defaultClerkId);
+				userData = fetchedData.find(item => item.clerkId === defaultClerkId);
 			}
 
-			if (userData) {
-				const { categories } = userData;
-
-				// Prepare data for the chart
-				const labels = Object.keys(categories);
-				const dataValues = Object.values(categories);
-
-				// Emerald-themed color palette
-				const backgroundColors = [
-					'rgba(16, 185, 129, 0.7)', // emerald-500
-					'rgba(5, 150, 105, 0.7)', // emerald-600
-					'rgba(4, 120, 87, 0.7)', // emerald-700
-					'rgba(6, 95, 70, 0.7)', // emerald-800
-					'rgba(6, 78, 59, 0.7)', // emerald-900
-					'rgba(14, 159, 110, 0.7)', // custom emerald
-					'rgba(20, 184, 166, 0.7)', // teal-500
-					'rgba(45, 212, 191, 0.7)', // teal-400
-				];
-
-				const borderColors = [
-					'rgba(16, 185, 129, 1)', // emerald-500
-					'rgba(5, 150, 105, 1)', // emerald-600
-					'rgba(4, 120, 87, 1)', // emerald-700
-					'rgba(6, 95, 70, 1)', // emerald-800
-					'rgba(6, 78, 59, 1)', // emerald-900
-					'rgba(14, 159, 110, 1)', // custom emerald
-					'rgba(20, 184, 166, 1)', // teal-500
-					'rgba(45, 212, 191, 1)', // teal-400
-				];
-
-				const data = {
-					labels,
-					datasets: [
-						{
-							data: dataValues,
-							backgroundColor: backgroundColors,
-							borderColor: borderColors,
-							borderWidth: 2,
-						},
-					],
-				};
-
-				setChartData(data);
-			} else {
-				console.error('No data found for the given or default clerkId');
+			if (!userData) {
+				console.error('No data for given or default clerkId');
+				setChartData({ labels: [], datasets: [] });
+				return;
 			}
-		} catch (error) {
-			console.error('Error fetching data:', error);
+
+			const { categories } = userData;
+			const labels = Object.keys(categories);
+			const dataValues = Object.values(categories);
+
+			const backgroundColors = [
+				'rgba(16, 185, 129, 0.7)',
+				'rgba(5, 150, 105, 0.7)',
+				'rgba(4, 120, 87, 0.7)',
+				'rgba(6, 95, 70, 0.7)',
+				'rgba(6, 78, 59, 0.7)',
+				'rgba(14, 159, 110, 0.7)',
+				'rgba(20, 184, 166, 0.7)',
+				'rgba(45, 212, 191, 0.7)',
+			];
+
+			const borderColors = backgroundColors.map(c => c.replace('0.7', '1'));
+
+			setChartData({
+				labels,
+				datasets: [
+					{
+						data: dataValues,
+						backgroundColor: backgroundColors,
+						borderColor: borderColors,
+						borderWidth: 2,
+					},
+				],
+			});
+		} catch (err) {
+			console.error('Error fetching data:', err);
 		}
 	};
 
 	useEffect(() => {
 		if (clerkId) fetchData();
-	}, [clerkId]);
+	}, [clerkId, refresh]); // ✅ now listens to refresh
 
 	const options = {
 		responsive: true,
@@ -87,9 +70,7 @@ const PieChart = ({ clerkId }) => {
 					padding: 15,
 					usePointStyle: true,
 					pointStyleWidth: 10,
-					font: {
-						size: 12,
-					},
+					font: { size: 12 },
 				},
 			},
 			tooltip: {
@@ -101,9 +82,7 @@ const PieChart = ({ clerkId }) => {
 				padding: 12,
 				cornerRadius: 6,
 				callbacks: {
-					label: function (context) {
-						return `${context.label}: ${context.parsed} kg CO₂`;
-					},
+					label: ctx => `${ctx.label}: ${ctx.parsed} kg CO₂`,
 				},
 			},
 		},
@@ -113,7 +92,7 @@ const PieChart = ({ clerkId }) => {
 		return (
 			<div className='flex flex-col items-center justify-center text-center py-12'>
 				<div className='h-16 w-16 rounded-full bg-emerald-900/30 flex items-center justify-center mb-4'>
-					<div className='h-8 w-8 text-emerald-400'>
+					<div className='h-8 w-8 text-emerald-400 animate-spin'>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							viewBox='0 0 24 24'

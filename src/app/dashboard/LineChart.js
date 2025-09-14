@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 
@@ -9,84 +10,87 @@ const LineChart = ({ clerkId }) => {
 		try {
 			const response = await fetch('/api/fetch');
 			const fetchedData = await response.json();
+			const safeData = Array.isArray(fetchedData) ? fetchedData : [];
 
-			// Find the data for the given clerkId
-			let userData = fetchedData.find((item) => item.clerkId === clerkId);
+			let userData = safeData.find((item) => item.clerkId === clerkId);
 
-			// If no data found, fallback to default clerkId
+			// fallback to default clerkId
 			if (!userData) {
-				console.warn(
-					`No data found for clerkId: ${clerkId}, fetching default clerkId`
-				);
+				console.warn(`No data found for clerkId: ${clerkId}, trying default clerkId`);
 				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
-				userData = fetchedData.find((item) => item.clerkId === defaultClerkId);
+				userData = safeData.find((item) => item.clerkId === defaultClerkId);
 			}
 
-			if (userData) {
-				const monthlyData = userData.monthlyData;
-
-				// Create arrays for labels and data values
-				const months = Object.keys(monthlyData);
-				const values = Object.values(monthlyData);
-
-				// Create cumulative data (running total)
-				const cumulativeValues = [];
-				let runningTotal = 0;
-
-				values.forEach((val) => {
-					runningTotal += val;
-					cumulativeValues.push(runningTotal);
-				});
-
-				setChartData({
-					labels: months,
-					datasets: [
-						{
-							label: 'Monthly Carbon Footprint',
-							data: values,
-							borderColor: 'rgba(16, 185, 129, 1)',
-							backgroundColor: 'rgba(16, 185, 129, 0.1)',
-							tension: 0.4,
-							pointBackgroundColor: 'rgba(16, 185, 129, 1)',
-							pointBorderColor: '#fff',
-							pointBorderWidth: 2,
-							pointRadius: 4,
-							pointHoverRadius: 6,
-							fill: false,
-							yAxisID: 'y',
-						},
-						{
-							label: 'Cumulative Carbon Footprint',
-							data: cumulativeValues,
-							borderColor: 'rgba(45, 212, 191, 1)',
-							backgroundColor: 'rgba(45, 212, 191, 0.1)',
-							borderDash: [5, 5],
-							tension: 0.4,
-							pointBackgroundColor: 'rgba(45, 212, 191, 1)',
-							pointBorderColor: '#fff',
-							pointBorderWidth: 2,
-							pointRadius: 4,
-							pointHoverRadius: 6,
-							fill: false,
-							yAxisID: 'y1',
-						},
-					],
-				});
-			} else {
+			if (!userData) {
 				console.error('No data found for the given or default clerkId');
+				setChartData({ labels: [], datasets: [] });
+				setLoading(false);
+				return;
 			}
 
-			setLoading(false);
+			const monthlyData = userData.monthlyData || {};
+			const months = Object.keys(monthlyData);
+			const values = Object.values(monthlyData);
+
+			// cumulative values
+			const cumulativeValues = [];
+			let runningTotal = 0;
+
+			// smoothed values: never decrease
+			const smoothedValues = [];
+			let runningMax = 0;
+
+			values.forEach((val) => {
+				runningTotal += val;
+				cumulativeValues.push(runningTotal);
+
+				runningMax = Math.max(runningMax, val);
+				smoothedValues.push(runningMax);
+			});
+
+			setChartData({
+				labels: months,
+				datasets: [
+					{
+						label: 'Monthly Carbon Footprint (Smoothed)',
+						data: smoothedValues,
+						borderColor: 'rgba(16, 185, 129, 1)',
+						backgroundColor: 'rgba(16, 185, 129, 0.1)',
+						tension: 0.4,
+						pointBackgroundColor: 'rgba(16, 185, 129, 1)',
+						pointBorderColor: '#fff',
+						pointBorderWidth: 2,
+						pointRadius: 4,
+						pointHoverRadius: 6,
+						fill: false,
+						yAxisID: 'y',
+					},
+					{
+						label: 'Cumulative Carbon Footprint',
+						data: cumulativeValues,
+						borderColor: 'rgba(45, 212, 191, 1)',
+						backgroundColor: 'rgba(45, 212, 191, 0.1)',
+						borderDash: [5, 5],
+						tension: 0.4,
+						pointBackgroundColor: 'rgba(45, 212, 191, 1)',
+						pointBorderColor: '#fff',
+						pointBorderWidth: 2,
+						pointRadius: 4,
+						pointHoverRadius: 6,
+						fill: false,
+						yAxisID: 'y1',
+					},
+				],
+			});
 		} catch (error) {
 			console.error('Error fetching data:', error);
+		} finally {
 			setLoading(false);
 		}
 	};
 
 	useEffect(() => {
-		if (clerkId) {
-			fetchData();
-		}
+		if (clerkId) fetchData();
 	}, [clerkId]);
 
 	const options = {
@@ -95,12 +99,7 @@ const LineChart = ({ clerkId }) => {
 		plugins: {
 			legend: {
 				position: 'top',
-				labels: {
-					color: 'rgba(255, 255, 255, 0.8)',
-					font: {
-						size: 12,
-					},
-				},
+				labels: { color: 'rgba(255, 255, 255, 0.8)', font: { size: 12 } },
 			},
 			tooltip: {
 				backgroundColor: 'rgba(15, 23, 42, 0.9)',
@@ -120,21 +119,13 @@ const LineChart = ({ clerkId }) => {
 		},
 		scales: {
 			x: {
-				grid: {
-					color: 'rgba(255, 255, 255, 0.1)',
-				},
-				ticks: {
-					color: 'rgba(255, 255, 255, 0.7)',
-				},
+				grid: { color: 'rgba(255, 255, 255, 0.1)' },
+				ticks: { color: 'rgba(255, 255, 255, 0.7)' },
 			},
 			y: {
 				position: 'left',
-				grid: {
-					color: 'rgba(255, 255, 255, 0.1)',
-				},
-				ticks: {
-					color: 'rgba(255, 255, 255, 0.7)',
-				},
+				grid: { color: 'rgba(255, 255, 255, 0.1)' },
+				ticks: { color: 'rgba(255, 255, 255, 0.7)' },
 				title: {
 					display: true,
 					text: 'Monthly Emissions (kg CO₂)',
@@ -143,12 +134,8 @@ const LineChart = ({ clerkId }) => {
 			},
 			y1: {
 				position: 'right',
-				grid: {
-					drawOnChartArea: false,
-				},
-				ticks: {
-					color: 'rgba(45, 212, 191, 0.9)',
-				},
+				grid: { drawOnChartArea: false },
+				ticks: { color: 'rgba(45, 212, 191, 0.9)' },
 				title: {
 					display: true,
 					text: 'Cumulative Emissions (kg CO₂)',
@@ -162,7 +149,7 @@ const LineChart = ({ clerkId }) => {
 		return (
 			<div className='flex flex-col items-center justify-center text-center py-12'>
 				<div className='h-16 w-16 rounded-full bg-emerald-900/30 flex items-center justify-center mb-4'>
-					<div className='h-8 w-8 text-emerald-400'>
+					<div className='h-8 w-8 text-emerald-400 animate-spin'>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							viewBox='0 0 24 24'
