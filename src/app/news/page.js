@@ -121,15 +121,16 @@ const NewsPage = () => {
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
             >
-              {item.enclosure?.url && (
+              {(item.enclosure?.url || item.image) && (
                 <div className='relative overflow-hidden h-56'>
                   <img
-                    src={item.enclosure.url}
+                    src={item.enclosure?.url || item.image}
                     alt={item.title}
                     className='w-full h-full object-cover transition-transform duration-500 hover:scale-110'
                   />
                 </div>
               )}
+
               <div className='p-6'>
                 {searchTerm && (
                   <div className='text-xs text-emerald-400 mb-2 font-medium'>
