@@ -33,29 +33,99 @@ import {
 } from 'recharts';
 
 // Categories and energy consumption data remain the same
+// Categories of appliances
 const CATEGORIES = {
-	'Major Appliances': [
-		'Refrigerator',
-		'Washing Machine',
-		'Dryer',
-		'Dishwasher',
-		'Microwave Oven',
-		'Conventional Oven / Range',
-		'Air Conditioner',
-		'Heater',
-		'Water Heater / Geyser',
-		'Vacuum Cleaner',
-	],
-	// Other categories remain the same...
+  'Major Appliances': [
+    'Refrigerator',
+    'Washing Machine',
+    'Dryer',
+    'Dishwasher',
+    'Microwave Oven',
+    'Conventional Oven / Range',
+    'Air Conditioner',
+    'Heater',
+    'Water Heater / Geyser',
+    'Vacuum Cleaner',
+  ],
+  'Small Appliances': [
+    'Toaster',
+    'Coffee Maker',
+    'Blender',
+    'Iron',
+    'Hair Dryer',
+    'Fan',
+    'Laptop',
+    'Desktop Computer',
+    'Television',
+    'Game Console',
+  ],
+  'Lighting & Electronics': [
+    'LED Bulb',
+    'CFL Bulb',
+    'Incandescent Bulb',
+    'Router / Modem',
+    'Printer',
+    'Tablet',
+    'Smartphone Charger',
+    'Monitor',
+    'Projector',
+  ],
+  'Kitchen Gadgets': [
+    'Rice Cooker',
+    'Instant Pot',
+    'Air Fryer',
+    'Electric Kettle',
+    'Food Processor',
+    'Mixer Grinder',
+  ],
 };
 
 // Energy consumption data in kWh per hour for each appliance
 const ENERGY_CONSUMPTION = {
-	'Refrigerator': 0.4,
-	'Washing Machine': 0.5,
-	'Dryer': 3.0,
-	// Other appliances remain the same...
+  // Major Appliances
+  'Refrigerator': 0.15,   // runs 24/7 but cycles
+  'Washing Machine': 0.5,
+  'Dryer': 3.0,
+  'Dishwasher': 1.5,
+  'Microwave Oven': 1.2,
+  'Conventional Oven / Range': 2.3,
+  'Air Conditioner': 1.0,
+  'Heater': 1.5,
+  'Water Heater / Geyser': 3.0,
+  'Vacuum Cleaner': 0.8,
+
+  // Small Appliances
+  'Toaster': 1.0,
+  'Coffee Maker': 0.8,
+  'Blender': 0.4,
+  'Iron': 1.2,
+  'Hair Dryer': 1.5,
+  'Fan': 0.075,
+  'Laptop': 0.05,
+  'Desktop Computer': 0.2,
+  'Television': 0.1,
+  'Game Console': 0.12,
+
+  // Lighting & Electronics
+  'LED Bulb': 0.01,
+  'CFL Bulb': 0.015,
+  'Incandescent Bulb': 0.06,
+  'Router / Modem': 0.01,
+  'Printer': 0.05,
+  'Tablet': 0.02,
+  'Smartphone Charger': 0.005,
+  'Monitor': 0.06,
+  'Projector': 0.25,
+
+  // Kitchen Gadgets
+  'Rice Cooker': 0.7,
+  'Instant Pot': 1.0,
+  'Air Fryer': 1.5,
+  'Electric Kettle': 1.5,
+  'Food Processor': 0.2,
+  'Mixer Grinder': 0.5,
 };
+
 
 // Daily carbon limit in kg CO2
 const DAILY_CARBON_LIMIT = 6.8;
