@@ -24,16 +24,15 @@ export default function Page() {
 	const [analyzing, setAnalyzing] = useState(false);
 
 	if (!process.env.NEXT_PUBLIC_GEMINI_API) {
-  	throw new Error("Gemini API key not found");
+		throw new Error('Gemini API key not found');
 	}
 	const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API);
-
 
 	const genText = async () => {
 		if (!input.trim()) return; // Prevent empty input
 		try {
 			setLoading(true);
-			const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+			const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
 			const prompt = `Explain how the following activity contributes to the carbon footprint in detail: ${input}. Provide specific metrics or environmental impacts in a concise paragraph.`;
 

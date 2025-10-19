@@ -45,7 +45,9 @@ export default function UserProfile() {
 		: '';
 
 	if (!mounted) {
-		return <div className="text-gray-400 text-center py-10">Loading dashboard…</div>;
+		return (
+			<div className='text-gray-400 text-center py-10'>Loading dashboard…</div>
+		);
 	}
 
 	return (
@@ -64,7 +66,10 @@ export default function UserProfile() {
 						</p>
 					</div>
 					<h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-white'>
-						Welcome, <span className='text-emerald-400'>{user?.firstName || 'User'}</span>
+						Welcome,{' '}
+						<span className='text-emerald-400'>
+							{user?.firstName || 'User'}
+						</span>
 					</h1>
 					<p className='text-gray-300 text-md max-w-2xl mx-auto leading-relaxed font-light'>
 						Tracking your environmental impact since {formattedDate}
@@ -117,21 +122,6 @@ export default function UserProfile() {
 											Carbon Trends
 										</h2>
 										<LineChart clerkId={user?.id} refresh={refresh} />
-										<button
-											className='mt-4 px-4 py-2 bg-emerald-500 text-white rounded hover:bg-emerald-600'
-											onClick={async () => {
-												const month = new Date().toLocaleString("default", { month: "short", year: "numeric" });
-												const value = Math.floor(Math.random() * 50) + 1;
-												await fetch("/api/addEmission", {
-													method: "POST",
-													headers: { "Content-Type": "application/json" },
-													body: JSON.stringify({ clerkId: user.id, month, value }),
-												});
-												setRefresh(prev => !prev);
-											}}
-										>
-											Add Random Emission
-										</button>
 									</div>
 								</div>
 							</div>
