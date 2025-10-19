@@ -16,7 +16,7 @@ const CarbonGauge = ({ clerkId }) => {
 	const fetchData = async () => {
 		setLoading(true);
 		try {
-			const response = await fetch('/api/fetch');
+			const response = await fetch('/api/footprint/fetch');
 			const fetchedData = await response.json();
 			const safeData = Array.isArray(fetchedData) ? fetchedData : [];
 
@@ -25,7 +25,9 @@ const CarbonGauge = ({ clerkId }) => {
 
 			// Fallback to default clerkId
 			if (!userData) {
-				console.warn(`No data found for clerkId: ${clerkId}, trying default clerkId`);
+				console.warn(
+					`No data found for clerkId: ${clerkId}, trying default clerkId`
+				);
 				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
 				userData = safeData.find((item) => item.clerkId === defaultClerkId);
 			}
@@ -41,7 +43,10 @@ const CarbonGauge = ({ clerkId }) => {
 			// Calculate total emissions safely
 			const { categories } = userData;
 			const total = categories
-				? Object.values(categories).reduce((sum, value) => sum + (value || 0), 0)
+				? Object.values(categories).reduce(
+						(sum, value) => sum + (value || 0),
+						0
+				  )
 				: 0;
 			setTotalEmissions(total);
 
@@ -99,13 +104,20 @@ const CarbonGauge = ({ clerkId }) => {
 	// Tailwind class for status
 	const getStatusColorClass = () => {
 		switch (status) {
-			case 'Low Impact': return 'text-green-500';
-			case 'Medium Impact': return 'text-yellow-400';
-			case 'High Impact': return 'text-orange-500';
-			case 'Very High Impact': return 'text-red-500';
-			case 'No Data': return 'text-gray-500';
-			case 'Error': return 'text-red-500';
-			default: return 'text-emerald-400';
+			case 'Low Impact':
+				return 'text-green-500';
+			case 'Medium Impact':
+				return 'text-yellow-400';
+			case 'High Impact':
+				return 'text-orange-500';
+			case 'Very High Impact':
+				return 'text-red-500';
+			case 'No Data':
+				return 'text-gray-500';
+			case 'Error':
+				return 'text-red-500';
+			default:
+				return 'text-emerald-400';
 		}
 	};
 

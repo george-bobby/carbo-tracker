@@ -6,14 +6,16 @@ const PieChart = ({ clerkId, refresh }) => {
 
 	const fetchData = async () => {
 		try {
-			const fetchedData = await fetch('/api/fetch').then(res => res.json());
+			const fetchedData = await fetch('/api/footprint/fetch').then((res) =>
+				res.json()
+			);
 
-			let userData = fetchedData.find(item => item.clerkId === clerkId);
+			let userData = fetchedData.find((item) => item.clerkId === clerkId);
 
 			if (!userData) {
 				console.warn(`No data for clerkId: ${clerkId}, using default.`);
 				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
-				userData = fetchedData.find(item => item.clerkId === defaultClerkId);
+				userData = fetchedData.find((item) => item.clerkId === defaultClerkId);
 			}
 
 			if (!userData) {
@@ -37,7 +39,7 @@ const PieChart = ({ clerkId, refresh }) => {
 				'rgba(45, 212, 191, 0.7)',
 			];
 
-			const borderColors = backgroundColors.map(c => c.replace('0.7', '1'));
+			const borderColors = backgroundColors.map((c) => c.replace('0.7', '1'));
 
 			setChartData({
 				labels,
@@ -82,7 +84,7 @@ const PieChart = ({ clerkId, refresh }) => {
 				padding: 12,
 				cornerRadius: 6,
 				callbacks: {
-					label: ctx => `${ctx.label}: ${ctx.parsed} kg CO₂`,
+					label: (ctx) => `${ctx.label}: ${ctx.parsed} kg CO₂`,
 				},
 			},
 		},

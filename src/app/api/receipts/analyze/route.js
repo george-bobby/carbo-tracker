@@ -63,11 +63,14 @@ export async function POST(req) {
 		// Step 1: Extract text using OCR.space API
 		console.log('Step 1: Extracting text using OCR.space...');
 
-		const ocrResponse = await fetch(`${req.nextUrl.origin}/api/ocr_extract`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ image }),
-		});
+		const ocrResponse = await fetch(
+			`${req.nextUrl.origin}/api/receipts/extract`,
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ image }),
+			}
+		);
 
 		if (!ocrResponse.ok) {
 			const ocrError = await ocrResponse.json();

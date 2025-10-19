@@ -20,7 +20,7 @@ const CarbonComparison = ({ clerkId }) => {
 	// Fetch user data
 	const fetchData = async () => {
 		try {
-			const response = await fetch('/api/fetch');
+			const response = await fetch('/api/footprint/fetch');
 			const fetchedData = await response.json();
 
 			// Ensure fetchedData is always an array

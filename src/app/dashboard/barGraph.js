@@ -8,12 +8,12 @@ const BarGraph = ({ clerkId }) => {
 	// Fetch existing data from MongoDB
 	const fetchData = async () => {
 		try {
-			const response = await fetch('/api/fetch');
+			const response = await fetch('/api/footprint/fetch');
 			const fetchedData = await response.json();
 
 			// Find the data for the given clerkId
-			let userData = Array.isArray(fetchedData) 
-				? fetchedData.find((item) => item.clerkId === clerkId) 
+			let userData = Array.isArray(fetchedData)
+				? fetchedData.find((item) => item.clerkId === clerkId)
 				: null;
 
 			// If no data found for the current clerkId, fallback to default clerkId
@@ -22,8 +22,8 @@ const BarGraph = ({ clerkId }) => {
 					`No data found for clerkId: ${clerkId}, fetching default clerkId`
 				);
 				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
-				userData = Array.isArray(fetchedData) 
-					? fetchedData.find((item) => item.clerkId === defaultClerkId) 
+				userData = Array.isArray(fetchedData)
+					? fetchedData.find((item) => item.clerkId === defaultClerkId)
 					: null;
 			}
 
@@ -42,7 +42,7 @@ const BarGraph = ({ clerkId }) => {
 	// Add a new monthly value to MongoDB
 	const addMonthlyValue = async (month, value) => {
 		try {
-			await fetch('/api/fetch', {
+			await fetch('/api/footprint/fetch', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ clerkId, month, value }),

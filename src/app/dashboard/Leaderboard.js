@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { FaTrophy } from 'react-icons/fa';
 
 // Leaderboard of lowest total emissions
-// Uses /api/fetch which returns documents from the `overall` collection
+// Uses /api/footprint/fetch which returns documents from the `overall` collection
 // Each document is expected to have: { clerkId, categories, monthlyData, updatedAt }
 
 const formatNumber = (n) =>

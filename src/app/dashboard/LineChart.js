@@ -8,7 +8,7 @@ const LineChart = ({ clerkId }) => {
 
 	const fetchData = async () => {
 		try {
-			const response = await fetch('/api/fetch');
+			const response = await fetch('/api/footprint/fetch');
 			const fetchedData = await response.json();
 			const safeData = Array.isArray(fetchedData) ? fetchedData : [];
 
@@ -16,7 +16,9 @@ const LineChart = ({ clerkId }) => {
 
 			// fallback to default clerkId
 			if (!userData) {
-				console.warn(`No data found for clerkId: ${clerkId}, trying default clerkId`);
+				console.warn(
+					`No data found for clerkId: ${clerkId}, trying default clerkId`
+				);
 				const defaultClerkId = 'user_2rUkwh8E63sBgJ8XGFKtKcEREbF';
 				userData = safeData.find((item) => item.clerkId === defaultClerkId);
 			}

@@ -159,7 +159,7 @@ const CarbonFootprintCalculator = () => {
 				},
 			};
 
-			const response = await fetch('/api/save', {
+			const response = await fetch('/api/footprint/save', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(data),

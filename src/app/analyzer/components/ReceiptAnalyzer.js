@@ -145,7 +145,7 @@ export default function ReceiptAnalyzer() {
 			});
 
 			// Call enhanced receipt analysis API (which now uses two-step process)
-			const res = await fetch('/api/analyze_receipt_enhanced', {
+			const res = await fetch('/api/receipts/analyze', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ image: base64 }),
@@ -226,7 +226,7 @@ export default function ReceiptAnalyzer() {
 				totalKg: parsed.totalKg,
 			};
 
-			const res = await fetch('/api/save', {
+			const res = await fetch('/api/footprint/save', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(payload),

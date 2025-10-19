@@ -197,7 +197,7 @@ export default function AIToolsTracking() {
 				totalKg: usageData.estimatedCO2,
 			};
 
-			const res = await fetch('/api/save', {
+			const res = await fetch('/api/footprint/save', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(payload),

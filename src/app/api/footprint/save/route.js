@@ -2,7 +2,7 @@ import clientPromise from '../../../dbConnect';
 
 export async function POST(req) {
 	try {
-		console.log('Received request to /api/save');
+		console.log('Received request to /api/footprint/save');
 		const client = await clientPromise;
 		const db = client.db('carbo');
 
@@ -98,7 +98,7 @@ export async function POST(req) {
 			{ status: 200, headers: { 'Content-Type': 'application/json' } }
 		);
 	} catch (error) {
-		console.error('Error in /api/save route:', error);
+		console.error('Error in /api/footprint/save route:', error);
 		return new Response(JSON.stringify({ error: error.message }), {
 			status: 500,
 			headers: { 'Content-Type': 'application/json' },

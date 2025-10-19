@@ -7,7 +7,9 @@ const RadarChart = ({ clerkId, refresh }) => {
 	// Fetch the data from the API
 	const fetchData = async () => {
 		try {
-			const fetchedData = await fetch('/api/fetch').then((res) => res.json());
+			const fetchedData = await fetch('/api/footprint/fetch').then((res) =>
+				res.json()
+			);
 
 			// Find the data for the given clerkId
 			let userData = fetchedData.find((item) => item.clerkId === clerkId);
