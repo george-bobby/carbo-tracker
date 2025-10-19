@@ -59,7 +59,7 @@ export default function Footer() {
 								{
 									icon: <FaComments className='text-emerald-400' />,
 									label: 'Activity Analyzer',
-									href: '/chatbot',
+									href: '/analyzer',
 								},
 								{
 									icon: <FaLeaf className='text-emerald-400' />,

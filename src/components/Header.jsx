@@ -58,7 +58,7 @@ function Header() {
 	const footerItems = [
 		{ name: 'Dashboard', icon: <MdDashboard className='w-5 h-5' /> },
 		{ name: 'Calculator', icon: <FaCalculator className='w-5 h-5' /> },
-		{ name: 'Chatbot', icon: <FaRobot className='w-5 h-5' /> },
+		{ name: 'Analyzer', icon: <FaRobot className='w-5 h-5' /> },
 		{ name: 'Live', icon: <FaLocationDot className='w-4 h-4' /> },
 	];
 
@@ -69,7 +69,7 @@ function Header() {
 		{ name: 'Live', icon: <FaLocationDot className='w-4 h-4' /> },
 		{ name: 'Ecocenter', icon: <FaLeaf className='w-4 h-4' /> },
 		{ name: 'Carpool', icon: <FaCar className='w-4 h-4' /> },
-		{ name: 'Chatbot', icon: <FaRobot className='w-4 h-4' /> },
+		{ name: 'Analyzer', icon: <FaRobot className='w-4 h-4' /> },
 		{ name: 'Contact', icon: <IoMdMailOpen className='w-4 h-4' /> },
 		{ name: 'About', icon: <FaInfo className='w-4 h-4' /> },
 		{ name: 'Dashboard', icon: <MdDashboard className='w-4 h-4' /> },
@@ -122,7 +122,7 @@ function Header() {
 										.filter(
 											(item) =>
 												!isSmallScreen ||
-												!['Dashboard', 'Calculator', 'Chatbot'].includes(
+												!['Dashboard', 'Calculator', 'Analyzer'].includes(
 													item.name
 												)
 										)
