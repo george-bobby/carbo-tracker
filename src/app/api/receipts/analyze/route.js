@@ -1,4 +1,4 @@
-import { google } from '@ai-sdk/google';
+import { openai } from '@ai-sdk/openai';
 import { generateObject } from 'ai';
 import { z } from 'zod';
 
@@ -95,7 +95,7 @@ export async function POST(req) {
 		console.log('Step 2: Parsing text with Gemini AI...');
 
 		const result = await generateObject({
-			model: google('gemini-2.0-flash'),
+			model: openai('gpt-4o'),
 			schema: ReceiptAnalysisSchema,
 			messages: [
 				{

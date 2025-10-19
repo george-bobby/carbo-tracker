@@ -19,7 +19,7 @@ export default function AIToolsTracking() {
 			name: 'ChatGPT',
 			icon: SiOpenai,
 			color: 'bg-green-600',
-			description: 'Track ChatGPT usage and conversations',
+			description: 'Track ChatGPT conversations',
 		},
 		{
 			id: 'gemini',
@@ -172,12 +172,8 @@ export default function AIToolsTracking() {
 				'Social Activities': 0,
 				'Shopping & Online Purchases': 0,
 				'Building & Home Maintenance': 0,
-				// New AI categories
 				'AI Tool Usage': usageData.estimatedCO2,
-				'Software Applications': 0,
-				'Cloud Services Usage': 0,
-				'Mobile Phone Usage': 0,
-				'Data Storage & Transfers': 0,
+				'Digital & Cloud Services': 0,
 			};
 
 			const payload = {

@@ -25,7 +25,7 @@ export default function PaymentIntegration() {
 			name: 'Google Pay',
 			icon: SiGooglepay,
 			color: 'bg-blue-500',
-			description: 'Connect your Google Pay transactions',
+			description: 'Connect your Google Pay',
 		},
 		{
 			id: 'paypal',
@@ -188,6 +188,8 @@ export default function PaymentIntegration() {
 				'Social Activities': 0,
 				'Shopping & Online Purchases': 0,
 				'Building & Home Maintenance': 0,
+				'AI Tool Usage': 0,
+				'Digital & Cloud Services': 0,
 			};
 
 			categories[transaction.category] = transaction.estimatedCO2;

@@ -34,7 +34,7 @@ export default function TravelTracking() {
 			name: 'Apple Maps',
 			icon: SiApple,
 			color: 'bg-gray-800',
-			description: 'Connect Apple Maps travel data',
+			description: 'Connect Apple Maps to import travel data',
 		},
 		{
 			id: 'herewego',
@@ -210,6 +210,8 @@ export default function TravelTracking() {
 				'Social Activities': 0,
 				'Shopping & Online Purchases': 0,
 				'Building & Home Maintenance': 0,
+				'AI Tool Usage': 0,
+				'Digital & Cloud Services': 0,
 			};
 
 			const payload = {

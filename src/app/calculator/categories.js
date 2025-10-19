@@ -37,14 +37,14 @@ const categories = [
 			{
 				id: 'carMiles',
 				label: 'Distance driven by car per week (KM)',
-				factor: 0.404,
-				source: 'EPA average vehicle emissions',
+				factor: 0.4,
+				source: 'EPA 2024: 400g CO2 per mile (0.4 kg/mile)',
 			}, // kg CO2 per mile
 			{
 				id: 'flightHours',
 				label: 'Hours of flight travel per year',
-				factor: 90,
-				source: 'IPCC aviation metrics',
+				factor: 250,
+				source: 'ICAO 2024: ~250 kg CO2 per passenger per hour',
 			}, // kg CO2 per hour
 			{
 				id: 'publicTransport',
@@ -70,20 +70,20 @@ const categories = [
 			{
 				id: 'electricityUsage',
 				label: 'kWh of electricity used per month',
-				factor: 0.92,
-				source: 'U.S. EPA average electricity emissions',
+				factor: 0.367,
+				source: 'EIA 2023: 0.81 lbs CO2/kWh = 0.367 kg CO2/kWh',
 			},
 			{
 				id: 'gasHeating',
 				label: 'Cubic meters of natural gas used per month',
-				factor: 2.03,
-				source: 'EPA natural gas emissions',
+				factor: 1.95,
+				source: 'EPA 2024: 0.0548 metric tons CO2/Mcf = 1.95 kg/m³',
 			},
 			{
 				id: 'waterHeating',
 				label: 'Gallons of water heated per month',
-				factor: 0.18,
-				source: 'Energy Information Administration',
+				factor: 0.15,
+				source: 'EPA 2024: Based on natural gas water heating efficiency',
 			},
 			{
 				id: 'solarGeneration',
@@ -102,14 +102,15 @@ const categories = [
 			{
 				id: 'meatMeals',
 				label: 'Meat-based meals per week',
-				factor: 7.2,
-				source: 'FAO livestock emissions',
+				factor: 6.5,
+				source:
+					'FAO 2024: Beef ~60kg CO2/kg, Chicken ~4kg CO2/kg, avg meal ~0.1kg',
 			},
 			{
 				id: 'vegetarianMeals',
 				label: 'Vegetarian meals per week',
-				factor: 2.0,
-				source: 'UNEP diet study',
+				factor: 1.5,
+				source: 'FAO 2024: Plant-based foods 1-2 kg CO2/kg, avg meal ~0.1kg',
 			},
 			{
 				id: 'foodWaste',
@@ -134,8 +135,8 @@ const categories = [
 			{
 				id: 'landfillWaste',
 				label: 'Kilograms of waste sent to landfill per week',
-				factor: 1.98,
-				source: 'EPA landfill methane emissions',
+				factor: 2.83,
+				source: 'EPA WARM 2024: 2.83 metric tons CO2e per ton waste',
 			},
 			{
 				id: 'recycledWaste',
@@ -286,7 +287,7 @@ const categories = [
 		],
 	},
 
-	// New AI & Software Categories
+	// AI & Digital Services Category
 	{
 		id: 'aiToolUsage',
 		title: 'AI Tool Usage',
@@ -294,71 +295,44 @@ const categories = [
 		info: 'Carbon footprint from AI model inference and server usage',
 		questions: [
 			{
-				id: 'chatgptUsage',
-				label: 'ChatGPT usage sessions per week',
-				factor: 0.01,
-				source: 'AI server energy consumption study',
+				id: 'imageGenerations',
+				label: 'Number of image generations per week',
+				factor: 0.15,
+				source: 'AI image generation energy study',
 			},
 			{
-				id: 'geminiUsage',
-				label: 'Gemini usage sessions per week',
+				id: 'textPrompts',
+				label: 'Number of text prompts sent per week',
 				factor: 0.008,
-				source: 'AI server energy consumption study',
+				source: 'AI text processing energy study',
 			},
 			{
-				id: 'claudeUsage',
-				label: 'Claude usage sessions per week',
-				factor: 0.009,
-				source: 'AI server energy consumption study',
+				id: 'videoGenerations',
+				label: 'Video generation requests per month',
+				factor: 2.5,
+				source: 'AI video generation energy study',
 			},
 			{
-				id: 'otherAiTools',
-				label: 'Other AI tools usage sessions per week',
-				factor: 0.01,
-				source: 'AI server energy consumption study',
-			},
-		],
-	},
-
-	{
-		id: 'softwareApplications',
-		title: 'Software Applications',
-		icon: Monitor,
-		info: 'Energy consumption from software usage and device operation',
-		questions: [
-			{
-				id: 'desktopApps',
-				label: 'Desktop applications opened per day',
+				id: 'apiCalls',
+				label: 'API calls made per week',
 				factor: 0.002,
-				source: 'Device energy consumption study',
-			},
-			{
-				id: 'mobileAppUsage',
-				label: 'Mobile apps usage hours per day',
-				factor: 0.001,
-				source: 'Mobile device energy study',
-			},
-			{
-				id: 'browserTabs',
-				label: 'Browser tabs opened per day',
-				factor: 0.0005,
-				source: 'Web browser energy study',
-			},
-			{
-				id: 'softwareInstallations',
-				label: 'Software installations per month',
-				factor: 0.05,
-				source: 'Software distribution energy study',
+				source: 'AI API infrastructure energy study',
 			},
 		],
 	},
 
 	{
 		id: 'cloudServices',
-		title: 'Cloud Services Usage',
+		title: 'Digital & Cloud Services',
 		icon: Cloud,
-		info: 'Energy consumption from cloud computing and storage services',
+		info: 'Energy consumption from digital activities, cloud computing, and device usage',
 		questions: [
+			{
+				id: 'screenTime',
+				label: 'Total screen time hours per day (all devices)',
+				factor: 0.003,
+				source: 'Digital device energy consumption study',
+			},
 			{
 				id: 'cloudStorage',
 				label: 'Cloud storage usage (GB per month)',
@@ -372,82 +346,10 @@ const categories = [
 				source: 'Digital streaming energy study',
 			},
 			{
-				id: 'cloudComputing',
-				label: 'Cloud computing services usage (hours per month)',
-				factor: 0.02,
-				source: 'Cloud computing energy study',
-			},
-			{
-				id: 'onlineBackup',
-				label: 'Online backup frequency (times per week)',
-				factor: 0.001,
-				source: 'Data backup energy study',
-			},
-		],
-	},
-
-	{
-		id: 'mobilePhoneUsage',
-		title: 'Mobile Phone Usage',
-		icon: Smartphone,
-		info: 'Energy consumption from mobile device usage and network activity',
-		questions: [
-			{
-				id: 'screenTime',
-				label: 'Screen time hours per day',
-				factor: 0.002,
-				source: 'Mobile device energy study',
-			},
-			{
-				id: 'phoneCalls',
-				label: 'Phone calls duration per day (minutes)',
-				factor: 0.0001,
-				source: 'Cellular network energy study',
-			},
-			{
-				id: 'textMessages',
-				label: 'Text messages sent per day',
-				factor: 0.000014,
-				source: 'Mobile network energy study',
-			},
-			{
-				id: 'mobileData',
-				label: 'Mobile data usage (GB per month)',
-				factor: 0.005,
-				source: 'Mobile network infrastructure study',
-			},
-		],
-	},
-
-	{
-		id: 'dataStorageTransfers',
-		title: 'Data Storage & Transfers',
-		icon: Database,
-		info: 'Energy consumption from data transmission and storage operations',
-		questions: [
-			{
-				id: 'fileDownloads',
-				label: 'File downloads per week (GB)',
+				id: 'dataTransfers',
+				label: 'Data uploads/downloads per week (GB)',
 				factor: 0.006,
 				source: 'Data transmission energy study',
-			},
-			{
-				id: 'fileUploads',
-				label: 'File uploads per week (GB)',
-				factor: 0.006,
-				source: 'Data transmission energy study',
-			},
-			{
-				id: 'emailAttachments',
-				label: 'Email attachments sent per week (MB)',
-				factor: 0.006,
-				source: 'Email infrastructure energy study',
-			},
-			{
-				id: 'socialMediaPosts',
-				label: 'Social media posts per day',
-				factor: 0.0047,
-				source: 'Social media platform energy study',
 			},
 		],
 	},

@@ -17,7 +17,7 @@ const ReceiptAnalysisSchema = z.object({
 		})
 	),
 	totalKg: z.number(),
-	categories: z.record(z.number()),
+	// categories field will be added after validation via mapItemsToDashboard()
 });
 
 export default function ReceiptAnalyzer() {
@@ -44,6 +44,8 @@ export default function ReceiptAnalyzer() {
 			'Social Activities': 0,
 			'Shopping & Online Purchases': 0,
 			'Building & Home Maintenance': 0,
+			'AI Tool Usage': 0,
+			'Digital & Cloud Services': 0,
 		};
 
 		items.forEach((item) => {
@@ -313,13 +315,6 @@ export default function ReceiptAnalyzer() {
 			{/* Analysis Loading with Two-Step Process */}
 			{analyzing && (
 				<div className='bg-slate-700/30 border border-slate-600 rounded-lg p-4'>
-					<div className='flex items-center gap-3 mb-3'>
-						<div className='animate-spin rounded-full h-6 w-6 border-b-2 border-emerald-400'></div>
-						<h3 className='text-white font-semibold text-sm'>
-							Analyzing Receipt...
-						</h3>
-					</div>
-
 					{/* Processing Steps */}
 					<div className='space-y-2'>
 						<div className='flex items-center gap-3'>

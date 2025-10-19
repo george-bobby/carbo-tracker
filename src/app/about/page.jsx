@@ -662,43 +662,6 @@ export default function AboutUs() {
 				</div>
 			</div>
 
-			{/* CTA Section */}
-			<div className='relative py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
-				<div className='max-w-4xl mx-auto px-6 text-center'>
-					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.5 }}
-						className='bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-12'
-					>
-						<h2 className='text-3xl md:text-4xl font-bold text-white mb-6'>
-							Ready to Make a Difference?
-						</h2>
-						<p className='text-gray-300 text-lg mb-8 max-w-2xl mx-auto'>
-							Join our community of climate activists and be part of the
-							solution. Together, we can create a sustainable future.
-						</p>
-						<div className='flex flex-col sm:flex-row gap-4 justify-center'>
-							<motion.button
-								whileHover={{ scale: 1.05 }}
-								whileTap={{ scale: 0.95 }}
-								className='bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-xl hover:shadow-emerald-500/20 transition-all ease-in-out duration-300 transform'
-							>
-								Become a Member
-							</motion.button>
-							<motion.button
-								whileHover={{ scale: 1.05 }}
-								whileTap={{ scale: 0.95 }}
-								className='border-2 border-emerald-400 text-emerald-400 px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:bg-emerald-500/10 transition-all ease-in-out duration-300 transform'
-							>
-								Contact Us
-							</motion.button>
-						</div>
-					</motion.div>
-				</div>
-			</div>
-
 			{/* Contact Section */}
 			<div className='relative py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
 				<div className='container mx-auto px-4'>

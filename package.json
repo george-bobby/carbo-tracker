@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^2.0.13",
+    "@ai-sdk/openai": "^2.0.52",
     "@clerk/nextjs": "^4.31.8",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",

@@ -13,12 +13,9 @@ const nationalAverages = {
 	socialActivities: 50,
 	shopping: 70,
 	buildingMaintenance: 45,
-	// New AI & Software categories
+	// Consolidated digital categories
 	aiToolUsage: 25,
-	softwareApplications: 35,
-	cloudServices: 40,
-	mobilePhoneUsage: 20,
-	dataStorageTransfers: 30,
+	cloudServices: 95, // Combined from previous software (35) + cloud (40) + mobile (20)
 };
 
 const months = [

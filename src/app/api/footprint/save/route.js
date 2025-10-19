@@ -1,4 +1,4 @@
-import clientPromise from '../../../dbConnect';
+import clientPromise from '../../../../dbConnect';
 
 export async function POST(req) {
 	try {
