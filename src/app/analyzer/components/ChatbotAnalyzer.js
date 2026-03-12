@@ -19,7 +19,7 @@ export default function ChatbotAnalyzer() {
 		if (!input.trim()) return; // Prevent empty input
 		try {
 			setLoading(true);
-			const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+			const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
 			const prompt = `Explain how the following activity contributes to the carbon footprint in detail: ${input}. Provide specific metrics or environmental impacts in a concise paragraph.`;
 
