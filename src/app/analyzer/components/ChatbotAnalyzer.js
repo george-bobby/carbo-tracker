@@ -5,6 +5,31 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { MdContentCopy } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const MODEL_CANDIDATES = [
+	'gemini-2.0-flash',
+	'gemini-2.0-flash-lite',
+	'gemini-1.5-flash-latest',
+	'gemini-1.5-flash-8b-latest',
+];
+
+function getFriendlyErrorMessage(error) {
+	const message = error?.message || 'Unknown error';
+
+	if (message.includes('[429')) {
+		return 'Gemini quota exceeded. Please wait a minute and retry, or use a key/project with available quota.';
+	}
+
+	if (message.includes('[404') || message.includes('not supported')) {
+		return 'Selected Gemini model is unavailable for this key/project. Try another key/project or redeploy with a supported model.';
+	}
+
+	if (message.includes('[403') || message.includes('permission')) {
+		return 'Gemini key is blocked or restricted for this domain/project. Check API key restrictions.';
+	}
+
+	return 'Failed to generate response. Please try again.';
+}
+
 export default function ChatbotAnalyzer() {
 	const [input, setInput] = useState('');
 	const [chatHistory, setChatHistory] = useState([]);
@@ -15,17 +40,42 @@ export default function ChatbotAnalyzer() {
 	}
 	const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API);
 
+	const generateWithFallback = async (prompt) => {
+		let lastError;
+
+		for (const modelName of MODEL_CANDIDATES) {
+			try {
+				const model = genAI.getGenerativeModel({ model: modelName });
+				const result = await model.generateContent(prompt);
+				const response = result.response;
+				return response.text();
+			} catch (err) {
+				lastError = err;
+				const msg = err?.message || '';
+
+				// Only fallback on model-availability errors; rethrow quota/auth errors immediately.
+				if (
+					!(
+						msg.includes('[404') ||
+						msg.includes('not found') ||
+						msg.includes('not supported')
+					)
+				) {
+					throw err;
+				}
+			}
+		}
+
+		throw lastError || new Error('No compatible Gemini model available');
+	};
+
 	const genText = async () => {
 		if (!input.trim()) return; // Prevent empty input
 		try {
 			setLoading(true);
-			const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
 			const prompt = `Explain how the following activity contributes to the carbon footprint in detail: ${input}. Provide specific metrics or environmental impacts in a concise paragraph.`;
-
-			const result = await model.generateContent(prompt);
-			const response = result.response;
-			const text = response.text();
+			const text = await generateWithFallback(prompt);
 
 			// Update chat history
 			setChatHistory((prev) => [...prev, { user: input, bot: text }]);
@@ -34,8 +84,7 @@ export default function ChatbotAnalyzer() {
 		} catch (error) {
 			console.error('Error generating content: ', error);
 			setLoading(false);
-			// You could add user-friendly error handling here
-			alert('Failed to generate response. Please try again.');
+			alert(getFriendlyErrorMessage(error));
 		}
 	};
 
