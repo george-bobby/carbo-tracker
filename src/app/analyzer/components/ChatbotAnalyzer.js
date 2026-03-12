@@ -7,9 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const MODEL_CANDIDATES = [
 	'gemini-2.0-flash',
-	'gemini-2.0-flash-lite',
-	'gemini-1.5-flash-latest',
-	'gemini-1.5-flash-8b-latest',
+	'gemini-1.5-flash',
+	'gemini-1.5-pro',
 ];
 
 function getFriendlyErrorMessage(error) {
@@ -35,9 +34,6 @@ export default function ChatbotAnalyzer() {
 	const [chatHistory, setChatHistory] = useState([]);
 	const [loading, setLoading] = useState(false);
 
-	if (!process.env.NEXT_PUBLIC_GEMINI_API) {
-		throw new Error('Gemini API key not found');
-	}
 	const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API);
 
 	const generateWithFallback = async (prompt) => {
