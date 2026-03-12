@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 const MODEL_CANDIDATES = [
 	'gemini-2.0-flash',
 	'gemini-1.5-flash',
-	'gemini-1.5-pro',
 ];
 
 function getFriendlyErrorMessage(error) {
