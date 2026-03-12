@@ -3,6 +3,30 @@
 import { useState } from 'react';
 import { MdContentCopy } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
+
+function MarkdownResponse({ text }) {
+	return (
+		<ReactMarkdown
+			components={{
+				p: ({ children }) => <p className='mb-3 last:mb-0'>{children}</p>,
+				strong: ({ children }) => <strong className='font-semibold text-white'>{children}</strong>,
+				em: ({ children }) => <em className='italic text-gray-100'>{children}</em>,
+				ul: ({ children }) => <ul className='mb-3 list-disc space-y-1 pl-5'>{children}</ul>,
+				ol: ({ children }) => <ol className='mb-3 list-decimal space-y-1 pl-5'>{children}</ol>,
+				li: ({ children }) => <li className='pl-1'>{children}</li>,
+				h1: ({ children }) => <h3 className='mb-2 text-base font-bold text-white'>{children}</h3>,
+				h2: ({ children }) => <h4 className='mb-2 text-sm font-semibold text-white'>{children}</h4>,
+				h3: ({ children }) => <h5 className='mb-2 text-sm font-semibold text-gray-100'>{children}</h5>,
+				code: ({ children }) => (
+					<code className='rounded bg-slate-800 px-1.5 py-0.5 text-emerald-300'>{children}</code>
+				),
+			}}
+		>
+			{text}
+		</ReactMarkdown>
+	);
+}
 
 function getFriendlyErrorMessage(error) {
 	const message = error?.message || 'Unknown error';
@@ -107,9 +131,10 @@ export default function ChatbotAnalyzer() {
 							{/* Bot Response */}
 							<div className='flex justify-start'>
 								<div className='bg-slate-700/50 border border-slate-600 rounded-lg p-4 max-w-[80%] relative group'>
-									<p className='text-gray-200 text-sm sm:text-base leading-relaxed'>
-										<strong className='text-emerald-400'>AI:</strong> {chat.bot}
-									</p>
+									<div className='text-gray-200 text-sm sm:text-base leading-relaxed'>
+										<p className='mb-2 font-semibold text-emerald-400'>AI:</p>
+										<MarkdownResponse text={chat.bot} />
+									</div>
 									<button
 										onClick={() => onCopyText(chat.bot)}
 										className='absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-slate-600 rounded'
