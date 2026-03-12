@@ -53,12 +53,15 @@ export default function ChatbotAnalyzer() {
 				lastError = err;
 				const msg = err?.message || '';
 
-				// Only fallback on model-availability errors; rethrow quota/auth errors immediately.
+				// Fallback on model-availability and per-model quota errors.
 				if (
 					!(
 						msg.includes('[404') ||
+						msg.includes('[429') ||
 						msg.includes('not found') ||
-						msg.includes('not supported')
+						msg.includes('not supported') ||
+						msg.includes('quota') ||
+						msg.includes('Too Many Requests')
 					)
 				) {
 					throw err;
